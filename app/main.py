@@ -1,0 +1,50 @@
+import os
+from flask import Flask
+from app.models import trainer
+from app.routes.batalla_routes import batalla_pb
+from app.routes.home_routes import home_pb
+from app.routes.pokedex_route import pokedex_pb
+from flask_session import Session
+from app.database.db import db
+from app.models.trainer import trainer
+
+app = Flask(__name__, template_folder='templates')
+app.secret_key = "pokemonSonimu"
+# Configuracion session
+app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
+app.config["SESSION_PERMANENT"] = False     # Sesiones temporales
+app.config["SESSION_FILE_DIR"] = "./.flask_session"  # Carpeta donde se guardan
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BD_PATH = os.path.join(BASE_DIR, "data", "pokemons.db")
+
+# Configuracion alchemy
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{BD_PATH}"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Clave session
+app.secret_key = "clave_super_secreta"
+
+
+# Inicializar la extensión
+Session(app)
+db.init_app(app)
+
+
+app.register_blueprint(#, url_prefix='/')
+
+
+# Comando CLI
+@app.cli.command("crear_tablas")
+def crear_tablas():
+    db.drop_all()
+    print("Creando las tablas correspondientes para la base de datos ...")
+    db.create_all()
+    # db.session.add(trainer(nombre="Paco", password="1234"))
+
+    db.session.commit()
+    print("Tablas creadas")
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8080)
