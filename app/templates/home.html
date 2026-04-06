@@ -1,0 +1,23 @@
+{% extends "plantilla-base.html" %}
+{% block title %}DevilMayStrike3{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="titulo">
+<h1>Devil May Strike 3</h1>
+  <form method="POST" action="/">
+    <label for="user">Usuario</label><br>
+    <input type="text" name="user"><br>
+    <label for="passwd">Contraseña</label><br>
+    <input type="password" name="passwd"><br>
+    <input type="submit" value="Entrar">
+  </form>
+</div>
+
+<div style="margin-top: 20px;">
+    <button onclick="alert('Próximamente: Registro')">Registrarse</button>
+    <button onclick="alert('Aquí irá el juego Unity WebGL')">Jugar</button>
+</div>
+{% endblock %}

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style-base.css') }}">
   {% block style %}{% endblock %}
 </head>
 
@@ -13,7 +13,6 @@
     <div id="menu">
       <ul>
         <li><a href="/">Inicio</a></li>
-        <li><a href="/pokedex">Pokedex</a></li>
         {% block links %}{% endblock %}
       </ul>
     </div>
