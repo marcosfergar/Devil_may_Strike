@@ -12,6 +12,12 @@
 ### 2. Preparar el Entorno Virtual
 Abre una terminal en la carpeta del proyecto y ejecuta:
 
+python -m venv .venv
+
+.\venv\Scripts\pip.exe install flask
+
+pip install -r requirements.txt
+
 # Crear el entorno
 python -m venv venv
 
