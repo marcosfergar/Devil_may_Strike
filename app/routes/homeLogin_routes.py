@@ -12,11 +12,11 @@ from flask import Blueprint, redirect, render_template, session, url_for
 # importe sercicios
 # from app.services.trainer_service import registrar_entrenador, autenticar_entrenador
 
-home_pb = Blueprint('home_route', __name__, template_folder='templates')
+homeLogin_pb = Blueprint('homeLogin_route', __name__, template_folder='templates')
 
 
-@home_pb.route('/home', methods=['GET', 'POST'])
-def paginaBienvenida():
+@homeLogin_pb.route('/', methods=['GET', 'POST'])
+def paginaLogin():
 
     # form = TrainerForm()
     # verifTrainer = None
@@ -34,7 +34,7 @@ def paginaBienvenida():
     #         return redirect(url_for('batalla_route.PokedexS'))
 
     # return render_template('index.html', form=form, verifTrainer=verifTrainer)
-    return render_template('home.html')
+    return render_template('home-login.html')
 
 
 # @home_pb.route('/register', methods=['GET', 'POST'])

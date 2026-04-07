@@ -7,6 +7,8 @@ from flask_session import Session
 
 # importe de rutas
 from app.routes.home_routes import home_pb
+from app.routes.homeLogin_routes import homeLogin_pb
+
 
 # importae modelos
 # from app.models import trainer
@@ -35,7 +37,9 @@ Session(app)
 # db.init_app(app)
 
 # Rutas
-app.register_blueprint(home_pb, url_prefix='/')
+app.register_blueprint(homeLogin_pb, url_prefix='/')
+app.register_blueprint(home_pb, url_prefix='/home')
+
 
 # # Comando CLI
 # @app.cli.command("crear_tablas")

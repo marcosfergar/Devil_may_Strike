@@ -1,0 +1,17 @@
+{% extends "plantilla_base.html" %} {% block title %}DevilMayStrike3{% endblock
+%} {% block style %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='../static/css/home-login.css') }}"
+/>
+{% endblock %} {% block content %}
+<div id="titulo">
+  <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo-dmStrike" />
+</div>
+
+<div class="menu-botones">
+  <input class="btns-menu" onclick="window.location.href = '/register'" type="button" value="Registrarse"/>
+  <input class="btns-menu" id="jugarInvitado" onclick="iniciarSesion()" type="button" value="Jugar" />
+  <input class="btns-menu" id="iniciarSesion" onclick="iniciarSesion()" type="button" value="Iniciar Sesión" />
+</div>
+{% endblock %}
