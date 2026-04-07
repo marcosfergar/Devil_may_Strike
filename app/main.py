@@ -1,7 +1,9 @@
 import os
 from flask import Flask
 from flask_session import Session
-from app.database.db import db
+
+# importe database
+# from app.database.db import db
 
 # importe de rutas
 from app.routes.home_routes import home_pb
@@ -47,4 +49,5 @@ app.register_blueprint(home_pb, url_prefix='/')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
+    # app.run(debug=True, host='0.0.0.0', port=8080)
+    app.run(host='127.0.0.1', port=5000, debug=True)

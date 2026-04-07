@@ -11,15 +11,34 @@
 
 ### 2. Preparar el Entorno Virtual
 Abre una terminal en la carpeta del proyecto y ejecuta:
-
+# 1. Crear entorno virtual
+Write-Host "Creando entorno virtual .venv"
 python -m venv .venv
 
-.\venv\Scripts\pip.exe install flask
+# 2. Activar el entorno virtual
+Write-Host "Activando entorno virtual"
+. .\.venv\Scripts\Activate.ps1
 
-pip install -r requirements.txt
+# 3. Instalar dependencias
+# Test-Path comprueba si existe
+if (Test-Path "requirements.txt") {
+    Write-Host "Instalando dependencias desde requirements.txt..."
+    pip install -r requirements.txt
+} else {
+    Write-Host "No se encontro requirements.txt. Lea el Readme para mas información"
+    return
+}
 
-# Crear el entorno
-python -m venv venv
+# 4. Ver versiones instaladas
+Write-Host "Paquetes instalados:"
+pip freeze
+
+# 5. Crea tabals
+flask.exe --app app.main crear_tablas
+
+# 5. Ejecutar la aplicación
+Write-Host "Ejecutando la aplicación..."
+python -m app.main
 
 
 /DevilMayStrike
