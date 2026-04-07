@@ -1,7 +1,8 @@
 from flask import Blueprint, redirect, render_template, session, url_for
+import random
 
 # importe de rutas
-# from app.routes.pokedex_route import pokedex_pb
+from app.routes.home_routes import home_pb
 
 # importe modelos
 # from app.models import trainer
@@ -36,6 +37,17 @@ def paginaLogin():
     # return render_template('index.html', form=form, verifTrainer=verifTrainer)
     return render_template('home-login.html')
 
+@homeLogin_pb.route('/invitado')
+def iniciar_invitado():
+    session.clear()
+    numero_aleatorio = random.randint(1000, 9999)
+    
+    # Creacion guest
+    session["user_id"] = numero_aleatorio
+    session["username"] = f"Guest_Dante#{numero_aleatorio}"  # Nombre de usuario para el invitado
+    session["is_guest"] = True
+    
+    return redirect(url_for('home_route.paginaBienvenida'))
 
 # @home_pb.route('/register', methods=['GET', 'POST'])
 # def registro():

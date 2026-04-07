@@ -1,7 +1,7 @@
 from flask import Blueprint, redirect, render_template, session, url_for
 
 # importe de rutas
-# from app.routes.pokedex_route import pokedex_pb
+# from app.routes.homeLogin_routes import homeLogin_pb
 
 # importe modelos
 # from app.models import trainer
@@ -34,33 +34,14 @@ def paginaBienvenida():
     #         return redirect(url_for('batalla_route.PokedexS'))
 
     # return render_template('index.html', form=form, verifTrainer=verifTrainer)
-    return render_template('home.html')
 
-
-# @home_pb.route('/register', methods=['GET', 'POST'])
-# def registro():
-
-#     form = TrainerForm()
-
-#     if form.validate_on_submit():
-
-#         # Obtencion de los datos del usuario entrenador que añadio en el formulario.
-#         nombreTrainer = form.trainer.data
-#         passwdTrainer = form.passwd.data
-
-#         entrenador = trainer(nombreTrainer, passwdTrainer)
-
-#         # Recordar que la funcion crear_entrenador crear y retorna el objeto trainer, lo añade a la session y un commit en la bd.
-#         registrar_entrenador(nombreTrainer, passwdTrainer)
-
-#         session["trainer"] = entrenador.to_dict()
-
-#         return redirect(url_for('batalla_route.PokedexS'))
-
-#     return render_template('registro.html', form=form)
+    if "username" not in session:
+            return redirect(url_for('home_login.paginaLogin'))
+        
+    return render_template('home.html', player=session.get("username"))
 
 
 # @home_pb.route("/logout")
 # def logout():
 #     session.clear()
-#     return redirect(url_for('home_route.Bienvenido'))
+#     return redirect(url_for('homeLogin_route.paginaLogin'))
