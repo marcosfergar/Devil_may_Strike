@@ -63,8 +63,8 @@ def registro():
         if exito:
             return redirect(url_for('homeLogin_route.paginaLogin'))
         else:
-            return render_template('registro.html', form=form, error=mensaje)
-        
+            if form.is_submitted():
+                        print(f"ERRORES DEL FORMULARIO: {form.errors}")        
     return render_template('registro.html', form=form)
 
 # @home_pb.route("/logout")
