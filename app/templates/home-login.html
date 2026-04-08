@@ -10,8 +10,10 @@
 </div>
 
 <div class="menu-botones">
-  <input class="btns-menu" onclick="window.location.href = '/register'" type="button" value="Registrarse"/>
+<input class="btns-menu" id="btnRegistro" type="button" value="Registrarse" data-url="{{ url_for('homeLogin_route.registro') }}"/>
+
   <input class="btns-menu" id="jugarInvitado" type="button" value="Jugar" data-url="{{ url_for('homeLogin_route.iniciar_invitado') }}"/>
+
   <input class="btns-menu" id="iniciarSesion" type="button" value="Iniciar Sesión" />
 </div>
 {% endblock %}

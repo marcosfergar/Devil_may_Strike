@@ -1,0 +1,32 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock%} 
+{% block style %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='../static/css/registro.css') }}"
+/>
+{% endblock %} 
+{% block content %}
+<div id="titulo">
+    <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo">
+</div>
+
+<div class="form-container">
+    <h2>Nuevo Cazador</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        
+        <label style="color: #aaa;">Nombre de usuario</label>
+        {{ form.player(placeholder="Ej: Dante") }}
+        
+        <label style="color: #aaa;">Contraseña</label>
+        {{ form.passwd(placeholder="••••••••") }}
+        
+        {{ form.enviar(class="btns-menu") }}
+    </form>
+    
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="{{ url_for('homeLogin_route.paginaLogin') }}" style="color: #666; text-decoration: none;">« Volver</a>
+    </div>
+</div>
+{% endblock %}

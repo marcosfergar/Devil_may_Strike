@@ -8,7 +8,8 @@ from app.routes.home_routes import home_pb
 # from app.models import trainer
 
 # importe formularios
-# from app.forms.trainer_form import TrainerForm
+from app.forms.player_form import PlayerForm
+from app.services.usuario_service import registrar_usuario
 
 # importe sercicios
 # from app.services.trainer_service import registrar_entrenador, autenticar_entrenador
@@ -49,28 +50,22 @@ def iniciar_invitado():
     
     return redirect(url_for('home_route.paginaBienvenida'))
 
-# @home_pb.route('/register', methods=['GET', 'POST'])
-# def registro():
-
-#     form = TrainerForm()
-
-#     if form.validate_on_submit():
-
-#         # Obtencion de los datos del usuario entrenador que añadio en el formulario.
-#         nombreTrainer = form.trainer.data
-#         passwdTrainer = form.passwd.data
-
-#         entrenador = trainer(nombreTrainer, passwdTrainer)
-
-#         # Recordar que la funcion crear_entrenador crear y retorna el objeto trainer, lo añade a la session y un commit en la bd.
-#         registrar_entrenador(nombreTrainer, passwdTrainer)
-
-#         session["trainer"] = entrenador.to_dict()
-
-#         return redirect(url_for('batalla_route.PokedexS'))
-
-#     return render_template('registro.html', form=form)
-
+@homeLogin_pb.route('/register', methods=['GET', 'POST'])
+def registro():
+    form = PlayerForm()
+    
+    if form.validate_on_submit():
+        username = form.player.data
+        password = form.passwd.data
+        
+        exito, mensaje = registrar_usuario(username, password)
+        
+        if exito:
+            return redirect(url_for('homeLogin_route.paginaLogin'))
+        else:
+            return render_template('registro.html', form=form, error=mensaje)
+        
+    return render_template('registro.html', form=form)
 
 # @home_pb.route("/logout")
 # def logout():

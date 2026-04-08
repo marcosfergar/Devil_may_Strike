@@ -19,53 +19,21 @@ body {
 /* Titulo */
 #titulo {
   display: flex;
-  flex-direction: column; /* Para que si hay un form debajo, se apile */
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
-  height: 80vh; /* Ajusta el alto para dejar espacio al menú de abajo */
-  width: 100%; /* Asegura que ocupe todo el ancho */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
   text-align: center;
-  /* Eliminamos el margin-left: 100px para que no se desvíe */
 }
 
 #titulo img {
   width: 600px;
-  max-width: 90%; /* Para que en pantallas pequeñas no se salga */
-  height: auto; /* Mantiene la proporción */
+  max-width: 90%;
+  height: auto;
   filter: drop-shadow(
     0 0 15px rgba(0, 0, 0, 0.8)
-  ); /* Opcional: le da profundidad a la imagen */
-}
-
-form {
-  color: black;
-  font-weight: bold;
-
-  margin-right: 60px;
-  text-transform: uppercase;
-  background-color: #ffffffc5;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  padding: 20px;
-  width: 250px;
-
-  text-align: center;
-
-  display: none;
-  /* Oculto al inicio */
-}
-
-form label {
-  color: black;
-}
-
-form input {
-  color: black;
-  padding: 0.8rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: none;
-  margin: 10px;
+  );
 }
 
 #enviar {

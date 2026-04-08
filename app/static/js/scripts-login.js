@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Referenciamos el botón
     const btnInvitado = document.getElementById("jugarInvitado");
 
-    // 2. Añadimos el "escuchador" de eventos
     if (btnInvitado) {
         btnInvitado.addEventListener("click", () => {
             // Leemos la URL que Flask inyectó en el HTML
@@ -15,13 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-    
-    // Puedes hacer lo mismo para el botón de Iniciar Sesión
+
+    const btnRegistro = document.getElementById("btnRegistro");
+
+    if (btnRegistro) {
+        btnRegistro.addEventListener("click", () => {
+            window.location.href = btnRegistro.getAttribute("data-url");
+        });
+    }
+
     const btnLogin = document.getElementById("iniciarSesion");
+    
     if (btnLogin) {
         btnLogin.addEventListener("click", () => {
             console.log("Abriendo menú de login...");
-            // Aquí tu lógica para el login
         });
     }
 });

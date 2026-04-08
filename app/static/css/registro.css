@@ -1,0 +1,100 @@
+/* Contenedor principal que ocupa toda la pantalla */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 100% de la altura de la ventana */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    background-color: #0a0a0a; /* Fondo oscuro por si falla la imagen */
+    background-image: url('../img/fondo-dms.jpg'); /* Tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* El logo arriba del formulario */
+#titulo img {
+    width: 300px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+}
+
+/* El contenedor del formulario */
+.form-container {
+    /* Lo fijamos a la pantalla */
+    position: fixed;
+    
+    /* Lo movemos al centro exacto */
+    top: 50%;
+    left: 50%;
+    
+    /* El truco mágico: se desplaza a sí mismo la mitad de su ancho y alto 
+       para quedar perfectamente centrado */
+    transform: translate(-50%, -50%);
+    
+    /* Estética Devil May Strike */
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(40, 40, 40, 0.95) 0%,
+        rgba(0, 0, 0, 1) 100%
+    );
+    border: 2px solid #8b0000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+    z-index: 1000; /* Para que esté por encima de todo */
+    
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2 {
+    color: #f1f1f1;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0;
+}
+
+/* Estilo de los campos de texto */
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #444;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 5px;
+    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff0000;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* Botón de envío (usando tu clase btns-menu) */
+.btns-menu {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to bottom, #8b0000, #4a0000);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btns-menu:hover {
+    background: #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+    transform: scale(1.02);
+}

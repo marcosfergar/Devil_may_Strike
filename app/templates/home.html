@@ -1,19 +1,27 @@
-{% extends "plantilla_base.html" %} {% block title %}DevilMayStrike{% endblock
-%} {% block style %}
+{% extends "plantilla_base.html" %} 
+{% block title %}DevilMayStrike{% endblock%}
+{% block style %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='../static/css/home-login.css') }}"
 />
 {% endblock %} {% block content %}
 <div id="titulo">
-  <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo-dmStrike" />
+  <img
+    src="{{ url_for('static', filename='img/dms-logo.png') }}"
+    alt="logo-dmStrike"
+  />
 </div>
 
 <div class="menu-botones">
-  <input class="btns-menu" id="Start" type="button" value="Start"/>
-  <input class="btns-menu" id="Ranking" type="button" value="Ranking"/>
-  <input class="btns-menu" id="ContOriginalApi" type="button" value="Inf Contenido original"/>
-  <input class="btns-menu" id="Logout" type="button" value="Cerrar Sesion"/>
-
+  <input class="btns-menu" id="Start" type="button" value="Start" />
+  <input class="btns-menu" id="Ranking" type="button" value="Ranking" />
+  <input
+    class="btns-menu"
+    id="ContOriginalApi"
+    type="button"
+    value="Inf Contenido original"
+  />
+  <input class="btns-menu" id="Logout" type="button" value="Cerrar Sesion" />
 </div>
 {% endblock %}
