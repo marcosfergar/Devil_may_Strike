@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnInvitado) {
         btnInvitado.addEventListener("click", () => {
-            // Leemos la URL que Flask inyectó en el HTML
             const urlDestino = btnInvitado.getAttribute("data-url");
             
             if (urlDestino) {
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (btnLogin) {
         btnLogin.addEventListener("click", () => {
-            console.log("Abriendo menú de login...");
+            window.location.href = btnLogin.getAttribute("data-url");
         });
     }
 });

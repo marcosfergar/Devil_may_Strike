@@ -28,4 +28,15 @@ class PlayerForm(FlaskForm):
         ]
     )
 
-    enviar = SubmitField("Registrar Cazador")
+    enviar = SubmitField("Registrarse")
+
+class LoginForm(FlaskForm):
+    player = StringField(
+        "Nombre de Usuario",
+        validators=[DataRequired(message="Introduce tu nombre de cazador.")]
+    )
+    passwd = PasswordField(
+        "Contraseña",
+        validators=[DataRequired(message="La contraseña es obligatoria.")]
+    )
+    enviar = SubmitField("Iniciar Sesión")

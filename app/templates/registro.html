@@ -2,20 +2,17 @@
 {% block style %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='../static/css/registro.css') }}"
+  href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"
 />
 {% endblock %} {% block content %}
-<div id="titulo">
-  <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo" />
-</div>
 
 <div class="form-container">
-  <h2>Nuevo Cazador</h2>
+  <h2>Nuevo Usuario</h2>
   <form method="POST">
     {{ form.hidden_tag() }}
 
     <label style="color: #aaa">Nombre de usuario</label>
-    {{ form.player(placeholder="Ej: Dante") }}
+    {{ form.player(placeholder="Ej: XxxLaTormenta777_YTxxX") }}
 
     <label style="color: #aaa">Contraseña</label>
     {{ form.passwd(placeholder="••••••••") }}
@@ -27,7 +24,7 @@
 
   <div style="text-align: center; margin-top: 15px">
     <a
-      href="{{ url_for('homeLogin_route.paginaLogin') }}"
+      href="{{ url_for('homeLogin_route.index') }}"
       style="color: #666; text-decoration: none"
       >« Volver</a
     >

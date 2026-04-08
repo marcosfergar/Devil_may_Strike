@@ -1,19 +1,19 @@
 {% extends "plantilla_base.html" %} 
-{% block title %}DevilMayStrike{% endblock%} 
+{% block title %}DevilMayStrike{% endblock %} 
+
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home-login.css') }}" />
 <script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
 {% endblock %}
+
 {% block content %}
 <div id="titulo">
   <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo-dmStrike" />
 </div>
 
 <div class="menu-botones">
-<input class="btns-menu" id="btnRegistro" type="button" value="Registrarse" data-url="{{ url_for('homeLogin_route.registro') }}"/>
-
+  <input class="btns-menu" id="btnRegistro" type="button" value="Registrarse" data-url="{{ url_for('homeLogin_route.registro') }}"/>
   <input class="btns-menu" id="jugarInvitado" type="button" value="Jugar" data-url="{{ url_for('homeLogin_route.iniciar_invitado') }}"/>
-
-  <input class="btns-menu" id="iniciarSesion" type="button" value="Iniciar Sesión" />
+  <input class="btns-menu" id="iniciarSesion" type="button" value="Iniciar Sesión" data-url="{{ url_for('homeLogin_route.paginaLogin') }}"/>
 </div>
 {% endblock %}

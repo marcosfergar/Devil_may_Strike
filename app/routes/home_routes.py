@@ -18,23 +18,6 @@ home_pb = Blueprint('home_route', __name__, template_folder='templates')
 @home_pb.route('/home', methods=['GET', 'POST'])
 def paginaBienvenida():
 
-    # form = TrainerForm()
-    # verifTrainer = None
-
-    # if form.validate_on_submit():
-    #     # Obtencion de los datos del usuario entrenador que añadido en el formulario.
-    #     nombreTrainer = form.trainer.data
-    #     passwdTrainer = form.passwd.data
-
-    #     entrenador = trainer(nombreTrainer, passwdTrainer)
-
-    #     verifTrainer = autenticar_entrenador(nombreTrainer, passwdTrainer)
-    #     if verifTrainer == True:
-    #         session["trainer"] = entrenador.to_dict()
-    #         return redirect(url_for('batalla_route.PokedexS'))
-
-    # return render_template('index.html', form=form, verifTrainer=verifTrainer)
-
     if "username" not in session:
             return redirect(url_for('home_login.paginaLogin'))
         
