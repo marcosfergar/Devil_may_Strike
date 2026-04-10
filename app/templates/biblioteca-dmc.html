@@ -19,7 +19,11 @@
                     <p class="card-text">
                         <strong>Lanzamiento:</strong> {{ juego.released }}<br>
                         <strong>Rating:</strong> ⭐ {{ juego.rating }}<br>
-                        <strong>Plataformas:</strong> 
+                        <div class="platforms-list">
+                            {% for plataforma in juego.platforms %}
+                                <span class="badge-platform">{{ plataforma }}</span>
+                            {% endfor %}
+                        </div>
                         <small>{{ juego.platforms | join(', ') }}</small>
                     </p>
                 </div>
