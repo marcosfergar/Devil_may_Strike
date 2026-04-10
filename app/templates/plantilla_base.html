@@ -11,12 +11,18 @@
 
 <body>
   <header>
-    <div id="menu">
-      <ul>
-        <li><a href="/">Inicio</a></li>
-        {% block links %}{% endblock %}
-      </ul>
-    </div>
+    <div class="menu">
+      <div class="user-profile-zone">
+        {% if player %}
+          <input class="btns-perfil" id="Perfil" type="button" value="{{ player }}" data-url="{{ url_for('home_route.perfil') }}"/>
+        {% endif %}
+      </div>
+      <div class="links">
+        <ul>
+          {% block links %}{% endblock %}
+        </ul>
+      </div>
+  </div>
   </header>
   <main>
     {% block content %}

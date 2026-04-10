@@ -12,7 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const btnPerfil = document.getElementById("Perfil");
 
+    if (btnPerfil) {
+        btnPerfil.addEventListener("click", () => {
+            window.location.href = btnPerfil.getAttribute("data-url");
+        });
+    }
     const btnRegistro = document.getElementById("btnRegistro");
 
     if (btnRegistro) {

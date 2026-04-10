@@ -48,6 +48,79 @@ header a, ul{
     list-style: none;
     text-decoration: none;
 }
+.menu{
+display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    width: 100%;
+    justify-content: space-between; /* Crea aire entre los bloques */
+}
+.links {
+    display: flex;
+    gap: 20px; /* Espacio entre los enlaces */
+    position: absolute; /* Truco para centrado absoluto respecto al header */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Perfil */
+.user-profile-zone {
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.btns-perfil {
+    /* Fondos y Bordes */
+    background: linear-gradient(135deg, rgba(20, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
+    border-top: 1px solid rgba(255, 0, 0, 0.4);
+    border-bottom: 2px solid #8b0000;
+    border-left: 1px solid rgba(255, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 4px;
+
+    /* Tipografía */
+    color: #e0e0e0;
+    font-family: 'Times New Roman', serif; /* O una fuente gótica que prefieras */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase; /* Todo en mayúsculas para más fuerza */
+    letter-spacing: 2px; /* Espaciado entre letras */
+
+    /* Espaciado y Tamaño */
+    padding: 5px;
+    cursor: pointer;
+    min-width: 100px; /* Asegura un tamaño mínimo */
+    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7),
+                inset 0 0 10px rgba(139, 0, 0, 0.3);
+    
+    position: relative;
+    overflow: hidden;
+}
+
+.btns-perfil:hover {
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), 
+                0 0 40px rgba(255, 0, 0, 0.3),
+                inset 0 0 15px rgba(255, 0, 0, 0.5);
+    border-bottom-color: #ff0000;
+    border-top-color: rgba(255, 255, 255, 0.5);
+    
+    transform: translateY(-3px) scale(1.03);
+    
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes neonPulse {
+    0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(139, 0, 0, 0.3); }
+    50% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(180, 0, 0, 0.5); }
+    100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(139, 0, 0, 0.3); }
+}
+
+.btns-perfil {
+    animation: neonPulse 3s infinite ease-in-out;
+}
 /* Fondo */
 
 body {
