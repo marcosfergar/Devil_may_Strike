@@ -7,13 +7,16 @@
 {% endblock %}
 
 {% block content %}
-<div id="titulo">
-  <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo-dmStrike" />
-</div>
+<div class="container-hone-login">
+  <img class="dmc-back" src="{{ url_for('static', filename='img/dmc-background.png') }}" alt="logo-dmStrike" />
+  <div id="titulo">
+    <img src="{{ url_for('static', filename='img/dms-logo.png') }}" alt="logo-dmStrike" />
+  </div>
 
-<div class="menu-botones">
-  <input class="btns-menu" id="btnRegistro" type="button" value="Registrarse" data-url="{{ url_for('homeLogin_route.registro') }}"/>
-  <input class="btns-menu" id="jugarInvitado" type="button" value="Jugar" data-url="{{ url_for('homeLogin_route.iniciar_invitado') }}"/>
-  <input class="btns-menu" id="iniciarSesion" type="button" value="Iniciar Sesión" data-url="{{ url_for('homeLogin_route.paginaLogin') }}"/>
+  <div class="menu-botones">
+    <input class="btns-menu" id="btnRegistro" type="button" value="Registrarse" data-url="{{ url_for('homeLogin_route.registro') }}"/>
+    <input class="btns-menu" id="jugarInvitado" type="button" value="Jugar" data-url="{{ url_for('homeLogin_route.iniciar_invitado') }}"/>
+    <input class="btns-menu" id="iniciarSesion" type="button" value="Iniciar Sesión" data-url="{{ url_for('homeLogin_route.paginaLogin') }}"/>
+  </div>
 </div>
 {% endblock %}

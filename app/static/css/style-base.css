@@ -13,7 +13,7 @@
 
 /* Fondo */
 
-body {
+/* body {
   background-image: url("../img/background-home.png");
   background-size: cover;
   background-position: center;
@@ -23,7 +23,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
+} */
 
 /* Titulo */
 #titulo {
@@ -34,6 +34,7 @@ body {
   height: 80vh;
   width: 100%;
   text-align: center;
+  z-index: 999;
 }
 
 #titulo img {

@@ -1,5 +1,63 @@
-body {
+body{
+  background: radial-gradient(circle, red 20%, black 80%);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+
   overflow: hidden;
+}
+.container-hone-login {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 90vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.dmc-back {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+width: 100%;
+  height: 100%;
+object-fit: cover;
+  z-index: 1;
+  
+  opacity: 0.6;
+  pointer-events: none;
+  /* Tu máscara para que se mezcle con el rojo/negro del body */
+  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 80%);
+  mask-image: radial-gradient(circle, black 30%, transparent 80%);
+}
+
+#titulo {
+  margin-top: 5vh;
+  z-index: 10;
+}
+
+#titulo img {
+  max-width: 500px; 
+  height: auto;
+}
+
+.imagen-fondo .dmc-back{
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+  max-width: 2000px;
+  
+  align-self: center;
+
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  mask-image: radial-gradient(circle, black 60%, transparent 100%);
 }
 
 /* Zona Botones */
