@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @font-face {
   font-family: "Mael";
   src: url("../fonts//MAEL____.TTF") format("truetype");
@@ -13,6 +19,10 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Titulo */
@@ -33,15 +43,6 @@ body {
   filter: drop-shadow(
     0 0 15px rgba(0, 0, 0, 0.8)
   );
-}
-
-#enviar {
-  color: black;
-  cursor: pointer;
-}
-
-#enviar:hover {
-  background-color: gray;
 }
 
 #titulo img {
@@ -103,40 +104,23 @@ body {
   color: white;
 }
 
-.error-mensaje {
-  background: white;
-  color: #1a1a1a;
-  font-size: 0.875rem;
-  font-weight: 400;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border-left: 5px solid #ef4444;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-
-  position: fixed;
-  top: 24px;
-  right: 24px;
-
-  animation: fadeSlide 0.3s ease-out;
-  z-index: 9999;
-}
-
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Footer de la página */
 footer {
-  text-align: center;
-  position: fixed;
-  bottom: 0%;
-  left: 0%;
-  color: white;
+    position: sticky;
+    top: 100vh;
+    background: #111;
+    color: white;
+    width: 100%;
+
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+footer a {
+    color: #8b0000;
+    text-decoration: none;
 }

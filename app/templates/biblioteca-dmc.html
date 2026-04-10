@@ -24,7 +24,6 @@
                                 <span class="badge-platform">{{ plataforma }}</span>
                             {% endfor %}
                         </div>
-                        <small>{{ juego.platforms | join(', ') }}</small>
                     </p>
                 </div>
                 
@@ -37,10 +36,5 @@
             <div class="error">No se pudo cargar la información de la saga.</div>
         {% endif %}
     </div>
-
-    <footer class="footer-copy">
-        <p>Datos proporcionados por <a href="https://rawg.io/" target="_blank">RAWG API</a>.</p>
-        <p>© Capcom Co., Ltd. - Contenido para fans.</p>
-    </footer>
 </div>
 {% endblock %}
