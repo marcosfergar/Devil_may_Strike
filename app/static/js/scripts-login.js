@@ -1,0 +1,31 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const btnInvitado = document.getElementById("jugarInvitado");
+
+    if (btnInvitado) {
+        btnInvitado.addEventListener("click", () => {
+            const urlDestino = btnInvitado.getAttribute("data-url");
+            
+            if (urlDestino) {
+                window.location.href = urlDestino;
+            } else {
+                console.error("Error: No se encontró la ruta de invitado.");
+            }
+        });
+    }
+
+    const btnRegistro = document.getElementById("btnRegistro");
+
+    if (btnRegistro) {
+        btnRegistro.addEventListener("click", () => {
+            window.location.href = btnRegistro.getAttribute("data-url");
+        });
+    }
+
+    const btnLogin = document.getElementById("iniciarSesion");
+    
+    if (btnLogin) {
+        btnLogin.addEventListener("click", () => {
+            window.location.href = btnLogin.getAttribute("data-url");
+        });
+    }
+});

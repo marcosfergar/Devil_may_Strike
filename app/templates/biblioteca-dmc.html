@@ -1,0 +1,42 @@
+{% extends "plantilla_base.html" %} 
+{% block title %}DevilMayStrike{% endblock %} 
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/biblioteca-dmc.css') }}" />
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Saga Devil May Cry</h1>
+
+    <div class="card-container">
+        {% if juegos %}
+            {% for juego in juegos %}
+            <div class="card">
+                <img src="{{ juego.background_image }}" class="card-img-top" alt="{{ juego.name }}" style="height: 250px; object-fit: cover;">
+                
+                <div class="card-body">
+                    <h3 class="card-title">{{ juego.name }}</h3>
+                    <p class="card-text">
+                        <strong>Lanzamiento:</strong> {{ juego.released }}<br>
+                        <strong>Rating:</strong> ⭐ {{ juego.rating }}<br>
+                        <strong>Plataformas:</strong> 
+                        <small>{{ juego.platforms | join(', ') }}</small>
+                    </p>
+                </div>
+                
+                <div class="card-footer">
+                    <small class="text-muted">ID RAWG: {{ juego.id }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="error">No se pudo cargar la información de la saga.</div>
+        {% endif %}
+    </div>
+
+    <footer class="footer-copy">
+        <p>Datos proporcionados por <a href="https://rawg.io/" target="_blank">RAWG API</a>.</p>
+        <p>© Capcom Co., Ltd. - Contenido para fans.</p>
+    </footer>
+</div>
+{% endblock %}

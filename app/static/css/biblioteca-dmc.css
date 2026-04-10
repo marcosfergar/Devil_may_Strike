@@ -1,0 +1,112 @@
+/* Configuración General */
+body {
+    background-color: #0f0f0f; /* Negro profundo */
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 40px 0;
+    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.7);
+    border-bottom: 2px solid #8b0000;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+/* Contenedor de Cuadrícula */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* La Tarjeta (Estilo Devil May Cry) */
+.card {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 1px solid #333;
+    border-radius: 0px; /* Bordes rectos para un look más agresivo */
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.card:hover {
+    transform: scale(1.03);
+    border-color: #ff0000;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+/* Imagen con efecto de desvanecimiento */
+.card-img-top {
+    border-bottom: 3px solid #8b0000;
+    transition: filter 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    filter: brightness(1.1) contrast(1.1);
+}
+
+/* Cuerpo de la tarjeta */
+.card-body {
+    padding: 20px;
+    min-height: 180px;
+}
+
+.card-title {
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+    height: 3.2em; /* Mantiene los títulos alineados */
+    overflow: hidden;
+}
+
+.card-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #bbb;
+}
+
+.card-text strong {
+    color: #8b0000; /* Color rojo para etiquetas */
+}
+
+/* Footer de la tarjeta */
+.card-footer {
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid #222;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+}
+
+/* Footer de la página */
+.footer-copy {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+.footer-copy a {
+    color: #8b0000;
+    text-decoration: none;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.6s ease forwards;
+}

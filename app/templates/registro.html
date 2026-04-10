@@ -1,0 +1,33 @@
+{% extends "plantilla_base.html" %} {% block title %}DevilMayStrike{% endblock%}
+{% block style %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"
+/>
+{% endblock %} {% block content %}
+
+<div class="form-container">
+  <h2>Nuevo Usuario</h2>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label style="color: #aaa">Nombre de usuario</label>
+    {{ form.player(placeholder="Ej: XxxLaTormenta777_YTxxX") }}
+
+    <label style="color: #aaa">Contraseña</label>
+    {{ form.passwd(placeholder="••••••••") }}
+
+    <label style="color: #aaa">Confirmar Contraseña</label>
+    {{ form.confirm_passwd(placeholder="••••••••") }} {{
+    form.enviar(class="btns-menu") }}
+  </form>
+
+  <div style="text-align: center; margin-top: 15px">
+    <a
+      href="{{ url_for('homeLogin_route.index') }}"
+      style="color: #666; text-decoration: none"
+      >« Volver</a
+    >
+  </div>
+</div>
+{% endblock %}
