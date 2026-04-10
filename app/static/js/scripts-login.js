@@ -36,4 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnLogout.getAttribute("data-url");
         });
     }
+    
+    const btnBibliotecaDmc = document.getElementById("biblioteca-dmc");
+
+    if (btnBibliotecaDmc) {
+        btnBibliotecaDmc.addEventListener("click", () => {
+            window.location.href = btnBibliotecaDmc.getAttribute("data-url");
+        });
+    }
 });

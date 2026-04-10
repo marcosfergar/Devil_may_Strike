@@ -49,61 +49,6 @@ body {
   width: 600px;
 }
 
-/* Zona Botones */
-
-.menu-botones {
-  margin-bottom: 50px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  background: radial-gradient(
-    ellipse at center,
-    rgb(224, 224, 224) 20%,
-    rgba(180, 180, 180, 0.884) 40%,
-    rgba(0, 0, 0, 0.8) 80%,
-    rgba(0, 0, 0, 1) 100%
-  );
-
-  position: fixed;
-  bottom: 15%;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-}
-
-.btns-menu {
-  background-color: transparent;
-  border: none;
-
-  color: grey;
-
-  width: auto;
-  height: 55px;
-  cursor: pointer;
-
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 1.6rem;
-
-  -webkit-text-stroke: 0.8px black;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
-
-  text-transform: uppercase;
-
-  transition: all 0.3s ease;
-}
-
-.btns-menu:hover {
-  filter: brightness(1.2);
-  transform: scale(1.05);
-  color: white;
-}
-
 /* Footer de la página */
 footer {
     position: sticky;
@@ -113,7 +58,7 @@ footer {
     width: 100%;
 
     text-align: center;
-    margin-top: 50px;
+
     padding: 20px;
     color: #666;
     font-size: 0.9rem;

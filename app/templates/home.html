@@ -4,27 +4,25 @@
 {% block style %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/home-login.css') }}"
+  href="{{ url_for('static', filename='css/home.css') }}"
 />
 <script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
 {% endblock %} 
 
 {% block content %}
-<div id="titulo">
-  <img
-    src="{{ url_for('static', filename='img/dms-logo.png') }}"
-    alt="logo-dmStrike"
-  />
-</div>
+<div class="container-home">
+  <div class="sparda">
+    <img src="{{ url_for('static', filename='img/Dante-menu.png') }}" alt="Dante"/>
+  </div>
 
-<div class="menu-botones">
-  <input class="btns-menu" id="Start" type="button" value="Start" />
-  <input class="btns-menu" id="Ranking" type="button" value="Ranking" />
-
-  <a href="{{ url_for('home_route.biblioteca_dmc') }}">
-    <input class="btns-menu" id="biblioteca-dmc" type="button" value="Saga" />
-  </a>
-
-  <input class="btns-menu" id="Logout" type="button" value="Cerrar Sesion" data-url="{{ url_for('home_route.logout') }}"/>
+  <div class="menu-botones-home">
+    <h1>MISSION SELECT</h1>
+    <hr>
+    <input class="btns-menu" id="Start" type="button" value="Start" />
+    <input class="btns-menu" id="Ranking" type="button" value="Ranking" />
+    <input class="btns-menu" id="biblioteca-dmc" type="button" value="Saga" data-url="{{ url_for('home_route.biblioteca_dmc') }}"/>
+    <input class="btns-menu" id="Logout" type="button" value="Cerrar Sesion" data-url="{{ url_for('home_route.logout') }}"/>
+    <hr>
+  </div>
 </div>
 {% endblock %}

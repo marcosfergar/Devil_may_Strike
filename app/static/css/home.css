@@ -1,0 +1,105 @@
+.container-home{
+    display: flex;
+    position: relative;
+
+    width: 100%;
+    justify-content: center;
+}
+
+/* Zona Papi */
+@keyframes entradaDante {
+    0% {
+        transform: translateX(-100%); /* Empieza fuera de la pantalla a la izquierda */
+        opacity: 0;                   /* Invisible */
+    }
+    100% {
+        transform: translateX(0);    /* Llega a su posición original */
+        opacity: 1;                   /* Totalmente visible */
+    }
+}
+
+.sparda{
+    width: auto;
+    height: 90vh;
+    animation: entradaDante 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
+.sparda img{
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+}
+
+
+/* Zona Botones */
+@keyframes entradaMenu {
+    0% {
+        opacity: 0;           /* Totalmente invisible */
+        transform: scale(1); /* Opcional: empieza un pelín más pequeño para dar efecto de profundidad */
+    }
+    100% {
+        opacity: 1;           /* Totalmente opaco */
+        transform: scale(1);   /* Tamaño original */
+    }
+}
+
+.menu-botones-home{
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+    align-items: center;
+
+    gap: 5px;
+    width: 35%;
+    animation: entradaMenu 0.5s ease-out 0.5s backwards;
+}
+
+.btns-menu{
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: #190303b3;
+
+    color: grey;
+
+    width: 90%;
+    height: 55px;
+    cursor: pointer;
+
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.6rem;
+
+    -webkit-text-stroke: 0.8px black;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btns-menu:hover {
+  filter: brightness(1.2);
+  color: white;
+}
+
+
+h1 {
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 50px;
+    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.7);
+    display: inline-block;
+    width: 100%;
+}
+
+.menu-botones-home hr{
+    width: 100%;
+    border-color: rgba(207, 0, 0, 0.7);
+
+    margin: 20px;
+}
