@@ -11,9 +11,37 @@
   font-style: normal;
 }
 
+main{
+  height: 85vh;
+  width: 100vw;
+}
+/* Header */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+
+    background: #111;
+    color: white;
+    width: 100%;
+
+    text-align: center;
+
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+header a, ul{
+    color: #8b0000;
+    list-style: none;
+    text-decoration: none;
+}
 /* Fondo */
 
-/* body {
+body {
   background-image: url("../img/background-home.png");
   background-size: cover;
   background-position: center;
@@ -23,7 +51,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-} */
+}
 
 /* Titulo */
 #titulo {
@@ -52,8 +80,8 @@
 
 /* Footer de la página */
 footer {
-    position: sticky;
-    top: 100vh;
+    position: fixed;
+    bottom: 0;
     background: #111;
     color: white;
     width: 100%;
