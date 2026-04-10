@@ -28,4 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnLogin.getAttribute("data-url");
         });
     }
+
+    const btnLogout = document.getElementById("Logout");
+    
+    if (btnLogout) {
+        btnLogout.addEventListener("click", () => {
+            window.location.href = btnLogout.getAttribute("data-url");
+        });
+    }
 });

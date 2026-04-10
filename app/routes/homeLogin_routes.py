@@ -21,7 +21,6 @@ def index():
 
 @homeLogin_pb.route('/login', methods=['GET', 'POST'])
 def paginaLogin():
-    # 2. Usa LoginForm en lugar de PlayerForm
     form = LoginForm()
     
     if form.validate_on_submit():
@@ -31,7 +30,7 @@ def paginaLogin():
         
         if exito:
             session['user_id'] = resultado.id
-            session['user_name'] = resultado.nombre
+            session['username'] = resultado.nombre
             return redirect(url_for('home_route.paginaBienvenida'))
         else:
             flash("Tu usuario o contraseña son incorrectos", "error")            
@@ -60,13 +59,9 @@ def registro():
         exito, mensaje = registrar_usuario(username, password)
         
         if exito:
+            session['username'] = username
             return redirect(url_for('home_route.paginaBienvenida'))
         else:
             return render_template('registro.html', form=form, error=mensaje)
         
     return render_template('registro.html', form=form)
-
-# @home_pb.route("/logout")
-# def logout():
-#     session.clear()
-#     return redirect(url_for('home_route.Bienvenido'))

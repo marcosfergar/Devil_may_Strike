@@ -19,7 +19,7 @@ home_pb = Blueprint('home_route', __name__, template_folder='templates')
 def paginaBienvenida():
 
     if "username" not in session:
-            return redirect(url_for('home_login.paginaLogin'))
+            return redirect(url_for('homeLogin_route.paginaLogin'))
         
     return render_template('home.html', player=session.get("username"))
 
@@ -29,7 +29,7 @@ def biblioteca_dmc():
     juegos_saga = listar_saga_dmc()
     return render_template('biblioteca-dmc.html', juegos=juegos_saga)   
 
-# @home_pb.route("/logout")
-# def logout():
-#     session.clear()
-#     return redirect(url_for('homeLogin_route.paginaLogin'))
+@home_pb.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('homeLogin_route.index'))
