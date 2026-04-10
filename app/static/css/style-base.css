@@ -1,3 +1,12 @@
+/* Creamos la animación */
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    animation: fadeInPage 0.5s ease-in-out;
+}
 * {
     margin: 0;
     padding: 0;
@@ -22,7 +31,7 @@ header {
     top: 0;
     z-index: 999;
 
-    background: #111;
+    background: #111111da;
     color: white;
     width: 100%;
 
