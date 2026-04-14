@@ -2,8 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Length, EqualTo
 
-class PlayerForm(FlaskForm):
-    player = StringField(
+class UsuarioForm(FlaskForm):
+    usuario = StringField(
         "Nombre de Usuario",
         validators=[
             DataRequired(message="El campo no puede estar vacío."),
@@ -31,7 +31,7 @@ class PlayerForm(FlaskForm):
     enviar = SubmitField("Registrarse")
 
 class LoginForm(FlaskForm):
-    player = StringField(
+    usuario = StringField(
         "Nombre de Usuario",
         validators=[DataRequired(message="Introduce tu nombre de cazador.")]
     )

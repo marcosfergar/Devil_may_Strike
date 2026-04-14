@@ -15,6 +15,6 @@ def perfil():
     if "username" not in session:
         return redirect(url_for('homeLogin_route.paginaLogin'))
     
-    return render_template('perfil.html', player=session.get("username"))
+    return render_template('perfil.html', usuario=session.get("username"))
 
 

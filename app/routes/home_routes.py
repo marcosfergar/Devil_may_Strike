@@ -20,7 +20,7 @@ def paginaBienvenida():
     if "username" not in session:
             return redirect(url_for('homeLogin_route.paginaLogin'))
         
-    return render_template('home.html', player=session.get("username"))
+    return render_template('home.html', usuario=session.get("username"))
 
 @home_pb.route('/biblioteca-dmc')
 def biblioteca_dmc():
@@ -28,7 +28,7 @@ def biblioteca_dmc():
             return redirect(url_for('homeLogin_route.paginaLogin'))
     
     juegos_saga = listar_saga_dmc()
-    return render_template('biblioteca-dmc.html',player=session.get("username"), juegos=juegos_saga)
+    return render_template('biblioteca-dmc.html',usuario=session.get("username"), juegos=juegos_saga)
 
 @home_pb.route("/logout")
 def logout():

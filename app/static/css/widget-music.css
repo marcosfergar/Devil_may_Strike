@@ -1,4 +1,4 @@
-.music-player {
+.music-usuario {
     position: fixed;
     bottom: 100px;
     left: 20px;
@@ -30,7 +30,7 @@
     font-family: 'Times New Roman', serif;
 }
 
-.player-controls {
+.usuario-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;

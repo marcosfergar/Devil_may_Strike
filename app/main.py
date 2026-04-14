@@ -48,7 +48,7 @@ app.register_blueprint(tienda_bp, url_prefix='/tienda')
 @app.cli.command("crear_tablas")
 def crear_tablas():
     db.drop_all()
-    print("Forjando de nuevo las tablas en el infierno...")
+    print("creando tablas")
     db.create_all()
 
     # Añadir productos de prueba
@@ -58,7 +58,7 @@ def crear_tablas():
     
     db.session.add_all([p1, p2, p3])
     db.session.commit()
-    print("Tablas creadas y tienda poblada. ¡SSS!")
+    print("Tablas creadas.")
 
 
 if __name__ == '__main__':

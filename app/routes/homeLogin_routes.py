@@ -7,7 +7,7 @@ from app.routes.home_routes import home_pb
 # importe modelos
 
 # importe formularios
-from app.forms.player_form import PlayerForm, LoginForm
+from app.forms.usuario_form import UsuarioForm, LoginForm
 
 # importe sercicios
 from app.services.usuario_service import registrar_usuario, verificar_usuario
@@ -23,7 +23,7 @@ def paginaLogin():
     form = LoginForm()
     
     if form.validate_on_submit():
-        username = form.player.data
+        username = form.usuario.data
         password = form.passwd.data
         exito, resultado = verificar_usuario(username, password)
         
@@ -49,10 +49,10 @@ def iniciar_invitado():
 
 @homeLogin_pb.route('/register', methods=['GET', 'POST'])
 def registro():
-    form = PlayerForm()
+    form = UsuarioForm()
     
     if form.validate_on_submit():
-        username = form.player.data
+        username = form.usuario.data
         password = form.passwd.data
         
         exito, mensaje = registrar_usuario(username, password)
