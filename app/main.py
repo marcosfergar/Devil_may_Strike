@@ -8,6 +8,7 @@ from app.database.db import db
 # importe de rutas
 from app.routes.home_routes import home_pb
 from app.routes.homeLogin_routes import homeLogin_pb
+from app.routes.perfil_routes import perfil_pb
 
 
 # importae modelos
@@ -39,6 +40,8 @@ db.init_app(app)
 # Rutas
 app.register_blueprint(homeLogin_pb, url_prefix='/')
 app.register_blueprint(home_pb, url_prefix='/home')
+app.register_blueprint(perfil_pb, url_prefix='/perfil')
+
 
 
 # # Comando CLI

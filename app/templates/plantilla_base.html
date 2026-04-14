@@ -6,6 +6,7 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style-base.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   {% block style %}{% endblock %}
 </head>
 
@@ -14,7 +15,7 @@
     <div class="menu">
       <div class="user-profile-zone">
         {% if player %}
-          <input class="btns-perfil" id="Perfil" type="button" value="{{ player }}" data-url="{{ url_for('home_route.perfil') }}"/>
+          <input class="btns-perfil" id="Perfil" type="button" value="{{ player }}" data-url="{{ url_for('perfil_route.perfil') }}"/>
         {% endif %}
       </div>
       <div class="links">
