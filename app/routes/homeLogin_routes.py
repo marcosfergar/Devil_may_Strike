@@ -5,7 +5,6 @@ import random
 from app.routes.home_routes import home_pb
 
 # importe modelos
-# from app.models import trainer
 
 # importe formularios
 from app.forms.player_form import PlayerForm, LoginForm

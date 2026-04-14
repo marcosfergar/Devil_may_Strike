@@ -1,5 +1,5 @@
 from app.database.db import db
-from app.models.usuario import Usuario
+from app.models.schema import Usuario
 from werkzeug.security import check_password_hash
 
 def registrar_usuario(nombre, password_plano):

@@ -50,4 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnBibliotecaDmc.getAttribute("data-url");
         });
     }
+
+    const btnTienda = document.getElementById("Tienda");
+
+    if (btnTienda) {
+        btnTienda.addEventListener("click", () => {
+            window.location.href = btnTienda.getAttribute("data-url");
+        });
+    }
 });

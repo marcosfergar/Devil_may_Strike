@@ -9,11 +9,11 @@ from app.database.db import db
 from app.routes.home_routes import home_pb
 from app.routes.homeLogin_routes import homeLogin_pb
 from app.routes.perfil_routes import perfil_pb
+from app.routes.tienda_routes import tienda_bp
 
 
 # importae modelos
-from app.models.usuario import Usuario
-
+from app.models.schema import Usuario, Producto, Comentario
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "DevilStrike3"
@@ -41,18 +41,24 @@ db.init_app(app)
 app.register_blueprint(homeLogin_pb, url_prefix='/')
 app.register_blueprint(home_pb, url_prefix='/home')
 app.register_blueprint(perfil_pb, url_prefix='/perfil')
-
+app.register_blueprint(tienda_bp, url_prefix='/tienda')
 
 
 # # Comando CLI
 @app.cli.command("crear_tablas")
 def crear_tablas():
     db.drop_all()
-    print("Creando las tablas correspondientes para la base de datos ...")
+    print("Forjando de nuevo las tablas en el infierno...")
     db.create_all()
 
+    # Añadir productos de prueba
+    p1 = Producto(nombre="Bury the Light", categoria="musica", precio=1500, data_path="music/bury.mp3", descripcion="Tema de Vergil")
+    p2 = Producto(nombre="Dark Slayer", categoria="tema", precio=5000, data_path="theme-vergil", descripcion="Interfaz estilo Vergil")
+    p3 = Producto(nombre="Legendary Hunter", categoria="titulo", precio=2000, data_path="Legendary", descripcion="Título de prestigio")
+    
+    db.session.add_all([p1, p2, p3])
     db.session.commit()
-    print("Tablas creadas")
+    print("Tablas creadas y tienda poblada. ¡SSS!")
 
 
 if __name__ == '__main__':
