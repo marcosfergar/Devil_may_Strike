@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
 <main class="perfil-container">
-    <section class="perfil-card">
+    <div class="perfil-card">
         <div class="card-header">
             <span class="rank-label">DEVIL HUNTER</span>
             <div class="line-decorator"></div>
@@ -24,6 +24,7 @@
             <div class="info-section">
                 <h1 class="user-name">{{ usuario.nombre }}</h1>
                 <p class="user-title">Legendary Dark Knight</p>
+                <p class="user-title">Orbes: {{ usuario.orbes_rojos }} <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon"></p>
                 
                 <div class="stats-grid">
                     <div class="stat-item">
@@ -42,6 +43,31 @@
             <a href="{{ url_for('home_route.paginaBienvenida') }}" class="btn-action">VOLVER</a>
             <input type="button" class="btn-action btn-danger" id="Logout" value="ABANDONAR MISIÓN" data-url="{{ url_for('home_route.logout') }}">
         </div>
-    </section>
+    </div>
+    
+    <div class="inventario-grid">
+        <h2><i class="fa-solid fa-box-open"></i> MI INVENTARIO</h2>
+        {% if usuario.productos %}
+            {% for item in usuario.productos %}
+                <div class="item-card">
+                    <div class="item-icon">
+                        {% if item.categoria == 'musica' %}
+                            <i class="fa-solid fa-music"></i>
+                        {% elif item.categoria == 'avatar' %}
+                            <i class="fa-solid fa-user-ninja"></i>
+                        {% else %}
+                            <i class="fa-solid fa-scroll"></i>
+                        {% endif %}
+                    </div>
+                    <div class="item-info">
+                        <h3>{{ item.nombre }}</h3>
+                        <span>{{ item.categoria | upper }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-msg">Tu inventario está vacío. Ve a la tienda a gastar tus orbes.</p>
+        {% endif %}
+    </div>
 </main>
 {% endblock %}
