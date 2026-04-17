@@ -10,6 +10,7 @@ from flask import Blueprint, redirect, render_template, session, url_for
 # from app.forms.trainer_form import TrainerForm
 
 # importe sercicios
+from app.database import db
 from app.services import usuario_service
 from app.services.rawg_service import listar_saga_dmc
 
@@ -37,7 +38,3 @@ def biblioteca_dmc():
     juegos_saga = listar_saga_dmc()
     return render_template('biblioteca-dmc.html',usuario=user, juegos=juegos_saga)
 
-@home_pb.route("/logout")
-def logout():
-    session.clear()
-    return redirect(url_for('homeLogin_route.index'))

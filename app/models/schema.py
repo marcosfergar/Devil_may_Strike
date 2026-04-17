@@ -15,18 +15,24 @@ class Usuario(db.Model):
     __tablename__ = "Usuarios"
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(100), nullable=False, unique=True)
-    password = Column(String(255), nullable=False)
+    password = Column(String(255), nullable=True)
     orbes_rojos = Column(Integer, default=1000)
+    
+    is_guest = Column(db.Boolean, default=False)
 
     # RELACIONES
     productos = db.relationship('Producto', secondary=inventario, backref='compradores')
     comentarios = db.relationship('Comentario', backref='autor', lazy=True)
 
-    def __init__(self, nombre, password, id=None):
+    def __init__(self, nombre, password, is_guest=False, id=None):
         self.id = id
+        self.is_guest = is_guest
         self.nombre = nombre
-        self.password = generate_password_hash(password)
         self.orbes_rojos = 1000
+        if password:
+            self.password = generate_password_hash(password)
+        else:
+            self.password = None
 
     def set_password(self, newPassword):
         self.password = generate_password_hash(newPassword)
