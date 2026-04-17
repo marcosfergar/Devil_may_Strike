@@ -1,3 +1,114 @@
-body {
+body{
+  background: radial-gradient(circle, rgb(145, 0, 0) 20%, black 100%);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+
   overflow: hidden;
+}
+.container-hone-login {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.dmc-back {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  
+  opacity: 0.6;
+  pointer-events: none;
+  /* Tu máscara para que se mezcle con el rojo/negro del body */
+  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 80%);
+  mask-image: radial-gradient(circle, black 30%, transparent 80%);
+}
+
+#titulo {
+  margin-top: 5vh;
+  z-index: 10;
+}
+
+#titulo img {
+  max-width: 500px; 
+  height: auto;
+}
+
+.imagen-fondo .dmc-back{
+  opacity: 0.5;
+  position: absolute;
+  width: 100%;
+  max-width: 2000px;
+  
+  align-self: center;
+
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  mask-image: radial-gradient(circle, black 60%, transparent 100%);
+}
+
+/* Zona Botones */
+
+.menu-botones {
+  margin-bottom: 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.535) 20%,
+    rgba(0, 0, 0, 0.683) 40%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  position: fixed;
+  bottom: 15%;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.btns-menu {
+  background-color: transparent;
+  border: none;
+
+  color: grey;
+
+  width: auto;
+  height: 55px;
+  cursor: pointer;
+
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.6rem;
+
+  -webkit-text-stroke: 0.8px black;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+
+  text-transform: uppercase;
+
+  transition: all 0.3s ease;
+}
+
+.btns-menu:hover {
+  filter: brightness(1.2);
+  transform: scale(1.05);
+  color: white;
 }

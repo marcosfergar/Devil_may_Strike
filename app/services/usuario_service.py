@@ -1,6 +1,16 @@
 from app.database.db import db
-from app.models.usuario import Usuario
+from app.models.schema import Usuario
 from werkzeug.security import check_password_hash
+
+def obtener_usuario_por_nombre(nombre):
+    if not nombre:
+        return None
+        
+    return Usuario.query.filter_by(nombre=nombre).first()
+
+def obtener_usuario_por_id(usuario_id):
+    
+    return Usuario.query.get(usuario_id)
 
 def registrar_usuario(nombre, password_plano):
 

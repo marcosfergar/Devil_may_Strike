@@ -5,10 +5,9 @@ import random
 from app.routes.home_routes import home_pb
 
 # importe modelos
-# from app.models import trainer
 
 # importe formularios
-from app.forms.player_form import PlayerForm, LoginForm
+from app.forms.usuario_form import UsuarioForm, LoginForm
 
 # importe sercicios
 from app.services.usuario_service import registrar_usuario, verificar_usuario
@@ -21,17 +20,16 @@ def index():
 
 @homeLogin_pb.route('/login', methods=['GET', 'POST'])
 def paginaLogin():
-    # 2. Usa LoginForm en lugar de PlayerForm
     form = LoginForm()
     
     if form.validate_on_submit():
-        username = form.player.data
+        username = form.usuario.data
         password = form.passwd.data
         exito, resultado = verificar_usuario(username, password)
         
         if exito:
             session['user_id'] = resultado.id
-            session['user_name'] = resultado.nombre
+            session['username'] = resultado.nombre
             return redirect(url_for('home_route.paginaBienvenida'))
         else:
             flash("Tu usuario o contraseña son incorrectos", "error")            
@@ -51,22 +49,18 @@ def iniciar_invitado():
 
 @homeLogin_pb.route('/register', methods=['GET', 'POST'])
 def registro():
-    form = PlayerForm()
+    form = UsuarioForm()
     
     if form.validate_on_submit():
-        username = form.player.data
+        username = form.usuario.data
         password = form.passwd.data
         
         exito, mensaje = registrar_usuario(username, password)
         
         if exito:
+            session['username'] = username
             return redirect(url_for('home_route.paginaBienvenida'))
         else:
             return render_template('registro.html', form=form, error=mensaje)
         
     return render_template('registro.html', form=form)
-
-# @home_pb.route("/logout")
-# def logout():
-#     session.clear()
-#     return redirect(url_for('home_route.Bienvenido'))

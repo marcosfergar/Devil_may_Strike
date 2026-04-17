@@ -1,0 +1,59 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock %} 
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tienda.css') }}" />
+<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tienda.js') }}"></script>
+{% endblock %}
+{% block links %}
+<li><a href="/home">Inicio</a></li>
+{% endblock %}
+{% block content %}
+<div class="shop-wrapper">
+    <header class="shop-header">
+        <h1><i class="fa-solid fa-skull"></i> DIVINITY STATUE</h1>
+        <div class="user-currency">
+            <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
+            <span id="orb-count">{{ usuario.orbes_rojos }}</span>
+            <small>ORBES ROJOS</small>
+        </div>
+    </header>
+
+    <nav class="shop-nav">
+        <button class="filter-btn active" onclick="filterShop('all')">TODO</button>
+        <button class="filter-btn" onclick="filterShop('musica')">MÚSICA</button>
+        <button class="filter-btn" onclick="filterShop('avatar')">AVATARES</button>
+        <button class="filter-btn" onclick="filterShop('titulo')">TÍTULOS</button>
+        <button class="filter-btn" onclick="filterShop('tema')">TEMAS</button>
+    </nav>
+
+    <section class="products-grid">
+        {% for producto in productos %}
+        <div class="product-card" data-category="{{ producto.categoria }}">
+            <div class="product-badge">{{ producto.categoria | upper }}</div>
+            
+            <div class="product-info">
+                <h3>{{ producto.nombre }}</h3>
+                <p>{{ producto.descripcion }}</p>
+            </div>
+
+            <div class="product-footer">
+                <div class="price">
+                    <img src="{{ url_for('static', filename='img/red-orb.png') }}" width="15">
+                    {{ producto.precio }}
+                </div>
+                
+                {% if producto in usuario.productos %}
+                    <button class="btn-buy owned" disabled>DESBLOQUEADO</button>
+                {% else %}
+                    <a href="{{ url_for('tienda_route.comprar', id=producto.id) }}" class="btn-buy">
+                        ADQUIRIR
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

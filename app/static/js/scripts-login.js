@@ -12,7 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const btnPerfil = document.getElementById("Perfil");
 
+    if (btnPerfil) {
+        btnPerfil.addEventListener("click", () => {
+            window.location.href = btnPerfil.getAttribute("data-url");
+        });
+    }
     const btnRegistro = document.getElementById("btnRegistro");
 
     if (btnRegistro) {
@@ -26,6 +32,30 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnLogin) {
         btnLogin.addEventListener("click", () => {
             window.location.href = btnLogin.getAttribute("data-url");
+        });
+    }
+
+    const btnLogout = document.getElementById("Logout");
+    
+    if (btnLogout) {
+        btnLogout.addEventListener("click", () => {
+            window.location.href = btnLogout.getAttribute("data-url");
+        });
+    }
+    
+    const btnBibliotecaDmc = document.getElementById("biblioteca-dmc");
+
+    if (btnBibliotecaDmc) {
+        btnBibliotecaDmc.addEventListener("click", () => {
+            window.location.href = btnBibliotecaDmc.getAttribute("data-url");
+        });
+    }
+
+    const btnTienda = document.getElementById("Tienda");
+
+    if (btnTienda) {
+        btnTienda.addEventListener("click", () => {
+            window.location.href = btnTienda.getAttribute("data-url");
         });
     }
 });

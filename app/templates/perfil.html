@@ -1,0 +1,47 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock %} 
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}" />
+<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
+{% endblock %}
+{% block content %}
+<main class="perfil-container">
+    <section class="perfil-card">
+        <div class="card-header">
+            <span class="rank-label">DEVIL HUNTER</span>
+            <div class="line-decorator"></div>
+        </div>
+
+        <div class="perfil-content">
+            <div class="avatar-section">
+                <div class="avatar-border">
+                    <i class="fa-solid fa-user-ninja"></i>
+                </div>
+                <div class="status-badge">ONLINE</div>
+            </div>
+
+            <div class="info-section">
+                <h1 class="user-name">{{ usuario.nombre }}</h1>
+                <p class="user-title">Legendary Dark Knight</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Rango</span>
+                        <span class="stat-value text-red">SSS</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Tipo</span>
+                        <span class="stat-value">{% if session.get('is_guest') %}Invitado{% else %}Cazador Registrado{% endif %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="perfil-actions">
+            <a href="{{ url_for('home_route.paginaBienvenida') }}" class="btn-action">VOLVER</a>
+            <input type="button" class="btn-action btn-danger" id="Logout" value="ABANDONAR MISIÓN" data-url="{{ url_for('home_route.logout') }}">
+        </div>
+    </section>
+</main>
+{% endblock %}

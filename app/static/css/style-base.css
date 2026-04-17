@@ -1,3 +1,18 @@
+/* Creamos la animación */
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    animation: fadeInPage 0.5s ease-in-out;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @font-face {
   font-family: "Mael";
   src: url("../fonts//MAEL____.TTF") format("truetype");
@@ -5,6 +20,107 @@
   font-style: normal;
 }
 
+main{
+  height: 85vh;
+  width: 100vw;
+}
+/* Header */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+
+    background: #111111da;
+    color: white;
+    width: 100%;
+
+    text-align: center;
+
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+header a, ul{
+    color: #8b0000;
+    list-style: none;
+    text-decoration: none;
+}
+.menu{
+display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    width: 100%;
+    justify-content: space-between; /* Crea aire entre los bloques */
+}
+.links {
+    display: flex;
+    gap: 20px; /* Espacio entre los enlaces */
+    position: absolute; /* Truco para centrado absoluto respecto al header */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Perfil */
+.user-profile-zone {
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.btns-perfil {
+    /* Fondos y Bordes */
+    background: linear-gradient(135deg, rgba(20, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
+    border-top: 1px solid rgba(255, 0, 0, 0.4);
+    border-bottom: 2px solid #8b0000;
+    border-left: 1px solid rgba(255, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 4px;
+
+    /* Tipografía */
+    color: #e0e0e0;
+    font-family: 'Times New Roman', serif; /* O una fuente gótica que prefieras */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase; /* Todo en mayúsculas para más fuerza */
+    letter-spacing: 2px; /* Espaciado entre letras */
+
+    /* Espaciado y Tamaño */
+    padding: 5px;
+    cursor: pointer;
+    min-width: 100px; /* Asegura un tamaño mínimo */
+    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7),
+                inset 0 0 10px rgba(139, 0, 0, 0.3);
+    
+    position: relative;
+    overflow: hidden;
+}
+
+.btns-perfil:hover {
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), 
+                0 0 40px rgba(255, 0, 0, 0.3),
+                inset 0 0 15px rgba(255, 0, 0, 0.5);
+    border-bottom-color: #ff0000;
+    border-top-color: rgba(255, 255, 255, 0.5);
+    
+    transform: translateY(-3px) scale(1.03);
+    
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes neonPulse {
+    0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(139, 0, 0, 0.3); }
+    50% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(180, 0, 0, 0.5); }
+    100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(139, 0, 0, 0.3); }
+}
+
+.btns-perfil {
+    animation: neonPulse 3s infinite ease-in-out;
+}
 /* Fondo */
 
 body {
@@ -13,6 +129,10 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Titulo */
@@ -24,6 +144,7 @@ body {
   height: 80vh;
   width: 100%;
   text-align: center;
+  z-index: 999;
 }
 
 #titulo img {
@@ -35,108 +156,27 @@ body {
   );
 }
 
-#enviar {
-  color: black;
-  cursor: pointer;
-}
-
-#enviar:hover {
-  background-color: gray;
-}
-
 #titulo img {
   width: 600px;
 }
 
-/* Zona Botones */
-
-.menu-botones {
-  margin-bottom: 50px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  background: radial-gradient(
-    ellipse at center,
-    rgb(224, 224, 224) 20%,
-    rgba(180, 180, 180, 0.884) 40%,
-    rgba(0, 0, 0, 0.8) 80%,
-    rgba(0, 0, 0, 1) 100%
-  );
-
-  position: fixed;
-  bottom: 15%;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-}
-
-.btns-menu {
-  background-color: transparent;
-  border: none;
-
-  color: grey;
-
-  width: auto;
-  height: 55px;
-  cursor: pointer;
-
-  font-family: "Times New Roman", Times, serif;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 1.6rem;
-
-  -webkit-text-stroke: 0.8px black;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
-
-  text-transform: uppercase;
-
-  transition: all 0.3s ease;
-}
-
-.btns-menu:hover {
-  filter: brightness(1.2);
-  transform: scale(1.05);
-  color: white;
-}
-
-.error-mensaje {
-  background: white;
-  color: #1a1a1a;
-  font-size: 0.875rem;
-  font-weight: 400;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border-left: 5px solid #ef4444;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-
-  position: fixed;
-  top: 24px;
-  right: 24px;
-
-  animation: fadeSlide 0.3s ease-out;
-  z-index: 9999;
-}
-
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Footer de la página */
 footer {
-  text-align: center;
-  position: fixed;
-  bottom: 0%;
-  left: 0%;
-  color: white;
+    position: fixed;
+    bottom: 0;
+    background: #111;
+    color: white;
+    width: 100%;
+
+    text-align: center;
+
+    padding: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+footer a {
+    color: #8b0000;
+    text-decoration: none;
 }

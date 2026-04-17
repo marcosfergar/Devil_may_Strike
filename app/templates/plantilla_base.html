@@ -4,28 +4,34 @@
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style-base.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   {% block style %}{% endblock %}
 </head>
 
 <body>
   <header>
-    <div id="menu">
-      <ul>
-        <li><a href="/">Inicio</a></li>
-        {% block links %}{% endblock %}
-      </ul>
-    </div>
+    <div class="menu">
+      <div class="user-profile-zone">
+        {% if usuario %}
+          <input class="btns-perfil" id="Perfil" type="button" value="{{ usuario.nombre }}" data-url="{{ url_for('perfil_route.perfil') }}"/>
+        {% endif %}
+      </div>
+      <div class="links">
+        <ul>
+          {% block links %}{% endblock %}
+        </ul>
+      </div>
+  </div>
   </header>
   <main>
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
   </main>
   <footer>
-    <p>
-      <small>&copy; 2026 | Creditos Marcos Fernández | Todos los contenidos son usados para
-        un fin educativo</small>
-    </p>
-
+    <p>Datos proporcionados por <a href="https://rawg.io/" target="_blank">RAWG API</a>.</p>
+    <p>&copy; 2026 | Creditos Marcos Fernández | Todos los contenidos son usados para un fin educativo</p>
   </footer>
 </body>
 
