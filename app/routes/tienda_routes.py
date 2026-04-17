@@ -18,18 +18,32 @@ tienda_bp = Blueprint('tienda_route', __name__, template_folder='templates')
 @tienda_bp.route('/')
 def ver_tienda():
     if "username" not in session:
+        flash("Debes iniciar sesión para acceder a la tienda.", "error")
         return redirect(url_for('homeLogin_route.paginaLogin'))
+        
     lista_productos = tienda_service.obtener_todos_los_productos()
 
-    nombre_sesion = session.get("username")
-    user = usuario_service.obtener_usuario_por_nombre(nombre_sesion)
+    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
 
+    if user and user.is_guest:
+            flash("Los invitados no tienen acceso a la tienda. ¡Regístrate para comprar!", "error")
+            return redirect(url_for('homeLogin_route.paginaLogin'))
+    
     return render_template('tienda.html', productos=lista_productos, usuario=user)
 
 @tienda_bp.route('/comprar/<int:id>')
 def comprar(id):
-    user_id = session.get('user_id')
-    resultado = tienda_service.comprar_producto(user_id, id)
+    if "username" not in session:
+        flash("Debes iniciar sesión para acceder a la tienda.", "error")
+        return redirect(url_for('homeLogin_route.paginaLogin'))
+        
+    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
+
+    if user and user.is_guest:
+            flash("Los invitados no tienen acceso a la tienda. ¡Regístrate para comprar!", "error")
+            return redirect(url_for('homeLogin_route.paginaLogin'))
+    
+    resultado = tienda_service.comprar_producto(user.id, id)
     
     if resultado["success"]:
         flash(resultado["message"], "success")
