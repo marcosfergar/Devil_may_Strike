@@ -6,6 +6,9 @@
 <script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tienda.js') }}"></script>
 {% endblock %}
+{% block links %}
+<li><a href="/home">Inicio</a></li>
+{% endblock %}
 {% block content %}
 <div class="shop-wrapper">
     <header class="shop-header">

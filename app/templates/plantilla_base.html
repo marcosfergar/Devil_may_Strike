@@ -15,7 +15,7 @@
     <div class="menu">
       <div class="user-profile-zone">
         {% if usuario %}
-          <input class="btns-perfil" id="Perfil" type="button" value="{{ usuario }}" data-url="{{ url_for('perfil_route.perfil') }}"/>
+          <input class="btns-perfil" id="Perfil" type="button" value="{{ usuario.nombre }}" data-url="{{ url_for('perfil_route.perfil') }}"/>
         {% endif %}
       </div>
       <div class="links">
