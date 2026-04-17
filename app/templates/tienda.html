@@ -44,7 +44,7 @@
                 {% if producto in usuario.productos %}
                     <button class="btn-buy owned" disabled>DESBLOQUEADO</button>
                 {% else %}
-                    <a href="{{ url_for('tienda.comprar', id=producto.id) }}" class="btn-buy">
+                    <a href="{{ url_for('tienda_route.comprar', id=producto.id) }}" class="btn-buy">
                         ADQUIRIR
                     </a>
                 {% endif %}

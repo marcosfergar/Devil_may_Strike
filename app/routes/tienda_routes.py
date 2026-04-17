@@ -10,6 +10,7 @@ from app.models.schema import Usuario
 # importe sercicios
 import app.services.inventario_service as inventario_service
 import app.services.tienda_service as tienda_service
+import app.services.usuario_service as usuario_service
 
 tienda_bp = Blueprint('tienda_route', __name__, template_folder='templates')
 
@@ -18,11 +19,11 @@ def ver_tienda():
     if "username" not in session:
         return redirect(url_for('homeLogin_route.paginaLogin'))
     lista_productos = tienda_service.obtener_todos_los_productos()
-    
-    # user_id = session.get('user_id')
-    # usuario = Usuario.query.get(user_id) if user_id else None
-    
-    return render_template('tienda.html', productos=lista_productos, usuario=session.get("username"))
+
+    nombre_sesion = session.get("username")
+    user = usuario_service.obtener_usuario_por_nombre(nombre_sesion)
+
+    return render_template('tienda.html', productos=lista_productos, usuario=user)
 
 @tienda_bp.route('/comprar/<int:id>')
 def comprar(id):
@@ -34,5 +35,5 @@ def comprar(id):
     else:
         flash(resultado["message"], "error")
         
-    return redirect(url_for('tienda.ver_tienda'))
+    return redirect(url_for('tienda_route.ver_tienda'))
 
