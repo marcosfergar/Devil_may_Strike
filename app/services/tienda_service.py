@@ -1,5 +1,6 @@
 from app.database.db import db
-from app.models.schema import Usuario,Producto
+from app.models.schema import Usuario,Producto,Comentario
+
 
 def obtener_todos_los_productos():
     return Producto.query.all()
@@ -29,3 +30,21 @@ def comprar_producto(usuario_id, producto_id):
     except Exception as e:
         db.session.rollback()
         return {"success": False, "message": "Error en la transacción"}
+
+def agregar_comentario(usuario_id, producto_id, texto):
+    try:
+        nuevo = Comentario(
+            contenido=texto,
+            usuario_id=usuario_id,
+            producto_id=producto_id
+        )
+        db.session.add(nuevo)
+        db.session.commit()
+        return True
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al crear comentario: {e}")
+        return False
+
+def obtener_producto_por_id(producto_id):
+    return Producto.query.get(producto_id)
