@@ -10,6 +10,7 @@ from app.routes.home_routes import home_pb
 from app.routes.homeLogin_routes import homeLogin_pb
 from app.routes.perfil_routes import perfil_pb
 from app.routes.tienda_routes import tienda_bp
+from app.routes.foro_routes import foro_bp
 
 
 # importae modelos
@@ -42,6 +43,8 @@ app.register_blueprint(homeLogin_pb, url_prefix='/')
 app.register_blueprint(home_pb, url_prefix='/home')
 app.register_blueprint(perfil_pb, url_prefix='/perfil')
 app.register_blueprint(tienda_bp, url_prefix='/tienda')
+app.register_blueprint(foro_bp, url_prefix='/foro')
+
 
 
 # # Comando CLI

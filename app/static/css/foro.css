@@ -1,0 +1,17 @@
+    *{
+        color: white;
+    }
+    .tabla-gotica {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        background: rgba(0,0,0,0.8);
+    }
+    .tabla-gotica td {
+        padding: 20px;
+        border-top: 1px solid #910000;
+        border-bottom: 1px solid #910000;
+    }
+    .cat-link { color: #ff3e3e; font-size: 1.5rem; text-decoration: none; font-family: 'Times New Roman'; }
+    .cat-link:hover { color: white; text-shadow: 0 0 10px #ff0000; }
+    .cat-desc { color: #888; font-size: 0.9rem; }

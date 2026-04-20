@@ -19,17 +19,22 @@ home_pb = Blueprint('home_route', __name__, template_folder='templates')
 
 @home_pb.route('/', methods=['GET', 'POST'])
 def paginaBienvenida():
-    if "username" not in session:
-            return redirect(url_for('homeLogin_route.paginaLogin'))
+    user_id = session.get("user_id")
     
-    nombre_sesion = session.get("username")
-    user = usuario_service.obtener_usuario_por_nombre(nombre_sesion)
+    if not user_id:
+        return redirect(url_for('homeLogin_route.paginaLogin'))
+    
+    user = usuario_service.obtener_usuario_por_id(user_id)
+
+    if not user:
+        session.clear()
+        return redirect(url_for('homeLogin_route.paginaLogin'))
 
     return render_template('home.html', usuario=user)
 
 @home_pb.route('/biblioteca-dmc')
 def biblioteca_dmc():
-    if "username" not in session:
+    if "user_id" not in session:
             return redirect(url_for('homeLogin_route.paginaLogin'))
     
     nombre_sesion = session.get("username")

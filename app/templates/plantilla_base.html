@@ -21,6 +21,9 @@
       </div>
       <div class="links">
         <ul>
+        {% if usuario %}
+          <li><a href="/home">Inicio</a></li>
+        {% endif %}
           {% block links %}{% endblock %}
         </ul>
       </div>

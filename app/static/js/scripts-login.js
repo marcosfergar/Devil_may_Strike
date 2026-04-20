@@ -58,4 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnTienda.getAttribute("data-url");
         });
     }
+
+    const btnForo = document.getElementById("Foro");
+
+    if (btnForo) {
+        btnForo.addEventListener("click", () => {
+            window.location.href = btnForo.getAttribute("data-url");
+        });
+    }
 });

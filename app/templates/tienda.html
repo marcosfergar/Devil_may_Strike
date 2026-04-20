@@ -7,7 +7,6 @@
 <script src="{{ url_for('static', filename='js/tienda.js') }}"></script>
 {% endblock %}
 {% block links %}
-<li><a href="/home">Inicio</a></li>
 {% endblock %}
 {% block content %}
 <div class="shop-wrapper">
@@ -61,10 +60,11 @@
                     </a>
                 {% endif %}
             </div>
+            <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="btn-ver-mas">
+            VER DETALLES
+            </a>
         </div>
-        <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="btn-ver-mas">
-        VER DETALLES
-        </a>
+
         {% endfor %}
     </section>
 </div>
