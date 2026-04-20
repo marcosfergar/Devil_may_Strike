@@ -1,0 +1,77 @@
+{% extends "plantilla_base.html" %}
+
+{% block content %}
+<div class="foro-container">
+    <a href="{{ url_for('foro_route.ver_categoria', id=tema.categoria_id) }}" class="btn-volver">← REGRESAR A LA MISIÓN</a>
+    
+    <h1 class="titulo-tema">{{ tema.titulo }}</h1>
+
+    <div class="muro-mensajes">
+        {% for msg in tema.mensajes %}
+        <div class="mensaje-card {% if loop.first %}original-poster{% endif %}">
+            <div class="autor-info">
+                <img src="https://api.dicebear.com/7.x/identicon/svg?seed={{ msg.autor.nombre }}" alt="avatar">
+                <span class="nombre-autor">{{ msg.autor.nombre }}</span>
+                <span class="rango-autor">CAZADOR</span>
+            </div>
+            <div class="contenido-mensaje">
+                <div class="fecha-msg">{{ msg.fecha_publicacion.strftime('%d/%m/%Y %H:%M') }}</div>
+                <p>{{ msg.contenido }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if usuario %}
+    <div class="responder-container">
+        <h3 style="color: #ff3e3e;">DEJAR UNA RESPUESTA</h3>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.contenido(class="input-dmc area-dmc", placeholder="Escribe tu respuesta aquí...", rows="5") }}
+            <div style="text-align: right; margin-top: 10px;">
+                {{ form.enviar(class="btn-nuevo-tema") }}
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .titulo-tema { color: white; font-size: 2.5rem; border-left: 5px solid #910000; padding-left: 15px; margin: 20px 0; }
+    
+    .mensaje-card {
+        display: flex;
+        background: rgba(15, 15, 15, 0.9);
+        border: 1px solid #333;
+        margin-bottom: 20px;
+        min-height: 150px;
+    }
+    
+    .original-poster { border: 1px solid #910000; box-shadow: 0 0 10px rgba(145, 0, 0, 0.3); }
+
+    .autor-info {
+        width: 150px;
+        background: #0a0a0a;
+        padding: 20px;
+        text-align: center;
+        border-right: 1px solid #333;
+    }
+    
+    .autor-info img { width: 60px; border-radius: 5px; border: 1px solid #910000; margin-bottom: 10px; }
+    .nombre-autor { display: block; color: #ff3e3e; font-weight: bold; font-size: 0.9rem; }
+    .rango-autor { font-size: 0.7rem; color: #666; }
+
+    .contenido-mensaje { padding: 20px; flex-grow: 1; color: #ccc; position: relative; }
+    .fecha-msg { font-size: 0.7rem; color: #555; margin-bottom: 10px; }
+    
+    .responder-container {
+        margin-top: 40px;
+        padding: 20px;
+        background: rgba(0,0,0,0.5);
+        border-top: 2px solid #910000;
+    }
+
+    .area-dmc { width: 100%; background: #111; border: 1px solid #444; color: white; padding: 15px; resize: none; }
+    .area-dmc:focus { border-color: #ff3e3e; outline: none; }
+</style>
+{% endblock %}

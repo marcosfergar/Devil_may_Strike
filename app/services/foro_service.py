@@ -30,22 +30,42 @@ def crear_nuevo_tema(usuario_id, categoria_id, titulo, contenido):
         )
         db.session.add(primer_mensaje)
 
-        # 4. RECOMPENSA: ¡Jackpot! +50 Orbes
-        user.orbes_rojos += 50
-        
         recompensa = 50
         cat = Categoria.query.get(categoria_id)
-        if cat.nombre == "Reporte de Fallos (Bugs)":
-            recompensa = 100 # ¡Doble paga por cazar bugs!
+        if cat and cat.nombre == "Reporte de Fallos (Bugs)":
+            recompensa = 100 
 
         user.orbes_rojos += recompensa
         db.session.commit()
-        return nuevo_tema, "¡Tema forjado con éxito! +50 Orbes obtenidos."
+        return nuevo_tema, f"¡Tema forjado! +{recompensa} Orbes obtenidos."
         
     except Exception as e:
         db.session.rollback()
         print(f"Error al crear tema: {e}")
         return None, "Hubo un error en el inframundo al crear el tema."
+
+def agregar_respuesta(usuario_id, tema_id, contenido):
+    try:
+        user = Usuario.query.get(usuario_id)
+        if not user:
+            return None, "Usuario no encontrado."
+
+        nueva_respuesta = Mensaje(
+            contenido=contenido,
+            tema_id=tema_id,
+            usuario_id=usuario_id
+        )
+        db.session.add(nueva_respuesta)
+
+        user.orbes_rojos += 10
+        
+        db.session.commit()
+        return nueva_respuesta, "Respuesta enviada. +10 Orbes obtenidos."
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al responder: {e}")
+        return None, "No se pudo enviar la respuesta al inframundo."
 
 def obtener_mensajes_de_tema(tema_id):
     """Obtiene todos los mensajes de un tema específico"""
