@@ -65,7 +65,7 @@
         <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="btn-ver-mas">
         VER DETALLES
         </a>
-        <div class="card-producto">
+        {% endfor %}
     </section>
 </div>
 {% endblock %}
