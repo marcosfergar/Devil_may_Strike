@@ -1,0 +1,87 @@
+{% extends "plantilla_base.html" %}
+
+{% block content %}
+<div class="foro-container">
+    <div class="categoria-header">
+        <a href="{{ url_for('foro_route.index_foro') }}" class="btn-volver">← VOLVER AL MAPA</a>
+        <h1 class="titulo-categoria">{{ categoria.nombre }}</h1>
+        <p class="descripcion-categoria">{{ categoria.descripcion }}</p>
+        
+        {% if usuario and not usuario.is_guest %}
+        <a href="{{ url_for('foro_route.nuevo_tema', categoria_id=categoria.id) }}" class="btn-nuevo-tema">
+            + INICIAR NUEVO HILO
+        </a>
+        {% endif %}
+    </div>
+
+    <div class="lista-temas">
+        {% if temas %}
+            <table class="tabla-temas">
+                <thead>
+                    <tr>
+                        <th>HILO / MISIÓN</th>
+                        <th>AUTOR</th>
+                        <th>RESPUESTAS</th>
+                        <th>FECHA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tema in temas %}
+                    <tr class="tema-row">
+                        <td class="tema-info">
+                            <a href="{{ url_for('foro_route.ver_tema', id=tema.id) }}" class="tema-titulo">
+                                {{ tema.titulo }}
+                            </a>
+                        </td>
+                        <td class="tema-autor">{{ tema.creador.nombre }}</td>
+                        <td class="tema-stats">{{ tema.mensajes|length - 1 }}</td>
+                        <td class="tema-fecha">{{ tema.fecha_creacion.strftime('%d/%m/%Y') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="mensaje-vacio">
+                <p>No hay susurros en esta zona... Sé el primero en dejar tu marca.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .foro-container { padding: 40px; max-width: 1200px; margin: auto; color: white; }
+    
+    .categoria-header { border-bottom: 2px solid #910000; margin-bottom: 30px; padding-bottom: 20px; }
+    .titulo-categoria { font-size: 3rem; color: #ff3e3e; text-shadow: 2px 2px 10px black; margin: 10px 0; }
+    
+    .btn-volver { color: #888; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+    .btn-volver:hover { color: white; }
+
+    .btn-nuevo-tema {
+        display: inline-block;
+        background: #910000;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: bold;
+        clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        transition: 0.3s;
+    }
+    .btn-nuevo-tema:hover { background: white; color: #910000; box-shadow: 0 0 15px #910000; }
+
+    /* Tabla de Temas */
+    .tabla-temas { width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.7); }
+    .tabla-temas th { text-align: left; padding: 15px; border-bottom: 1px solid #333; color: #910000; }
+    
+    .tema-row { border-bottom: 1px solid #222; transition: 0.3s; }
+    .tema-row:hover { background: rgba(145, 0, 0, 0.1); }
+    
+    .tema-info { padding: 20px; }
+    .tema-titulo { color: #e0e0e0; font-size: 1.2rem; text-decoration: none; font-weight: bold; }
+    .tema-titulo:hover { color: #ff3e3e; }
+    
+    .tema-autor, .tema-stats, .tema-fecha { padding: 20px; color: #888; font-size: 0.9rem; }
+    
+    .mensaje-vacio { text-align: center; padding: 50px; font-style: italic; color: #666; }
+</style>
+{% endblock %}

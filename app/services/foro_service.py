@@ -1,5 +1,5 @@
 from app.database.db import db
-from app.models.schema import Tema, Mensaje, Usuario
+from app.models.schema import Categoria, Tema, Mensaje, Usuario
 
 def crear_nuevo_tema(usuario_id, categoria_id, titulo, contenido):
     """
@@ -33,9 +33,15 @@ def crear_nuevo_tema(usuario_id, categoria_id, titulo, contenido):
         # 4. RECOMPENSA: ¡Jackpot! +50 Orbes
         user.orbes_rojos += 50
         
+        recompensa = 50
+        cat = Categoria.query.get(categoria_id)
+        if cat.nombre == "Reporte de Fallos (Bugs)":
+            recompensa = 100 # ¡Doble paga por cazar bugs!
+
+        user.orbes_rojos += recompensa
         db.session.commit()
         return nuevo_tema, "¡Tema forjado con éxito! +50 Orbes obtenidos."
-
+        
     except Exception as e:
         db.session.rollback()
         print(f"Error al crear tema: {e}")

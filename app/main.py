@@ -14,7 +14,7 @@ from app.routes.foro_routes import foro_bp
 
 
 # importae modelos
-from app.models.schema import Usuario, Producto, Comentario
+from app.models.schema import Categoria, Usuario, Producto, Comentario
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = "DevilStrike3"
@@ -62,7 +62,22 @@ def crear_tablas():
     db.session.add_all([p1, p2, p3])
     db.session.commit()
     print("Tablas creadas.")
-
+    
+@app.cli.command("insertar_categorias")
+def insertar_categorias():
+    with app.app_context():
+        estrategias = Categoria(nombre="Estrategias de Combate", descripcion="Guías para rango SSS.")
+        general = Categoria(nombre="Taberna General", descripcion="Charla general de cazadores.")
+        bugs = Categoria(nombre="Reporte de Bugs", descripcion="Inestabilidad en el inframundo.")
+        
+        db.session.add_all([estrategias, general, bugs])
+        
+        try:
+            db.session.commit()
+            print("¡Categorías forjadas con éxito!")
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error: Tal vez ya existen las categorías. {e}")
 
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0', port=8080)
