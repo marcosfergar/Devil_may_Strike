@@ -3,7 +3,6 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}" />
-<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
 <script src="{{ url_for('static', filename='js/script-editarPerfil.js') }}" defer></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
@@ -60,7 +59,7 @@
                         {% if item.categoria == 'musica' %}
                             <i class="fa-solid fa-music"></i>
                         {% elif item.categoria == 'avatar' %}
-                            <i class="fa-solid fa-user-ninja"></i>
+                            <img src="{{ url_for('static', filename='uploads/tienda/' + item.data_path) }}" alt="{{ item.nombre }}" style="width: 100%;">
                         {% else %}
                             <i class="fa-solid fa-scroll"></i>
                         {% endif %}
