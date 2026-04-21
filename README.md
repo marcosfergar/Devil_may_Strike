@@ -57,3 +57,7 @@ python -m app.main
 ├── main.py
 ├── requirements.txt       # Librerías necesarias
 └── README.md              # Archivos HTML (Jinja2)
+
+
+sacar la api key y poner en el .env y algo del ca-pem
+hacer las migraciones
