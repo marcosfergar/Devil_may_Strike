@@ -1,9 +1,12 @@
 import os
-from werkzeug.utils import secure_filename
+import base64
+import time
+from flask import current_app
 from app.database.db import db
 from app.models.schema import Usuario
 from werkzeug.security import check_password_hash
 
+# LOGIN Y MOVIDAS DE ESAS
 def obtener_usuario_por_nombre(nombre):
     if not nombre:
         return None
@@ -70,21 +73,34 @@ def gestionar_cierre_sesion(user_id):
         
     return False
 
-def actualizar_ajustes_perfil(usuario, nueva_foto=None, nuevo_titulo=None):
+# PAL PERFIL
+
+def actualizar_perfil_completo(usuario, nuevo_titulo, base64_data):
     try:
-        # Foto
-        if nueva_foto:
-            nombre_archivo = f"user_{usuario.id}_{secure_filename(nueva_foto.filename)}"
-            ruta = os.path.join('app/static/uploads/perfiles', nombre_archivo)
-            nueva_foto.save(ruta)
-            usuario.imagen_perfil = nombre_archivo
-        
-        # Titutilo
         if nuevo_titulo:
             usuario.titulo_actual = nuevo_titulo
+
+        if base64_data and ";base64," in base64_data:
+            header, imgstr = base64_data.split(';base64,')
+            extension = header.split('/')[-1]
+            if extension == 'jpeg': extension = 'jpg'
+
+            nombre_archivo = f"user_{usuario.id}_{int(time.time())}.{extension}"
+            ruta_carpeta = os.path.join(current_app.root_path, 'static', 'uploads', 'perfiles')
             
+            if not os.path.exists(ruta_carpeta):
+                os.makedirs(ruta_carpeta)
+
+            ruta_completa = os.path.join(ruta_carpeta, nombre_archivo)
+
+            with open(ruta_completa, "wb") as f:
+                f.write(base64.b64decode(imgstr))
+
+            usuario.imagen_perfil = nombre_archivo
+
         db.session.commit()
-        return True, "Perfil actualizado con éxito."
+        return True, "Perfil actualizado."
     except Exception as e:
         db.session.rollback()
-        return False, f"Error, esto no chufla: {e}"
+        print(f"Error en service: {e}")
+        return False, str(e)

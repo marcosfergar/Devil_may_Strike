@@ -28,10 +28,10 @@ def actualizar_perfil():
     user_id = session.get("user_id")
     user = usuario_service.obtener_usuario_por_id(user_id)
     
-    foto = request.files.get('foto')
-    titulo = request.form.get('titulo')
-
-    exito, mensaje = usuario_service.actualizar_ajustes_perfil(user, foto, titulo)
+    nuevo_titulo = request.form.get('titulo')
+    foto_recortada_base64 = request.form.get('cropped_data')
     
-    flash(mensaje, "success" if exito else "error")
+    usuario_service.actualizar_perfil_completo(user, nuevo_titulo, foto_recortada_base64)
+
+    flash("Perfil actualizado con éxito", "success")
     return redirect(url_for('perfil_route.perfil'))
