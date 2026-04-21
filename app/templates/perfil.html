@@ -82,28 +82,28 @@
             <h1 class="titulo-dmc">CONFIGURACIÓN DE CAZADOR</h1>
 
             <form action="{{ url_for('perfil_route.actualizar_perfil') }}" method="POST" enctype="multipart/form-data" class="form-gotico">
-<div class="seccion-ajuste">
-    <h3>AJUSTAR APARIENCIA</h3>
-    
-    <div id="wrapper-editor" style="display: none; margin-bottom: 15px;">
-        <div class="cropper-wrapper" style="max-height: 400px; overflow: hidden; border: 2px solid #910000;">
-            <img src="" id="image-to-crop" style="max-width: 100%;">
-        </div>
-        <button type="button" id="btn-confirmar" class="btn-action" onclick="confirmarRecorte()" style="margin-top: 10px; width: 100%; border: 1px solid #00ff00; color: #00ff00;">
-            CONFIRMAR RECORTE
-        </button>
-    </div>
-    
-    <div id="mensaje-exito" style="display: none; color: #00ff00; text-align: center; font-weight: bold; margin: 10px 0;">
-        ¡ALMA PREPARADA PARA EL COMBATE!
-    </div>
+                <div class="seccion-ajuste">
+                    <h3>AJUSTAR APARIENCIA</h3>
+                    
+                    <div id="wrapper-editor" style="display: none; margin-bottom: 15px;">
+                        <div class="cropper-wrapper" style="max-height: 400px; overflow: hidden; border: 2px solid #910000;">
+                            <img src="" id="image-to-crop" style="max-width: 100%;">
+                        </div>
+                        <button type="button" id="btn-confirmar" class="btn-action" onclick="confirmarRecorte()" style="margin-top: 10px; width: 100%; border: 1px solid #00ff00; color: #00ff00;">
+                            CONFIRMAR RECORTE
+                        </button>
+                    </div>
+                    
+                    <div id="mensaje-exito" style="display: none; color: #00ff00; text-align: center; font-weight: bold; margin: 10px 0;">
+                        ¡ALMA PREPARADA PARA EL COMBATE!
+                    </div>
 
-    <input type="hidden" name="cropped_data" id="cropped_data">
+                    <input type="hidden" name="cropped_data" id="cropped_data">
 
-    <label class="btn-subir" id="label-archivo">
-        <input type="file" name="foto" id="input-foto" accept="image/*"> SELECCIONAR NUEVA ALMA
-    </label>
-</div>
+                    <label class="btn-subir" id="label-archivo">
+                        <input type="file" name="foto" id="input-foto" accept="image/*"> SELECCIONAR NUEVA ALMA
+                    </label>
+                </div>
 
                 <div class="seccion-ajuste">
                     <h3>TÍTULO DE PRESTIGIO</h3>

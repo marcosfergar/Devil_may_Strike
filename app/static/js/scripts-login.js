@@ -66,4 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnForo.getAttribute("data-url");
         });
     }
+
+    // Lógica global para mensajes Flash
+    document.addEventListener('DOMContentLoaded', () => {
+        const messages = document.querySelectorAll('.flash-message');
+        
+        messages.forEach(msg => {
+            // Auto-eliminar después de 5 segundos
+            setTimeout(() => {
+                msg.style.animation = "fadeOut 0.5s forwards";
+                setTimeout(() => msg.remove(), 500);
+            }, 5000);
+        });
+    });
 });
