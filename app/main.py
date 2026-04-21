@@ -1,4 +1,4 @@
-import os
+import os,json
 from flask import Flask
 from flask_session import Session
 
@@ -48,20 +48,42 @@ app.register_blueprint(foro_bp, url_prefix='/foro')
 
 
 # # Comando CLI
+
 @app.cli.command("crear_tablas")
 def crear_tablas():
     db.drop_all()
-    print("creando tablas")
+    print("Borrando tablas antiguas...")
     db.create_all()
-
-    # Añadir productos de prueba
-    p1 = Producto(nombre="Bury the Light", categoria="musica", precio=1500, data_path="music/bury.mp3", descripcion="Tema de Vergil")
-    p2 = Producto(nombre="Dark Slayer", categoria="tema", precio=5000, data_path="theme-vergil", descripcion="Interfaz estilo Vergil")
-    p3 = Producto(nombre="Legendary Hunter", categoria="titulo", precio=2000, data_path="Legendary", descripcion="Título de prestigio")
+    print("Tablas creadas con éxito.")
     
-    db.session.add_all([p1, p2, p3])
-    db.session.commit()
-    print("Tablas creadas.")
+    json_path = os.path.join(app.root_path, 'data', 'productos.json')
+    
+    if os.path.exists(json_path):
+        try:
+            with open(json_path, 'r', encoding='utf-8') as f:
+                productos_data = json.load(f)
+            
+            for p in productos_data:
+                # Usamos .get() para que si no existe 'imagen_url', devuelva None o un string vacío
+                nuevo_producto = Producto(
+                    nombre=p['nombre'],
+                    categoria=p['tipo'],
+                    precio=p['precio'],
+                    descripcion=p.get('descripcion', ''),
+                    data_path=p.get('imagen_url', 'default_item.png') # Valor por defecto
+                )
+                db.session.add(nuevo_producto)
+            
+            db.session.commit()
+            print(f"Tienda cargada: {len(productos_data)} items forjados.")
+            
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error crítico al cargar JSON: {e}")
+    else:
+        print(f"Aviso: No se encontró el archivo en {json_path}")
+
+    print("--- PROCESO FINALIZADO: RANGO SSS ---")
     
 @app.cli.command("insertar_categorias")
 def insertar_categorias():

@@ -1,0 +1,41 @@
+[
+    {
+        "nombre": "Alma de Sparda",
+        "tipo": "avatar",
+        "precio": 5000,
+        "descripcion": "El legendario caballero oscuro.",
+        "imagen_url": "avatar_sparda.png"
+    },
+    {
+        "nombre": "Estilo Rebellion",
+        "tipo": "avatar",
+        "precio": 2500,
+        "descripcion": "La herencia de Dante.",
+        "imagen_url": "avatar_rebellion.png"
+    },
+    {
+        "nombre": "Visions of V",
+        "tipo": "avatar",
+        "precio": 3000,
+        "descripcion": "La esencia del misterio.",
+        "imagen_url": "avatar_v.png"
+    },
+    {
+        "nombre": "Bury the Light",
+        "tipo": "musica",
+        "precio": 1500,
+        "descripcion": "Tema de Vergil"
+    },
+    {
+        "nombre": "Dark Slayer",
+        "tipo": "tema",
+        "precio": 5000,
+        "descripcion": "Interfaz estilo Vergil"
+    },
+    {
+        "nombre": "Legendary Hunter",
+        "tipo": "titulo",
+        "precio": 2000,
+        "descripcion": "Título de prestigio"
+    }
+]

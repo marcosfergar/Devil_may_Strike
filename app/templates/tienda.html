@@ -28,15 +28,6 @@
     </nav>
 
     <section class="products-grid">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div style="color: #ff4d4d; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; border: 1px solid #ff4d4d;">
-                {{ message }}
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
         {% for producto in productos %}
         <div class="product-card" data-category="{{ producto.categoria }}">
             <div class="product-badge">{{ producto.categoria | upper }}</div>
@@ -44,6 +35,15 @@
             <div class="product-info">
                 <h3>{{ producto.nombre }}</h3>
                 <p>{{ producto.descripcion }}</p>
+                {% if producto.categoria == 'avatar' and producto.data_path %}
+                    <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}" 
+                        class="avatar-preview" 
+                        alt="{{ producto.nombre }}">
+                {% elif producto.categoria == 'musica' %}
+                    <div class="icon-musica">🎵</div>
+                {% elif producto.categoria == 'titulo' %}
+                    <div class="icon-titulo">📜</div>
+                {% endif %}
             </div>
 
             <div class="product-footer">

@@ -1,3 +1,6 @@
+body {
+    padding-bottom: 200px;
+}
 :root {
     --dmc-red: #b30000;
     --dmc-blue: #0055ff;
@@ -80,4 +83,22 @@
     border-color: #555;
     color: #555;
     cursor: default;
+}
+
+.avatar-preview {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #910000; /* Rojo DMC */
+    border-radius: 5px;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(145, 0, 0, 0.5);
+}
+
+.icon-musica, .icon-titulo {
+    font-size: 3rem;
+    padding: 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed #444;
 }
