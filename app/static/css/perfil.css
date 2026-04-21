@@ -44,6 +44,10 @@
     align-items: center;
 }
 
+.avatar{
+    width: 120px; height: 120px; border: 2px solid #910000; margin-bottom: 15px; object-fit: cover;
+}
+
 .avatar-border {
     width: 120px;
     height: 120px;

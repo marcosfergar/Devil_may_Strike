@@ -1,3 +1,5 @@
+import os
+from werkzeug.utils import secure_filename
 from app.database.db import db
 from app.models.schema import Usuario
 from werkzeug.security import check_password_hash
@@ -67,3 +69,22 @@ def gestionar_cierre_sesion(user_id):
         print(f"Error al eliminar invitado durante logout: {e}")
         
     return False
+
+def actualizar_ajustes_perfil(usuario, nueva_foto=None, nuevo_titulo=None):
+    try:
+        # Foto
+        if nueva_foto:
+            nombre_archivo = f"user_{usuario.id}_{secure_filename(nueva_foto.filename)}"
+            ruta = os.path.join('app/static/uploads/perfiles', nombre_archivo)
+            nueva_foto.save(ruta)
+            usuario.imagen_perfil = nombre_archivo
+        
+        # Titutilo
+        if nuevo_titulo:
+            usuario.titulo_actual = nuevo_titulo
+            
+        db.session.commit()
+        return True, "Perfil actualizado con éxito."
+    except Exception as e:
+        db.session.rollback()
+        return False, f"Error, esto no chufla: {e}"

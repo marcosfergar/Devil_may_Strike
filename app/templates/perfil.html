@@ -9,16 +9,22 @@
 <main class="perfil-container">
     <div class="perfil-card">
         <div class="card-header">
-            <span class="rank-label">DEVIL HUNTER</span>
+            <span class="rank-label">{{usuario.titulo_actual}}</span>
             <div class="line-decorator"></div>
         </div>
 
         <div class="perfil-content">
             <div class="avatar-section">
                 <div class="avatar-border">
-                    <i class="fa-solid fa-user-ninja"></i>
+                <img src="{{ url_for('static', filename='uploads/perfiles/' + usuario.imagen_perfil) }}" id="preview" class="avatar">
                 </div>
-                <div class="status-badge">ONLINE</div>
+                <div class="status-badge">
+                    {% if usuario.is_guest %}
+                        CAZADOR INVITADO
+                    {% else %}
+                        CAZADOR
+                    {% endif %}
+                </div>
             </div>
 
             <div class="info-section">
@@ -69,5 +75,49 @@
             <p class="empty-msg">Tu inventario está vacío. Ve a la tienda a gastar tus orbes.</p>
         {% endif %}
     </div>
+    <h1 class="titulo-dmc">CONFIGURACIÓN DE CAZADOR</h1>
+
+    <form action="{{ url_for('perfil_route.actualizar_perfil') }}" method="POST" enctype="multipart/form-data" class="form-gotico">
+        
+        <div class="seccion-ajuste">
+            <h3>APARIENCIA (AVATAR)</h3>
+            <div class="avatar-preview">
+                <img src="{{ url_for('static', filename='uploads/perfiles/' + usuario.imagen_perfil) }}" id="preview">
+            </div>
+            <label class="btn-subir">
+                <input type="file" name="foto" onchange="readURL(this);"> SELECCIONAR ALMA
+            </label>
+        </div>
+
+        <div class="seccion-ajuste">
+            <h3>TÍTULO DE PRESTIGIO</h3>
+            <select name="titulo" class="input-dmc">
+                <option value="{{ usuario.titulo_actual }}">{{ usuario.titulo_actual }} (Actual)</option>
+                <option value="Legendary Hunter">Legendary Hunter</option>
+                <option value="Dark Slayer">Dark Slayer</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-guardar-perfil">GUARDAR CAMBIOS (SSS)</button>
+    </form>
 </main>
+<style>
+    .seccion-ajuste { margin-bottom: 30px; padding: 20px; border: 1px solid #333; background: rgba(0,0,0,0.3); }
+    .avatar-preview img { width: 120px; height: 120px; border: 2px solid #910000; margin-bottom: 15px; object-fit: cover; }
+    
+    .btn-subir { background: #222; padding: 10px; cursor: pointer; border: 1px dashed #910000; display: inline-block; }
+    .btn-subir input { display: none; }
+    
+    .btn-guardar-perfil {
+        width: 100%;
+        background: #910000;
+        color: white;
+        padding: 15px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+    }
+    .btn-guardar-perfil:hover { background: #ff3e3e; box-shadow: 0 0 20px #ff3e3e; }
+</style>
 {% endblock %}

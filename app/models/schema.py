@@ -18,12 +18,13 @@ class Usuario(db.Model):
     password = Column(String(255), nullable=True)
     orbes_rojos = Column(Integer, default=1000)
     is_guest = Column(db.Boolean, default=False)
+    
+    imagen_perfil = db.Column(db.String(200), default='default.png')
+    titulo_actual = db.Column(db.String(100), default='Cazador Novato')
 
     # RELACIONES
     productos = db.relationship('Producto', secondary=inventario, backref='compradores')
-    # Cambiamos backref para evitar ambigüedad
     comentarios = db.relationship('Comentario', backref='autor_tienda', lazy=True)
-    # Los mensajes del foro se vinculan mediante el backref definido en la clase Mensaje
 
     def __init__(self, nombre, password=None, is_guest=False):
         self.nombre = nombre
@@ -53,6 +54,7 @@ class Producto(db.Model):
     precio = Column(Integer, nullable=False)
     data_path = Column(String(255))
     descripcion = Column(String(255))
+
     comentarios = db.relationship('Comentario', backref='producto_asociado', lazy=True)
 
 class Comentario(db.Model):
@@ -68,7 +70,7 @@ class Categoria(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(50), nullable=False, unique=True)
     descripcion = Column(String(255))
-    # Añadimos cascade aquí también para limpieza total
+
     temas = db.relationship('Tema', backref='categoria_asociada', lazy=True, cascade="all, delete-orphan")
 
 class Tema(db.Model):
