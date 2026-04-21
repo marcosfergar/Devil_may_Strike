@@ -48,6 +48,24 @@ app.register_blueprint(foro_bp, url_prefix='/foro')
 
 
 # # Comando CLI
+def seed_categorias():
+    """Función auxiliar para insertar categorías iniciales"""
+    # Lista de categorías para iterar fácilmente
+    categorias_data = [
+        {"nombre": "Estrategias de Combate", "descripcion": "Guías para rango SSS."},
+        {"nombre": "Taberna General", "descripcion": "Charla general de cazadores."},
+        {"nombre": "Reporte de Bugs", "descripcion": "Inestabilidad en el inframundo."}
+    ]
+    
+    for cat in categorias_data:
+        # Esto evita que el script falle si la categoría ya existe
+        existe = Categoria.query.filter_by(nombre=cat['nombre']).first()
+        if not existe:
+            nueva_cat = Categoria(nombre=cat['nombre'], descripcion=cat['descripcion'])
+            db.session.add(nueva_cat)
+    
+    db.session.commit()
+    print("¡Categorías forjadas con éxito!")
 
 @app.cli.command("crear_tablas")
 def crear_tablas():
@@ -56,50 +74,36 @@ def crear_tablas():
     db.create_all()
     print("Tablas creadas con éxito.")
     
+    # 1. Cargar Productos desde JSON
     json_path = os.path.join(app.root_path, 'data', 'productos.json')
-    
     if os.path.exists(json_path):
         try:
             with open(json_path, 'r', encoding='utf-8') as f:
                 productos_data = json.load(f)
             
             for p in productos_data:
-                # Usamos .get() para que si no existe 'imagen_url', devuelva None o un string vacío
                 nuevo_producto = Producto(
                     nombre=p['nombre'],
                     categoria=p['tipo'],
                     precio=p['precio'],
                     descripcion=p.get('descripcion', ''),
-                    data_path=p.get('imagen_url', 'default_item.png') # Valor por defecto
+                    data_path=p.get('imagen_url', 'default_item.png')
                 )
                 db.session.add(nuevo_producto)
             
             db.session.commit()
             print(f"Tienda cargada: {len(productos_data)} items forjados.")
-            
         except Exception as e:
             db.session.rollback()
             print(f"Error crítico al cargar JSON: {e}")
-    else:
-        print(f"Aviso: No se encontró el archivo en {json_path}")
+    
+    # 2. Cargar Categorías del Foro
+    try:
+        seed_categorias()
+    except Exception as e:
+        print(f"Error al insertar categorías: {e}")
 
     print("--- PROCESO FINALIZADO: RANGO SSS ---")
-    
-@app.cli.command("insertar_categorias")
-def insertar_categorias():
-    with app.app_context():
-        estrategias = Categoria(nombre="Estrategias de Combate", descripcion="Guías para rango SSS.")
-        general = Categoria(nombre="Taberna General", descripcion="Charla general de cazadores.")
-        bugs = Categoria(nombre="Reporte de Bugs", descripcion="Inestabilidad en el inframundo.")
-        
-        db.session.add_all([estrategias, general, bugs])
-        
-        try:
-            db.session.commit()
-            print("¡Categorías forjadas con éxito!")
-        except Exception as e:
-            db.session.rollback()
-            print(f"Error: Tal vez ya existen las categorías. {e}")
 
 if __name__ == '__main__':
     # app.run(debug=True, host='0.0.0.0', port=8080)

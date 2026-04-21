@@ -1,3 +1,4 @@
+
 /* Creamos la animación */
 @keyframes fadeInPage {
     from { opacity: 0; }
@@ -17,7 +18,7 @@ body {
     overflow-y: scroll; 
 }
 
-/* 3. Para Internet Explorer y versiones antiguas de Edge */
+/* Internet Explorer*/
 html, 
 body {
     -ms-overflow-style: none;
@@ -40,12 +41,12 @@ body {
 }
 
 main{
-  height: 85vh;
+  min-height: 85vh;
   width: 100vw;
 }
 /* Header */
 
-header {
+.index-menu {
     position: sticky;
     top: 0;
     z-index: 999;
@@ -62,7 +63,7 @@ header {
     border-top: 1px solid #333;
 }
 
-header a, ul{
+.index-menu a, ul{
     color: #8b0000;
     list-style: none;
     text-decoration: none;

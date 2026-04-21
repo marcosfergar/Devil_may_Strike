@@ -1,55 +1,40 @@
 {% extends "plantilla_base.html" %}
-
+{% block title %}DevilMayStrike{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/foro.css') }}"/>
+{% endblock %} 
 {% block content %}
-<div class="foro-container">
-    <div class="form-gotico">
-        <h1 class="titulo-dmc">FORJAR NUEVA MISIÓN</h1>
-        <p style="color: #888;">Escribe tu mensaje. Recuerda: las reglas del castillo se aplican aquí.</p>
+<div class="foro-wrapper">
+    <div class="form-mision-container">
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <header class="form-header">
+            <h1 class="titulo-dmc">FORJAR NUEVA MISIÓN</h1>
+            <div class="divisor-ritual"></div>
+            <p class="subtitulo-form">Escribe tus crónicas. Las leyes del castillo rigen tus palabras.</p>
+        </header>
         
-        <form method="POST">
+        <form method="POST" class="form-ritual">
             {{ form.hidden_tag() }}
             
-            <div class="input-group">
-                <label>Título del Hilo</label>
-                {{ form.titulo(class="input-dmc", placeholder="Ej: Combo Infinito con Rebellion") }}
+            <div class="ritual-input-group">
+                <label class="ritual-label">TÍTULO DEL HILO</label>
+                {{ form.titulo(class="ritual-input ritual-titulo", placeholder="Ej: Combo Infinito con Rebellion...") }}
             </div>
 
-            <div class="input-group">
-                <label>Contenido del Mensaje</label>
-                {{ form.contenido(class="input-dmc area-dmc", rows="10") }}
+            <div class="ritual-input-group">
+                <label class="ritual-label">CONTENIDO DEL MANUSCRITO</label>
+                {{ form.contenido(class="ritual-input ritual-area", rows="12") }}
             </div>
 
-            <div class="botones-container">
-                <a href="{{ url_for('foro_route.ver_categoria', id=categoria_id) }}" class="btn-cancelar">ABORTAR</a>
-                {{ form.enviar(class="btn-nuevo-tema") }}
+            <div class="acciones-rituales">
+                <a href="{{ url_for('foro_route.ver_categoria', id=categoria_id) }}" class="btn-abortar">ABORTAR</a>
+                <button type="submit" class="btn-desbloquear">PUBLICAR MISIÓN</button>
             </div>
         </form>
     </div>
 </div>
-
-<style>
-    .form-gotico {
-        background: rgba(20, 0, 0, 0.9);
-        border: 2px solid #910000;
-        padding: 40px;
-        box-shadow: 0 0 20px #000;
-        max-width: 90vw;
-        max-height: 80vh;
-        margin: 40px auto;
-    }
-    .input-group { margin-bottom: 20px; max-height: 400px;}
-    .input-group label { display: block; color: #ff3e3e; margin-bottom: 5px; font-weight: bold; }
-    .input-dmc {
-        width: 100%;
-        background: #111;
-        border: 1px solid #444;
-        color: white;
-        padding: 10px;
-        font-family: 'Courier New', Courier, monospace;
-    }
-    .input-dmc:focus { border-color: #ff3e3e; outline: none; }
-    .area-dmc { resize: none; }
-    .btn-cancelar { color: #888; text-decoration: none; margin-right: 20px; }
-    .botones-container { display: flex; align-items: center; justify-content: flex-end; margin-top: 20px; }
-</style>
 {% endblock %}

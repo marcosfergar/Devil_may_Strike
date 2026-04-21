@@ -3,42 +3,47 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/foro.css') }}"/>
-
-<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
-
 {% endblock %} 
+
 {% block content %}
-<div class="foro-container">
-    <h1 class="titulo-dmc">FORO DE CAZADORES</h1>
+<div class="foro-wrapper">
+    <header class="foro-header">
+        <h1 class="titulo-dmc">ARCHIVO DE CAZADORES</h1>
+        <p class="subtitulo-gotico">Consulta los registros del inframundo</p>
+    </header>
     
-    <table class="tabla-gotica">
-        <thead>
-            <tr>
-                <th>Categoría</th>
-                <th>Temas</th>
-                <th>Último Susurro</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cat in categorias %}
-            <tr>
-                <td>
+    <div class="categorias-grid">
+        {% for cat in categorias %}
+        <div class="cat-card">
+            <div class="cat-glow"></div>
+            <div class="cat-content">
+                <div class="cat-info">
                     <a href="{{ url_for('foro_route.ver_categoria', id=cat.id) }}" class="cat-link">
                         {{ cat.nombre }}
                     </a>
                     <p class="cat-desc">{{ cat.descripcion }}</p>
-                </td>
-                <td>{{ cat.temas|length }}</td>
-                <td>
-                    {% if cat.temas %}
-                        {{ cat.temas[-1].titulo }}
-                    {% else %}
-                        Silencio absoluto...
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </div>
+                
+                <div class="cat-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">TEMAS</span>
+                        <span class="meta-value">{{ cat.temas|length }}</span>
+                    </div>
+                    <div class="meta-item ultimo-mensaje">
+                        <span class="meta-label">ÚLTIMO SUSURRO</span>
+                        <span class="meta-value">
+                            {% if cat.temas %}
+                                <span class="tema-txt">{{ cat.temas[-1].titulo }}</span>
+                            {% else %}
+                                <span class="silencio">Silencio absoluto...</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="cat-border-accent"></div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
