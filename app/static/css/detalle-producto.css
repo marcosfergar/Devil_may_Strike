@@ -1,82 +1,252 @@
-    .container-detalle { position: relative; min-height: 100vh; padding: 50px; color: white; overflow: hidden; }
-    .detalle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; z-index: 10; position: relative; }
-    
-    .titulo-producto { font-family: 'Times New Roman', serif; font-size: 4rem; color: #910000; text-shadow: 2px 2px 10px black; margin: 0; }
-    
-    .precio-tag { display: flex; align-items: center; font-size: 2rem; color: #ff3e3e; margin: 20px 0; }
-    .precio-tag img { width: 40px; margin-right: 10px; }
+.reliquia-wrapper {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+}
 
-    .descripcion-box, .comentarios-box { background: rgba(0, 0, 0, 0.7); border: 1px solid #910000; padding: 20px; border-radius: 5px; margin-bottom: 20px; }
-    
-    .lista-comentarios { max-height: 300px; overflow-y: auto; margin-bottom: 15px; }
-    .comentario { border-bottom: 1px solid #333; padding: 10px 0; }
-    .autor { color: #910000; font-weight: bold; }
-    .fecha { font-size: 0.7rem; color: #666; margin-left: 10px; }
+.detalle-card-ritual {
+    background: linear-gradient(145deg, #150a0a 0%, #050505 100%);
+    border: 1px solid #332222;
+    position: relative;
+    padding: 40px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.9);
+}
 
-    .btn-comprar { background: #910000; color: white; border: none; padding: 15px 30px; font-size: 1.5rem; cursor: pointer; transition: 0.3s; width: 100%; }
-    .btn-comprar:hover { background: white; color: #910000; box-shadow: 0 0 20px #910000; }
-    /* Contenedor del Formulario */
-.form-comentario {
-    margin-top: 25px;
+.detalle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+}
+
+/* Columna Visual */
+.col-visual {
+    text-align: center;
+    border-right: 1px solid rgba(145, 0, 0, 0.2);
+    padding-right: 20px;
+}
+
+.item-frame {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    background: radial-gradient(circle, rgba(145,0,0,0.2) 0%, transparent 70%);
+    border: 1px solid #444;
+    padding: 10px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-reliquia {
+    max-width: 100%;
+    filter: drop-shadow(0 0 10px rgba(255, 62, 62, 0.4));
+}
+
+.titulo-producto {
+    font-family: 'Mael', serif; /* O tu fuente gótica */
+    color: #eee;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.badge-categoria {
+    display: inline-block;
+    color: #910000;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    border-bottom: 1px solid #910000;
+    margin-bottom: 20px;
+}
+
+.precio-ritual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
-    padding: 15px;
-    background: rgba(20, 0, 0, 0.6); /* Fondo rojo muy oscuro traslúcido */
-    border: 1px solid #4a0000;
-    border-radius: 4px;
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
 }
 
-/* El Campo de Texto (TextArea/Input) */
-.input-com {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid #910000;
-    color: #e0e0e0;
-    padding: 12px;
-    font-family: 'Times New Roman', serif;
-    font-size: 1rem;
-    resize: none; /* Evita que el usuario deforme el diseño */
-    outline: none;
-    transition: all 0.3s ease;
-}
-
-.input-com:focus {
-    border-color: #ff0000;
-    box-shadow: 0 0 10px rgba(145, 0, 0, 0.5);
-    background: rgba(10, 0, 0, 0.9);
-}
-
-/* El Botón de Publicar */
-.btn-enviar {
-    align-self: flex-end; /* Lo alinea a la derecha */
-    background: linear-gradient(135deg, #600000 0%, #910000 100%);
-    color: white;
-    border: 1px solid #ff3e3e;
-    padding: 8px 25px;
-    font-family: "Times New Roman", Times, serif;
+.precio-ritual .valor {
+    font-size: 1.8rem;
+    color: #ff3e3e;
     font-weight: bold;
-    font-style: italic;
-    text-transform: uppercase;
+}
+
+.btn-comprar-ritual {
+    background: #910000;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-family: 'Mael', sans-serif;
+    letter-spacing: 2px;
     cursor: pointer;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); /* Efecto de bordes cortados/afilados */
+    transition: 0.3s;
+    width: 100%;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
 }
 
-.btn-enviar:hover {
-    filter: brightness(1.3);
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-    color: #ffffff;
+.btn-comprar-ritual:hover {
+    background: #ff3e3e;
+    box-shadow: 0 0 20px rgba(255, 62, 62, 0.5);
 }
 
-.btn-enviar:active {
-    transform: scale(0.95);
+/* Columna Info */
+.ritual-header {
+    color: #910000;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* Estilo para los placeholders */
-.input-com::placeholder {
-    color: #555;
+.descripcion-texto {
+    color: #bbb;
+    line-height: 1.6;
     font-style: italic;
+}
+
+.lista-comentarios-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 20px;
+}
+
+.comentario-ritual {
+    background: rgba(255,255,255,0.03);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 2px solid #910000;
+}
+
+.com-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+}
+
+.com-meta .autor { color: #eee; font-weight: bold; }
+.com-meta .fecha { color: #666; }
+
+.input-com-ritual {
+    width: 100%;
+    background: #000;
+    border: 1px solid #333;
+    color: #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-enviar-ritual {
+    background: transparent;
+    border: 1px solid #910000;
+    color: #910000;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.btn-enviar-ritual:hover {
+    background: #910000;
+    color: white;
+}
+
+/* Esquinas (Reutiliza las que ya tienes o usa estas) */
+.corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #910000;
+}
+.top-left { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.top-right { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.bottom-left { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+.bottom-right { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+/* Contenedor que ocupa casi toda la pantalla */
+.reliquia-wrapper.full-screen {
+    max-width: 95vw;
+    width: 95vw;
+    margin: 10px auto;
+    padding: 0;
+}
+
+.detalle-card-ritual {
+    background: linear-gradient(145deg, #100808 0%, #050505 100%);
+    border: 1px solid #332222;
+    position: relative;
+    padding: 25px;
+    height: 80vh; /* Altura fija para evitar scroll de página */
+    display: flex;
+    align-items: center;
+}
+
+.detalle-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Columna fija para imagen, el resto para info */
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Columna Info ahora es interna en horizontal */
+.col-info-horizontal {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Descripción y comentarios lado a lado */
+    gap: 25px;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Ajustes de scroll interno para que no crezca la página */
+.scroll-viejuno, .lista-comentarios-compacta {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #910000 #111;
+}
+
+/* Estilo de los comentarios más compacto */
+.comentario-ritual {
+    background: rgba(255,255,255,0.02);
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 2px solid #910000;
+    font-size: 0.85rem;
+}
+
+/* Formulario en una sola línea para ahorrar espacio */
+.input-group-ritual {
+    display: flex;
+    gap: 5px;
+}
+
+.input-com-ritual {
+    flex-grow: 1;
+    background: #000;
+    border: 1px solid #333;
+    color: #eee;
+    padding: 8px;
+    height: 40px;
+}
+
+/* Imagen un poco más pequeña para ganar espacio vertical */
+.item-frame {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 15px;
+}
+
+.titulo-producto {
+    font-size: 1.8rem;
+}
+
+/* Personalización del scrollbar para que parezca de juego */
+.scroll-viejuno::-webkit-scrollbar, .lista-comentarios-compacta::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-viejuno::-webkit-scrollbar-thumb, .lista-comentarios-compacta::-webkit-scrollbar-thumb {
+    background: #910000;
 }
