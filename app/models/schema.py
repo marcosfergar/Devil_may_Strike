@@ -45,6 +45,23 @@ class Usuario(db.Model):
             "nombre": self.nombre,
             "orbes_rojos": self.orbes_rojos
         }
+    @property
+    def url_avatar(self):
+        # Si es la imagen por defecto, siempre está en perfiles
+        if self.imagen_perfil == 'default.png':
+            return "uploads/perfiles/default.png"
+            
+        # Importación local para evitar errores circulares
+        from app.models.schema import Producto
+        
+        # Buscamos si el nombre de la imagen existe en la tienda
+        es_de_tienda = Producto.query.filter_by(data_path=self.imagen_perfil).first()
+        
+        if es_de_tienda:
+            return f"uploads/tienda/{self.imagen_perfil}"
+        
+        # Si no está en la tienda, es un recorte personalizado del usuario
+        return f"uploads/perfiles/{self.imagen_perfil}"
     
 class Producto(db.Model):
     __tablename__ = "productos"

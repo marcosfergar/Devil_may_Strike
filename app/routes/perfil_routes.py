@@ -25,13 +25,16 @@ def perfil():
 
 @perfil_pb.route('/actualizar', methods=['POST'])
 def actualizar_perfil():
-    user_id = session.get("user_id")
-    user = usuario_service.obtener_usuario_por_id(user_id)
+    nombre_sesion = session.get("username")
+    user = usuario_service.obtener_usuario_por_nombre(nombre_sesion)
+    
+    if not user:
+        return redirect(url_for('homeLogin_route.paginaLogin'))
     
     nuevo_titulo = request.form.get('titulo')
-    foto_recortada_base64 = request.form.get('cropped_data')
+    foto_recortada_or_inventario = request.form.get('cropped_data')
     
-    usuario_service.actualizar_perfil_completo(user, nuevo_titulo, foto_recortada_base64)
+    usuario_service.actualizar_perfil_completo(user, nuevo_titulo, foto_recortada_or_inventario)
 
-    flash("Perfil actualizado con éxito", "success")
+    flash("¡Identidad actualizada, cazador!", "success")
     return redirect(url_for('perfil_route.perfil'))

@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import base64
 import time
@@ -75,32 +76,23 @@ def gestionar_cierre_sesion(user_id):
 
 # PAL PERFIL
 
-def actualizar_perfil_completo(usuario, nuevo_titulo, base64_data):
-    try:
-        if nuevo_titulo:
-            usuario.titulo_actual = nuevo_titulo
+def actualizar_perfil_completo(usuario, nuevo_titulo, foto_data):
+    if nuevo_titulo:
+        usuario.titulo_actual = nuevo_titulo
 
-        if base64_data and ";base64," in base64_data:
-            header, imgstr = base64_data.split(';base64,')
-            extension = header.split('/')[-1]
-            if extension == 'jpeg': extension = 'jpg'
-
-            nombre_archivo = f"user_{usuario.id}_{int(time.time())}.{extension}"
-            ruta_carpeta = os.path.join(current_app.root_path, 'static', 'uploads', 'perfiles')
+    if foto_data:
+        if foto_data.startswith('data:image'):
+            format, imgstr = foto_data.split(';base64,') 
+            ext = format.split('/')[-1]
+            nombre_archivo = f"perfil_{usuario.id}_{int(datetime.utcnow().timestamp())}.{ext}"
             
-            if not os.path.exists(ruta_carpeta):
-                os.makedirs(ruta_carpeta)
-
-            ruta_completa = os.path.join(ruta_carpeta, nombre_archivo)
-
-            with open(ruta_completa, "wb") as f:
-                f.write(base64.b64decode(imgstr))
-
+            ruta = os.path.join('app/static/uploads/perfiles/', nombre_archivo)
+            with open(ruta, "wb") as fh:
+                fh.write(base64.b64decode(imgstr))
+            
             usuario.imagen_perfil = nombre_archivo
 
-        db.session.commit()
-        return True, "Perfil actualizado."
-    except Exception as e:
-        db.session.rollback()
-        print(f"Error en service: {e}")
-        return False, str(e)
+        else:
+            usuario.imagen_perfil = foto_data
+
+    db.session.commit()

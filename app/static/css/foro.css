@@ -1,20 +1,19 @@
-header{
+header {
     background: #111111da;
-    color: white;
-    width: 100%;
-
-    text-align: center;
-
-    padding: 20px;
     color: #666;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
     font-size: 0.9rem;
     border-top: 1px solid #333;
 }
+
 /* Contenedor Principal */
 .foro-wrapper {
     max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: 'Lora', serif;
 }
 
 .foro-header {
@@ -153,14 +152,6 @@ header{
 
 /* css Categoria */
 
-/* Estructura General */
-.foro-wrapper {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 20px;
-    font-family: 'Lora', serif; /* O una fuente similar gótica */
-}
-
 /* Header */
 .zona-header {
     margin-bottom: 40px;
@@ -235,7 +226,7 @@ header{
 .hilo-card:hover {
     border-color: #444;
     background: rgba(25, 25, 25, 0.9);
-    transform: translateX(10px); /* Efecto de desplazamiento */
+    transform: translateX(10px);
 }
 
 .hilo-titulo {
@@ -306,17 +297,17 @@ header{
     box-shadow: 0 20px 50px rgba(0,0,0,0.8);
 }
 
-/* Decoraciones de Esquina (Simuladas con CSS) */
+/* Decoraciones de Esquina */
 .corner {
     position: absolute;
     width: 20px;
     height: 20px;
     border: 2px solid #910000;
 }
-.top-left { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-.top-right { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
-.bottom-left { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
-.bottom-right { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+.top-left    { top: 10px;    left: 10px;  border-right: 0; border-bottom: 0; }
+.top-right   { top: 10px;    right: 10px; border-left: 0;  border-bottom: 0; }
+.bottom-left { bottom: 10px; left: 10px;  border-right: 0; border-top: 0; }
+.bottom-right{ bottom: 10px; right: 10px; border-left: 0;  border-top: 0; }
 
 .form-header { text-align: center; margin-bottom: 40px; }
 
@@ -346,11 +337,11 @@ header{
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid #333;
     color: #ccc;
-    padding: 12px 15px; /* Reducimos el padding vertical de 15px a 12px */
+    padding: 12px 15px;
     font-family: 'Lora', serif;
     font-size: 1.1rem;
     transition: all 0.3s;
-    display: block; /* Asegura que respete el margen */
+    display: block;
 }
 
 .ritual-input:focus {
@@ -360,14 +351,25 @@ header{
     box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 0 5px rgba(145, 0, 0, 0.2);
 }
 
-.ritual-titulo{
+.ritual-titulo {
     max-height: 100px;
 }
 
 .ritual-area {
+    width: 100%;
     max-width: 100%;
+    background: #000;
+    border: 1px solid #333;
+    color: #ddd;
+    padding: 15px;
+    font-family: inherit;
     resize: vertical;
     min-height: 200px;
+}
+
+.ritual-area:focus {
+    border-color: #910000;
+    outline: none;
 }
 
 /* Botones */
@@ -407,7 +409,8 @@ header{
 }
 
 /* css de Tema */
-/* --- CONTENEDORES --- */
+
+/* Contenedores */
 .bitacora-combate {
     display: flex;
     flex-direction: column;
@@ -434,7 +437,7 @@ header{
     background: linear-gradient(90deg, rgba(145, 0, 0, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%);
 }
 
-/* --- SIDEBAR DEL AUTOR --- */
+/* Sidebar del Autor */
 .autor-sidebar {
     width: 180px;
     padding: 25px 15px;
@@ -479,7 +482,7 @@ header{
     font-weight: bold;
 }
 
-/* --- CUERPO DEL MENSAJE --- */
+/* Cuerpo del Mensaje */
 .mensaje-cuerpo {
     padding: 25px;
     flex-grow: 1;
@@ -496,7 +499,7 @@ header{
 }
 
 .fecha-ritual { color: #555; font-size: 0.75rem; font-family: monospace; }
-.id-mensaje { color: #333; font-size: 0.75rem; font-weight: bold; }
+.id-mensaje   { color: #333; font-size: 0.75rem; font-weight: bold; }
 
 .mensaje-texto {
     color: #ccc;
@@ -505,7 +508,7 @@ header{
     word-break: break-word;
 }
 
-/* --- SECCIÓN RESPUESTA --- */
+/* Sección Respuesta */
 .respuesta-ritual {
     background: #0a0a0a;
     border: 1px solid #332222;
@@ -526,18 +529,35 @@ header{
     margin-top: 15px;
 }
 
-/* Reutilizando tus clases de formulario previas */
-.ritual-area {
-    width: 100%;
-    background: #000;
-    border: 1px solid #333;
-    color: #ddd;
-    padding: 15px;
-    font-family: inherit;
-    resize: none;
+.form-mision-container {
+    background: linear-gradient(180deg, #150a0a 0%, #0a0a0a 100%);
+    border: 1px solid #332222;
+    padding: 50px;
+    position: relative;
+    max-width: 800px;
+    /* Cambia el margen superior de 60px a 10px o 20px */
+    margin: 10px auto 40px auto; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
 }
 
-.ritual-area:focus {
-    border-color: #910000;
-    outline: none;
+main {
+    height: auto !important; 
+    min-height: 0 !important;
+    padding-top: 0 !important;
+    display: block !important;
+}
+
+.foro-wrapper {
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+}
+
+.form-mision-container {
+    margin-top: 0 !important;
+    top: 0 !important;
+}
+
+.form-header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }

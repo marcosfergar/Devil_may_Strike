@@ -20,7 +20,7 @@
         <div class="perfil-content">
             <div class="avatar-section">
                 <div class="avatar-border">
-                <img src="{{ url_for('static', filename='uploads/perfiles/' + usuario.imagen_perfil) }}" class="avatar">
+                    <img src="{{ url_for('static', filename=usuario.url_avatar) }}" class="avatar">
                 </div>
                 <div class="status-badge" onclick="abrirModal()" style="cursor: pointer;">
                     EDITAR
@@ -84,7 +84,24 @@
             <form action="{{ url_for('perfil_route.actualizar_perfil') }}" method="POST" enctype="multipart/form-data" class="form-gotico">
                 <div class="seccion-ajuste">
                     <h3>AJUSTAR APARIENCIA</h3>
-                    
+                    <div id="inventario-avatares-selector" class="avatar-selector-grid">
+                        <p class="ritual-label" style="font-size: 0.7rem; margin-bottom: 10px;">SELECCIONA UN ALMA DE TU INVENTARIO</p>
+                        <div class="grid-scroll">
+                            {% for item in usuario.productos if item.categoria == 'avatar' %}
+                                <label class="avatar-option">
+                                    <input type="radio" name="avatar_seleccionado" value="{{ item.data_path }}" 
+                                        class="radio-inventario">
+                                    <img src="{{ url_for('static', filename='uploads/tienda/' + item.data_path) }}" alt="{{ item.nombre }}">
+                                    <span class="tooltip">{{ item.nombre }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+
+                        <button type="button" id="btn-confirmar-inventario" class="btn-action" 
+                                style="display: none; margin-top: 15px; width: 100%; border: 1px solid #ff3e3e; color: #ff3e3e; background: rgba(145, 0, 0, 0.1);">
+                            EQUIPAR ALMA SELECCIONADA
+                        </button>
+                    </div>
                     <div id="wrapper-editor" style="display: none; margin-bottom: 15px;">
                         <div class="cropper-wrapper" style="max-height: 400px; overflow: hidden; border: 2px solid #910000;">
                             <img src="" id="image-to-crop" style="max-width: 100%;">

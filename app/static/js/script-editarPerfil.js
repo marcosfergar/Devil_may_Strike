@@ -1,6 +1,7 @@
 let cropper;
 let fotoOriginal = "";
 
+// Elementos Globales
 const modal = document.getElementById("modalPerfil");
 const imageToCrop = document.getElementById('image-to-crop');
 const inputFoto = document.getElementById('input-foto');
@@ -8,6 +9,9 @@ const croppedDataInput = document.getElementById('cropped_data');
 const avatarPrincipal = document.querySelector('.avatar');
 const wrapperEditor = document.getElementById('wrapper-editor');
 const mensajeExito = document.getElementById('mensaje-exito');
+const inventarioSelector = document.getElementById('inventario-avatares-selector');
+const btnConfirmarInv = document.getElementById('btn-confirmar-inventario');
+const labelArchivo = document.getElementById('label-archivo');
 
 function abrirModal() {
     fotoOriginal = avatarPrincipal.src;
@@ -16,21 +20,36 @@ function abrirModal() {
 
 function cerrarModal() {
     modal.style.display = "none";
-    if (!croppedDataInput.value) avatarPrincipal.src = fotoOriginal;
     if (cropper) { cropper.destroy(); cropper = null; }
+    
+    // Resetear visibilidad de elementos
     inputFoto.value = "";
     wrapperEditor.style.display = 'none';
     mensajeExito.style.display = 'none';
+    if (inventarioSelector) {
+        inventarioSelector.style.display = 'block';
+        document.querySelector('.grid-scroll').style.opacity = '1';
+    }
+    labelArchivo.style.display = 'block';
+    if (btnConfirmarInv) btnConfirmarInv.style.display = 'none';
+    
+    // Si no confirmó nada, restaurar foto
+    if (!croppedDataInput.value) avatarPrincipal.src = fotoOriginal;
 }
 
+// Lógica para SUBIR FOTO NUEVA
 inputFoto.addEventListener('change', function (e) {
     const files = e.target.files;
     if (files && files.length > 0) {
         const reader = new FileReader();
         reader.onload = function (event) {
+            // Ocultar inventario al subir nueva
+            if (inventarioSelector) inventarioSelector.style.display = 'none';
+            
             imageToCrop.src = event.target.result;
             wrapperEditor.style.display = 'block';
             mensajeExito.style.display = 'none';
+            
             if (cropper) cropper.destroy();
             cropper = new Cropper(imageToCrop, {
                 aspectRatio: 1,
@@ -47,13 +66,41 @@ function confirmarRecorte() {
     const canvas = cropper.getCroppedCanvas({ width: 400, height: 400 });
     const dataURL = canvas.toDataURL('image/jpeg');
 
-    croppedDataInput.value = dataURL;
+    croppedDataInput.value = dataURL; // Guardamos el Base64
     avatarPrincipal.src = dataURL;
 
     wrapperEditor.style.display = 'none';
     mensajeExito.style.display = 'block';
+    mensajeExito.innerText = "¡ALMA PREPARADA PARA EL COMBATE!";
     cropper.destroy();
     cropper = null;
+}
+
+// Lógica para SELECCIONAR DEL INVENTARIO
+document.querySelectorAll('.radio-inventario').forEach(radio => {
+    radio.addEventListener('change', function() {
+        if (this.checked) {
+            btnConfirmarInv.style.display = 'block';
+            // Al seleccionar inventario, nos aseguramos de limpiar cualquier recorte previo
+            if (cropper) { cropper.destroy(); cropper = null; wrapperEditor.style.display = 'none'; }
+        }
+    });
+});
+
+if (btnConfirmarInv) {
+    btnConfirmarInv.addEventListener('click', function() {
+const seleccionada = document.querySelector('.radio-inventario:checked');
+    if (seleccionada) {
+        // ASIGNAMOS EL NOMBRE DEL ARCHIVO AL INPUT QUE SE ENVÍA AL SERVIDOR
+        document.getElementById('cropped_data').value = seleccionada.value; 
+        
+        // Cambiamos la miniatura visualmente
+        avatarPrincipal.src = "/static/uploads/tienda/" + seleccionada.value;
+        
+        mensajeExito.style.display = 'block';
+        mensajeExito.innerText = "¡ALMA EQUIPADA! HAZ CLIC EN 'GUARDAR CAMBIOS'.";
+    }
+});
 }
 
 window.onclick = function(event) {
