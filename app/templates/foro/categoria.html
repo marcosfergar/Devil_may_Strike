@@ -1,0 +1,59 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/foro.css') }}"/>
+{% endblock %} 
+{% block content %}
+<div class="foro-wrapper">
+    <header class="zona-header">
+        <a href="{{ url_for('foro_route.index_foro') }}" class="btn-mapa">
+            <span class="icon">📜</span> VOLVER AL MAPA
+        </a>
+        <div class="header-main">
+            <h1 class="titulo-zona">{{ categoria.nombre }}</h1>
+            <div class="divisor-sangriento"></div>
+            <p class="descripcion-zona">{{ categoria.descripcion }}</p>
+        </div>
+        
+        {% if usuario and not usuario.is_guest %}
+        <div class="acciones-zona">
+            <a href="{{ url_for('foro_route.nuevo_tema', categoria_id=categoria.id) }}" class="btn-forjar">
+                + INICIAR NUEVO HILO
+            </a>
+        </div>
+        {% endif %}
+    </header>
+
+    <div class="hilos-container">
+        {% if temas %}
+            {% for tema in temas %}
+            <div class="hilo-card">
+                <div class="hilo-main">
+                    <div class="hilo-info">
+                        <a href="{{ url_for('foro_route.ver_tema', id=tema.id) }}" class="hilo-titulo">
+                            {{ tema.titulo }}
+                        </a>
+                        <div class="hilo-meta">
+                            Iniciado por <span class="autor">{{ tema.creador.nombre }}</span> 
+                            • <span class="fecha">{{ tema.fecha_creacion.strftime('%d %b, %Y') }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hilo-stats">
+                    <div class="stat-box">
+                        <span class="stat-num">{{ tema.mensajes|length - 1 }}</span>
+                        <span class="stat-label">SUSURROS</span>
+                    </div>
+                    <div class="hilo-indicator"></div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="vacio-container">
+                <p>No hay susurros en esta zona... Sé el primero en dejar tu marca.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

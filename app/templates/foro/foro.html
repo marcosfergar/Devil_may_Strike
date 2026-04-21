@@ -1,0 +1,49 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock%}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/foro.css') }}"/>
+{% endblock %} 
+
+{% block content %}
+<div class="foro-wrapper">
+    <header class="foro-header">
+        <h1 class="titulo-dmc">ARCHIVO DE CAZADORES</h1>
+        <p class="subtitulo-gotico">Consulta los registros del inframundo</p>
+    </header>
+    
+    <div class="categorias-grid">
+        {% for cat in categorias %}
+        <div class="cat-card">
+            <div class="cat-glow"></div>
+            <div class="cat-content">
+                <div class="cat-info">
+                    <a href="{{ url_for('foro_route.ver_categoria', id=cat.id) }}" class="cat-link">
+                        {{ cat.nombre }}
+                    </a>
+                    <p class="cat-desc">{{ cat.descripcion }}</p>
+                </div>
+                
+                <div class="cat-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">TEMAS</span>
+                        <span class="meta-value">{{ cat.temas|length }}</span>
+                    </div>
+                    <div class="meta-item ultimo-mensaje">
+                        <span class="meta-label">ÚLTIMO SUSURRO</span>
+                        <span class="meta-value">
+                            {% if cat.temas %}
+                                <span class="tema-txt">{{ cat.temas[-1].titulo }}</span>
+                            {% else %}
+                                <span class="silencio">Silencio absoluto...</span>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="cat-border-accent"></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

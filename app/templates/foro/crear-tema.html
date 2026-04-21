@@ -1,0 +1,41 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/foro.css') }}"/>
+{% endblock %} 
+{% block content %}
+<div class="foro-wrapper">
+    <div class="form-mision-container">
+        <div class="corner top-left"></div>
+        <div class="corner top-right"></div>
+        <div class="corner bottom-left"></div>
+        <div class="corner bottom-right"></div>
+
+        <header class="form-header">
+            <h1 class="titulo-dmc">FORJAR NUEVA MISIÓN</h1>
+            <div class="divisor-ritual"></div>
+            <p class="subtitulo-form">Escribe tus crónicas. Las leyes del castillo rigen tus palabras.</p>
+        </header>
+        
+        <form method="POST" class="form-ritual">
+            {{ form.hidden_tag() }}
+            
+            <div class="ritual-input-group">
+                <label class="ritual-label">TÍTULO DEL HILO</label>
+                {{ form.titulo(class="ritual-input ritual-titulo", placeholder="Ej: Combo Infinito con Rebellion...") }}
+            </div>
+
+            <div class="ritual-input-group">
+                <label class="ritual-label">CONTENIDO DEL MANUSCRITO</label>
+                {{ form.contenido(class="ritual-input ritual-area", rows="12") }}
+            </div>
+
+            <div class="acciones-rituales">
+                <a href="{{ url_for('foro_route.ver_categoria', id=categoria_id) }}" class="btn-abortar">ABORTAR</a>
+                <button type="submit" class="btn-desbloquear">PUBLICAR MISIÓN</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -11,9 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentTrackIndex = 0;
 
-    // Función para renderizar la lista en el HTML
     function renderPlaylist() {
-        playlistContainer.innerHTML = ""; // Limpiar
+        playlistContainer.innerHTML = "";
         playlist.forEach((track, index) => {
             const li = document.createElement("li");
             li.classList.add("track-item");
@@ -31,15 +30,35 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadAndPlay() {
         audio.src = playlist[currentTrackIndex].src;
         trackNameDisplay.innerText = playlist[currentTrackIndex].name;
-        renderPlaylist(); // Actualizar cuál está activa
+        renderPlaylist();
         audio.play();
         document.getElementById("play-pause").innerHTML = '<i class="fa-solid fa-pause"></i>';
     }
 
-    // Inicializar la lista al cargar
     renderPlaylist();
 
-    // Eventos de los botones (Next/Prev)
+    // plei and paus
+
+    document.getElementById("play-pause").addEventListener("click", () => {
+        if (audio.paused) {
+            if (!audio.src) {
+                loadAndPlay();
+            } else {
+                audio.play();
+                document.getElementById("play-pause").innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+        } else {
+            audio.pause();
+            document.getElementById("play-pause").innerHTML = '<i class="fa-solid fa-play"></i>';
+        }
+    });
+
+    audio.onended = () => {
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        loadAndPlay();
+    };
+
+    // la de antes y la de despues
     document.getElementById("next-track").addEventListener("click", () => {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
         loadAndPlay();

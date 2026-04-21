@@ -15,18 +15,23 @@ class Usuario(db.Model):
     __tablename__ = "Usuarios"
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(100), nullable=False, unique=True)
-    password = Column(String(255), nullable=False)
+    password = Column(String(255), nullable=True)
     orbes_rojos = Column(Integer, default=1000)
+    is_guest = Column(db.Boolean, default=False)
+    
+    imagen_perfil = db.Column(db.String(200), default='default.png')
+    titulo_actual = db.Column(db.String(100), default='Cazador Novato')
 
     # RELACIONES
     productos = db.relationship('Producto', secondary=inventario, backref='compradores')
-    comentarios = db.relationship('Comentario', backref='autor', lazy=True)
+    comentarios = db.relationship('Comentario', backref='autor_tienda', lazy=True)
 
-    def __init__(self, nombre, password, id=None):
-        self.id = id
+    def __init__(self, nombre, password=None, is_guest=False):
         self.nombre = nombre
-        self.password = generate_password_hash(password)
+        self.is_guest = is_guest
         self.orbes_rojos = 1000
+        if password:
+            self.password = generate_password_hash(password)
 
     def set_password(self, newPassword):
         self.password = generate_password_hash(newPassword)
@@ -40,17 +45,33 @@ class Usuario(db.Model):
             "nombre": self.nombre,
             "orbes_rojos": self.orbes_rojos
         }
-
+    @property
+    def url_avatar(self):
+        # Si es la imagen por defecto, siempre está en perfiles
+        if self.imagen_perfil == 'default.png':
+            return "uploads/perfiles/default.png"
+            
+        # Importación local para evitar errores circulares
+        from app.models.schema import Producto
+        
+        # Buscamos si el nombre de la imagen existe en la tienda
+        es_de_tienda = Producto.query.filter_by(data_path=self.imagen_perfil).first()
+        
+        if es_de_tienda:
+            return f"uploads/tienda/{self.imagen_perfil}"
+        
+        # Si no está en la tienda, es un recorte personalizado del usuario
+        return f"uploads/perfiles/{self.imagen_perfil}"
+    
 class Producto(db.Model):
     __tablename__ = "productos"
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(100), nullable=False)
-    categoria = Column(String(50), nullable=False) # 'musica', 'avatar', 'titulo', 'tema'
+    categoria = Column(String(50), nullable=False)
     precio = Column(Integer, nullable=False)
     data_path = Column(String(255))
     descripcion = Column(String(255))
 
-    # RELACIÓN
     comentarios = db.relationship('Comentario', backref='producto_asociado', lazy=True)
 
 class Comentario(db.Model):
@@ -58,15 +79,34 @@ class Comentario(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     contenido = Column(Text, nullable=False)
     fecha = Column(DateTime, default=datetime.utcnow)
-
-    # CLAVES FORÁNEAS
     usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
     producto_id = Column(Integer, db.ForeignKey('productos.id'), nullable=True)
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "contenido": self.contenido,
-            "autor": self.autor.nombre,
-            "fecha": self.fecha.strftime("%Y-%m-%d %H:%M:%S")
-        }
+class Categoria(db.Model):
+    __tablename__ = "categorias"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(50), nullable=False, unique=True)
+    descripcion = Column(String(255))
+
+    temas = db.relationship('Tema', backref='categoria_asociada', lazy=True, cascade="all, delete-orphan")
+
+class Tema(db.Model):
+    __tablename__ = "temas"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    titulo = Column(String(100), nullable=False)
+    fecha_creacion = Column(DateTime, default=datetime.utcnow)
+    categoria_id = Column(Integer, db.ForeignKey('categorias.id'), nullable=False)
+    usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
+    
+    mensajes = db.relationship('Mensaje', backref='tema_asociado', lazy=True, cascade="all, delete-orphan")
+    creador = db.relationship('Usuario', backref='temas_creados')
+
+class Mensaje(db.Model):
+    __tablename__ = "mensajes"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    contenido = Column(Text, nullable=False)
+    fecha_publicacion = Column(DateTime, default=datetime.utcnow)
+    tema_id = Column(Integer, db.ForeignKey('temas.id'), nullable=False)
+    usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
+    
+    autor = db.relationship('Usuario', backref='mensajes_foro')

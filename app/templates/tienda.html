@@ -7,7 +7,6 @@
 <script src="{{ url_for('static', filename='js/tienda.js') }}"></script>
 {% endblock %}
 {% block links %}
-<li><a href="/home">Inicio</a></li>
 {% endblock %}
 {% block content %}
 <div class="shop-wrapper">
@@ -36,6 +35,15 @@
             <div class="product-info">
                 <h3>{{ producto.nombre }}</h3>
                 <p>{{ producto.descripcion }}</p>
+                {% if producto.categoria == 'avatar' and producto.data_path %}
+                    <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}" 
+                        class="avatar-preview" 
+                        alt="{{ producto.nombre }}">
+                {% elif producto.categoria == 'musica' %}
+                    <div class="icon-musica">🎵</div>
+                {% elif producto.categoria == 'titulo' %}
+                    <div class="icon-titulo">📜</div>
+                {% endif %}
             </div>
 
             <div class="product-footer">
@@ -52,7 +60,11 @@
                     </a>
                 {% endif %}
             </div>
+            <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="btn-ver-mas">
+            VER DETALLES
+            </a>
         </div>
+
         {% endfor %}
     </section>
 </div>

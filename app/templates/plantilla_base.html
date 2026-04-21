@@ -7,11 +7,12 @@
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/style-base.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="{{ url_for('static', filename='js/konami-code.js') }}"></script>
   {% block style %}{% endblock %}
 </head>
 
 <body>
-  <header>
+  <header class="index-menu">
     <div class="menu">
       <div class="user-profile-zone">
         {% if usuario %}
@@ -20,11 +21,31 @@
       </div>
       <div class="links">
         <ul>
+        {% if usuario %}
+          <li><a href="/home">Inicio</a></li>
+        {% endif %}
           {% block links %}{% endblock %}
         </ul>
       </div>
   </div>
   </header>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="flash-container" class="flash-global-wrapper">
+      {% for category, message in messages %}
+        <div class="flash-message alert-{{ category }}">
+            <div class="flash-icon">
+                {% if category == 'success' %}<i class="fas fa-check-circle"></i>
+                {% elif category == 'error' %}<i class="fas fa-exclamation-triangle"></i>
+                {% else %}<i class="fas fa-info-circle"></i>{% endif %}
+            </div>
+            <div class="flash-text">{{ message }}</div>
+            <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
   <main>
     {% block content %}
     {% endblock %}

@@ -1,0 +1,58 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock %} 
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/detalle-producto.css') }}" />
+<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="container-detalle">
+    <img src="{{ url_for('static', filename='images/bg-detalle.jpg') }}" class="dmc-back">
+
+    <div class="detalle-grid">
+        <div class="col-visual">
+            <h1 class="titulo-producto">{{ producto.nombre }}</h1>
+            <div class="badge-categoria">{{ producto.categoria }}</div>
+            
+            <div class="precio-tag">
+                <img src="{{ url_for('static', filename='images/red-orb.png') }}" alt="Orbe">
+                <span>{{ producto.precio }}</span>
+            </div>
+
+            <form action="{{ url_for('tienda_route.comprar', id=producto.id) }}" method="POST">
+                <button type="submit" class="btn-comprar">ADQUIRIR PODER</button>
+            </form>
+        </div>
+
+        <div class="col-info">
+            <div class="descripcion-box">
+                <h3>DESCRIPCIÓN</h3>
+                <p>{{ producto.descripcion }}</p>
+            </div>
+
+            <div class="comentarios-box">
+                <h3>RESEÑAS DE CAZADORES</h3>
+                
+                <div class="lista-comentarios">
+                    {% for com in producto.comentarios %}
+                    <div class="comentario">
+                        <span class="autor">{{ com.autor.nombre }}</span>
+                        <span class="fecha">{{ com.fecha.strftime('%d/%m/%Y') }}</span>
+                        <p>{{ com.contenido }}</p>
+                    </div>
+                    {% else %}
+                    <p class="no-com">Aún no hay susurros sobre este objeto...</p>
+                    {% endfor %}
+                </div>
+
+                {% if usuario and not usuario.is_guest %}
+                <form action="{{ url_for('tienda_route.postear_comentario', producto_id=producto.id) }}" method="POST" class="form-comentario">
+                    {{ form.hidden_tag() }}
+                    {{ form.contenido(placeholder="Deja tu marca...", class="input-com") }}
+                    <button type="submit" class="btn-enviar">PUBLICAR</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

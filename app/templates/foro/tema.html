@@ -1,0 +1,58 @@
+{% extends "plantilla_base.html" %}
+{% block title %}DevilMayStrike{% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/foro.css') }}"/>
+{% endblock %}
+
+{% block content %}
+<div class="foro-wrapper">
+    <header class="tema-header">
+        <a href="{{ url_for('foro_route.ver_categoria', id=tema.categoria_id) }}" class="btn-mapa">
+            ← REGRESAR A LA ZONA
+        </a>
+        <h1 class="titulo-ritual">{{ tema.titulo }}</h1>
+        <div class="divisor-sangriento"></div>
+    </header>
+
+    <div class="bitacora-combate">
+        {% for msg in tema.mensajes %}
+        <article class="mensaje-ritual {% if loop.first %}post-original{% endif %}">
+            <aside class="autor-sidebar">
+                <div class="avatar-marco">
+                    <img src="{{ url_for('static', filename=msg.autor.url_avatar) }}" class="avatar">
+                </div>
+                <div class="autor-datos">
+                    <span class="nombre-autor">{{ msg.autor.nombre }}</span>
+                    <span class="rango-badge">{% if loop.first %}LÍDER DE MISIÓN{% else %}CAZADOR{% endif %}</span>
+                </div>
+            </aside>
+
+            <section class="mensaje-cuerpo">
+                <header class="mensaje-meta">
+                    <span class="fecha-ritual">{{ msg.fecha_publicacion.strftime('%d %b, %Y • %H:%M') }}</span>
+                    <span class="id-mensaje">#{{ loop.index }}</span>
+                </header>
+                <div class="mensaje-texto">
+                    {{ msg.contenido }}
+                </div>
+            </section>
+        </article>
+        {% endfor %}
+    </div>
+
+    {% if usuario %}
+    <section class="respuesta-ritual">
+        <h3 class="titulo-responder">AÑADIR A LA BITÁCORA</h3>
+        <form method="POST" class="form-respuesta">
+            {{ form.hidden_tag() }}
+            <div class="input-wrapper">
+                {{ form.contenido(class="ritual-input ritual-area", placeholder="Escribe tu respuesta aquí...", rows="5") }}
+            </div>
+            <div class="acciones-respuesta">
+                {{ form.enviar(class="btn-desbloquear") }}
+            </div>
+        </form>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

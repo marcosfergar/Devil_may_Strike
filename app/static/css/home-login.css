@@ -1,12 +1,15 @@
 body{
-  background: radial-gradient(circle, rgb(145, 0, 0) 20%, black 100%);
+  background: radial-gradient(circle, rgb(100, 0, 0) 10%, black 90%) !important;
+  background-color: black;
   margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-
   overflow: hidden;
 }
+
+@keyframes pulsoRojo {
+    0%, 100% { filter: saturate(1) contrast(1); }
+    10%, 20% { filter: saturate(1.5) contrast(1.2); }
+}
+
 .container-hone-login {
 
   display: flex;
@@ -18,22 +21,49 @@ body{
   overflow: hidden;
 }
 
-.dmc-back {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  
-  opacity: 0.6;
-  pointer-events: none;
-  /* Tu máscara para que se mezcle con el rojo/negro del body */
-  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 80%);
-  mask-image: radial-gradient(circle, black 30%, transparent 80%);
+.dmc-back {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% ;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.7;
+    pointer-events: none;
+
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 90%);
+    mask-image: radial-gradient(circle, black 40%, transparent 90%);
+
+    animation: latidoRojo 4s ease-in-out infinite !important;
+}
+
+@keyframes latidoRojo {
+0% {
+        filter: brightness(0.8) saturate(1);
+        transform: translate(-50%, -50%) scale(1);
+    }
+    20% {
+        filter: brightness(1.2) saturate(1.8);
+        transform: translate(-50%, -50%) scale(1.04);
+    }
+    30% {
+        filter: brightness(0.8) saturate(1.2);
+        transform: translate(-50%, -50%) scale(1.01);
+    }
+    45% {
+        filter: brightness(1.1) saturate(1.5);
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+    60% {
+        filter: brightness(0.8) saturate(1);
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        filter: brightness(0.8) saturate(1);
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 #titulo {
@@ -51,13 +81,15 @@ body{
   position: absolute;
   width: 100%;
   max-width: 2000px;
-  
+
   align-self: center;
 
   z-index: 0;
   -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
   mask-image: radial-gradient(circle, black 60%, transparent 100%);
+  
 }
+
 
 /* Zona Botones */
 
@@ -112,3 +144,4 @@ body{
   transform: scale(1.05);
   color: white;
 }
+
