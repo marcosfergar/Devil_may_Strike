@@ -1,10 +1,10 @@
-# 🛡️ Devil May Strike
+# Devil May Strike
 
 Este proyecto es una aplicación web interactiva que integra un videojuego desarrollado en **Unity (WebGL)** con un backend robusto en **Python/Flask**. Se trata de un *demake* inspirado en el universo de *Devil May Cry*, fusionando mecánicas de *beat 'em up* con un ecosistema web completo para el jugador.
 
 ---
 
-## 🚀 Funcionalidades Principales (Rango SSS)
+## Funcionalidades Principales
 
 ### 🎵 Widget Musical "Persiana"
 * **Despliegue Dinámico**: Reproductor integrado en el header que se despliega hacia abajo al pulsar el icono del disco.
