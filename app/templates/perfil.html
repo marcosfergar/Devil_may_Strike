@@ -50,30 +50,26 @@
         </div>
     </div>
     
-    <div class="inventario-grid">
-        <h2><i class="fa-solid fa-box-open"></i> MI INVENTARIO</h2>
-        {% if usuario.productos %}
-            {% for item in usuario.productos %}
-                <div class="item-card">
-                    <div class="item-icon">
-                        {% if item.categoria == 'musica' %}
-                            <i class="fa-solid fa-music"></i>
-                        {% elif item.categoria == 'avatar' %}
-                            <img src="{{ url_for('static', filename='uploads/tienda/' + item.data_path) }}" alt="{{ item.nombre }}" style="width: 100%;">
-                        {% else %}
-                            <i class="fa-solid fa-scroll"></i>
-                        {% endif %}
-                    </div>
-                    <div class="item-info">
-                        <h3>{{ item.nombre }}</h3>
-                        <span>{{ item.categoria | upper }}</span>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p class="empty-msg">Tu inventario está vacío. Ve a la tienda a gastar tus orbes.</p>
-        {% endif %}
+
+<div class="seccion-inventario">
+    <h3><i class="fa-solid fa-briefcase"></i> EQUIPAMIENTO ACTUAL</h3>
+    
+    <div class="inventario-maletin">
+        {% for producto in usuario.productos %}
+        <div class="item-slot" title="{{ producto.nombre }}">
+            <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}"  alt="{{ producto.nombre }}" >
+        </div>
+        {% endfor %}
+
+        {% set total_slots = 15 %}
+        {% set items_count = usuario.productos|length %}
+        {% for i in range(total_slots - items_count) %}
+        <div class="item-slot empty">
+            <i class="fa-solid fa-plus" style="font-size: 0.8rem; color: #222;"></i>
+        </div>
+        {% endfor %}
     </div>
+</div>
 
     <div id="modalPerfil" class="modal-overlay">
         <div class="formulario modal-content">
