@@ -1,21 +1,18 @@
 function inspeccionarItem(nombre, descripcion, imagenSrc) {
-    const wrapper = document.querySelector('.perfil-container');
-    const img = document.getElementById('inspeccion-img');
-    const title = document.getElementById('inspeccion-nombre');
-    const desc = document.getElementById('inspeccion-desc');
+    const contenedor = document.querySelector('.perfil-container');
+    const imgElement = document.getElementById('inspeccion-img');
+    const nombreElement = document.getElementById('inspeccion-nombre');
+    const descElement = document.getElementById('inspeccion-desc');
 
-    // Cambiar contenido
-    img.src = imagenSrc;
-    title.innerText = nombre.toUpperCase();
-    desc.innerText = descripcion;
-
-    // Mostrar columna
-    wrapper.classList.add('show-details');
+    imgElement.src = imagenSrc;
+    nombreElement.innerText = nombre.toUpperCase();
     
-    // Sonido opcional
-    // playSound('click_metalico.mp3');
+    descElement.innerText = descripcion !== "None" ? descripcion : "Un objeto misterioso obtenido en combate.";
+
+    contenedor.classList.add('show-details');
 }
 
 function cerrarInspeccion() {
-    document.querySelector('.re4-perfil-wrapper').classList.remove('show-details');
+    const contenedor = document.querySelector('.perfil-container');
+    contenedor.classList.remove('show-details');
 }

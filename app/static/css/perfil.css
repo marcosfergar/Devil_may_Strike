@@ -6,7 +6,7 @@
     padding: 20px;
     align-items: start;
     display: grid;
-    grid-template-columns: 300px 1fr 0px; /* La 3ª columna empieza con 0 ancho */
+    grid-template-columns: 300px 1fr 0px;
     gap: 0; 
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     max-width: 1400px;
@@ -18,12 +18,13 @@
     grid-template-columns: 280px 1fr 350px;
     gap: 20px;
 }
-/* --- COLUMNA PERFIL (Izquierda) --- */
+
+/*Columna Perfil*/
 
 /* Avatar */
 .col-status {
     background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
-    border-right: 3px solid #8b0000; /* Línea roja ahora a la derecha del panel */
+    border-right: 3px solid #8b0000;
     padding: 25px;
     border-radius: 5px 0 0 5px;
     box-shadow: 10px 0 30px rgba(0,0,0,0.5);
@@ -91,6 +92,17 @@
     gap: 4px;
     justify-content: center;
 }
+
+.close-inspeccion {
+    background: none;
+    border: none;
+    color: #910000;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-inspeccion:hover { color: #ff3e3e; }
 
 /* Items */
 .item-slot {
@@ -171,30 +183,29 @@
     margin: 15px 0;
 }
 
-/* formulario viejo */
-    .seccion-ajuste { margin-bottom: 30px; padding: 20px; border: 1px solid #333; background: rgba(0,0,0,0.3); }
-    .avatar-preview img { width: 120px; height: 120px; border: 2px solid #910000; margin-bottom: 15px; object-fit: cover; }
-    
-    .btn-subir { background: #222; padding: 10px; cursor: pointer; border: 1px dashed #910000; display: inline-block; }
-    .btn-subir input { display: none; }
-    
-    .btn-guardar-perfil {
-        width: 100%;
-        background: #910000;
-        color: white;
-        padding: 15px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
-    }
-    .btn-guardar-perfil:hover { background: #ff3e3e; box-shadow: 0 0 20px #ff3e3e; }
+/* formulario editar foto */
+.seccion-ajuste { margin-bottom: 30px; padding: 20px; border: 1px solid #333; background: rgba(0,0,0,0.3); }
+.avatar-preview img { width: 120px; height: 120px; border: 2px solid #910000; margin-bottom: 15px; object-fit: cover; }
+
+.btn-subir { background: #222; padding: 10px; cursor: pointer; border: 1px dashed #910000; display: inline-block; }
+.btn-subir input { display: none; }
+
+.btn-guardar-perfil {
+    width: 100%;
+    background: #910000;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+}
+.btn-guardar-perfil:hover { background: #ff3e3e; box-shadow: 0 0 20px #ff3e3e; }
 
     /* form nuevo */
 
-    /* Fondo oscuro que cubre toda la pantalla */
 .modal-overlay {
-    display: none; /* Oculto por defecto */
+    display: none; 
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -220,6 +231,7 @@
 
 /* Botón de cerrar (X) */
 .btn-cerrar {
+    background-color: #000;
     position: absolute;
     right: 20px;
     top: 10px;
@@ -300,3 +312,4 @@
     color: white !important;
     box-shadow: 0 0 15px rgba(145, 0, 0, 0.5);
 }
+/* se acabo formulario */
