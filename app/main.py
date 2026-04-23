@@ -3,7 +3,6 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_session import Session
 from dotenv import load_dotenv
-
 # importe database
 from app.database.db import db
 
@@ -21,7 +20,7 @@ from app.models.schema import Categoria, Usuario, Producto, Comentario
 load_dotenv()
 
 app = Flask(__name__, template_folder='templates')
-app.secret_key = os.getenv("SECRET_KEY", "una-clave-por-defecto-segura")
+app.secret_key = os.getenv("SECRET_KEY")
 
 # Configuracion session
 app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
@@ -32,7 +31,14 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 BD_PATH = os.path.join(BASE_DIR, "jugadores.db")
 
 # # Configuracion alchemy
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{BD_PATH}"
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "connect_args": {
+        "ssl": {
+            "ca": os.path.join(os.path.dirname(__file__), 'ca.pem')
+        }
+    }
+}
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 migrate = Migrate(app, db)
