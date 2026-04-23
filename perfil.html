@@ -4,67 +4,73 @@
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}" />
 <script src="{{ url_for('static', filename='js/script-editarPerfil.js') }}" defer></script>
-<script src="{{ url_for('static', filename='js/perfil-inspeccion-item.js') }}" defer></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 {% endblock %}
 {% block content %}
 <div class="perfil-container">
-    <div class="col-status">
-        <div class="avatar-container">
-            <img src="{{ url_for('static', filename=usuario.url_avatar) }}">
-            <div class="status-badge" onclick="abrirModal()" style="cursor: pointer;">
-                EDITAR
-            </div>
+    <div class="perfil-card">
+        <div class="card-header">
+            <span class="rank-label">{{usuario.titulo_actual}}</span>
+            <div class="line-decorator"></div>
         </div>
-        <h2 class="nombre-cazador">{{ usuario.nombre }}</h2>
-        <span>{{ usuario.titulo_actual}}</span>
-        <div class="currency-display">
-            Orbes:
-            <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
-            {{ usuario.orbes_rojos }}
-        </div>
-        <div class="stat-item">
-            <span class="stat-label">Tipo:</span>
-            <span class="stat-value">{% if session.get('is_guest') %}Invitado{% else %}Cazador Registrado{% endif %}</span>
-        </div>
-    </div>
 
-    <div class="col-maletin">    
-        <div class="case-visual">
-            <div class="inventario-maletin">
-                {% for producto in usuario.productos %}
-                <div class="item-slot" onclick='inspeccionarItem("{{ producto.nombre }}", "{{ producto.descripcion }}", "{{ url_for("static", filename="img/items/" + producto.data_path) }}")'>
-                    <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}"  alt="{{ producto.nombre }}" >
+        <div class="perfil-content">
+            <div class="avatar-section">
+                <div class="avatar-border">
+                    <img src="{{ url_for('static', filename=usuario.url_avatar) }}" class="avatar">
                 </div>
-                {% endfor %}
-
-                {% set total_slots = 15 %}
-                {% set items_count = usuario.productos|length %}
-                {% for i in range(total_slots - items_count) %}
-                <div class="item-slot empty">
-                    <i class="fa-solid fa-plus" style="font-size: 0.8rem; color: #222;"></i>
+                <div class="status-badge" onclick="abrirModal()" style="cursor: pointer;">
+                    EDITAR
                 </div>
-                {% endfor %}
+            </div>
+
+            <div class="info-section">
+                <h1 class="user-name">{{ usuario.nombre }}</h1>
+                <p class="user-title">{{usuario.titulo_actual}}</p>
+                <p class="user-title">Orbes: {{ usuario.orbes_rojos }} <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon"></p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Rango</span>
+                        <span class="stat-value text-red">SSS</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Tipo</span>
+                        <span class="stat-value">{% if session.get('is_guest') %}Invitado{% else %}Cazador Registrado{% endif %}</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="col-inspeccion" class="col-inspeccion">
-        <div class="inspeccion-content">
-            <button class="close-inspeccion" onclick="cerrarInspeccion()">×</button>
-            <h3 class="inspeccion-titulo">EXAMINAR</h3>
-            <div class="item-preview-frame">
-                <img id="inspeccion-img" src="" alt="">
-            </div>
-            <h2 id="inspeccion-nombre">NOMBRE DEL OBJETO</h2>
-            <div class="inspeccion-separator"></div>
-            <p id="inspeccion-desc">Descripción detallada del objeto...</p>
+        <div class="perfil-actions">
+            <a href="{{ url_for('home_route.paginaBienvenida') }}" class="btn-action">VOLVER</a>
+            <input type="button" class="btn-action btn-danger" id="Logout" value="ABANDONAR MISIÓN" data-url="{{ url_for('homeLogin_route.logout') }}">
         </div>
     </div>
+    
 
-    <!-- contenedor editor -->
+<div class="seccion-inventario">
+    <h3><i class="fa-solid fa-briefcase"></i> EQUIPAMIENTO ACTUAL</h3>
+    
+    <div class="inventario-maletin">
+        {% for producto in usuario.productos %}
+        <div class="item-slot" title="{{ producto.nombre }}">
+            <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}"  alt="{{ producto.nombre }}" >
+        </div>
+        {% endfor %}
+
+        {% set total_slots = 15 %}
+        {% set items_count = usuario.productos|length %}
+        {% for i in range(total_slots - items_count) %}
+        <div class="item-slot empty">
+            <i class="fa-solid fa-plus" style="font-size: 0.8rem; color: #222;"></i>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
     <div id="modalPerfil" class="modal-overlay">
         <div class="formulario modal-content">
             <span class="btn-cerrar" onclick="cerrarModal()">&times;</span>
@@ -124,5 +130,6 @@
             </form>
         </div>
     </div>
+
 </div>
 {% endblock %}
