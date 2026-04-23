@@ -12,25 +12,25 @@
         <div class="corner bottom-right"></div>
 
         <header class="form-header">
-            <h1 class="titulo-dmc">FORJAR NUEVA MISIÓN</h1>
-            <div class="divisor-ritual"></div>
+            <h1 class="titulo-dmc">crear NUEVA MISIÓN</h1>
+            <div class="divisor-cont"></div>
             <p class="subtitulo-form">Escribe tus crónicas. Las leyes del castillo rigen tus palabras.</p>
         </header>
         
-        <form method="POST" class="form-ritual">
+        <form method="POST" class="form-cont">
             {{ form.hidden_tag() }}
             
-            <div class="ritual-input-group">
-                <label class="ritual-label">TÍTULO DEL HILO</label>
-                {{ form.titulo(class="ritual-input ritual-titulo", placeholder="Ej: Combo Infinito con Rebellion...") }}
+            <div class="cont-input-group">
+                <label class="cont-label">TÍTULO DEL HILO</label>
+                {{ form.titulo(class="cont-input cont-titulo", placeholder="Ej: Combo Infinito con Rebellion...") }}
             </div>
 
-            <div class="ritual-input-group">
-                <label class="ritual-label">CONTENIDO DEL MANUSCRITO</label>
-                {{ form.contenido(class="ritual-input ritual-area", rows="12") }}
+            <div class="cont-input-group">
+                <label class="cont-label">CONTENIDO DEL MANUSCRITO</label>
+                {{ form.contenido(class="cont-input cont-area", rows="12") }}
             </div>
 
-            <div class="acciones-rituales">
+            <div class="acciones-contes">
                 <a href="{{ url_for('foro_route.ver_categoria', id=categoria_id) }}" class="btn-abortar">ABORTAR</a>
                 <button type="submit" class="btn-desbloquear">PUBLICAR MISIÓN</button>
             </div>
