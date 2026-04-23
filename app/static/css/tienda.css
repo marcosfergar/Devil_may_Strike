@@ -2,14 +2,6 @@ body{
   background: radial-gradient(circle, rgb(100, 0, 0) 10%, black 90%) !important;
   background-color: black;
 }
-/* Layout General */
-.dmc-shop-layout {
-    display: grid;
-    grid-template-columns: 20% auto 10%;
-    width: 100vw;
-    height: 90vh;
-    position: relative;
-}
 
 .dmc-back {
     position: absolute;
@@ -17,6 +9,15 @@ body{
     object-fit: cover;
     z-index: -1;
     opacity: 0.4;
+}
+
+/* Layout General */
+.dmc-shop-layout {
+    display: grid;
+    grid-template-columns: 20% auto 10%;
+    width: 100vw;
+    height: 90vh;
+    position: relative;
 }
 
 /* Columna Lady */
