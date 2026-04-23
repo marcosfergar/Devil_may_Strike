@@ -98,3 +98,12 @@ input:focus {
     box-shadow: 0 0 15px #ff0000;
     transform: scale(1.02);
 }
+
+label{
+  color: var(--text-muted);
+}
+
+.volver{
+    color: var(--text-muted); 
+    text-decoration: none
+}

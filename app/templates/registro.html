@@ -11,23 +11,21 @@
   <form method="POST">
     {{ form.hidden_tag() }}
 
-    <label style="color: #aaa">Nombre de usuario</label>
+    <label>Nombre de usuario</label>
     {{ form.usuario(placeholder="Ej: XxxLaTormenta777_YTxxX") }}
 
-    <label style="color: #aaa">Contraseña</label>
+    <label>Contraseña</label>
     {{ form.passwd(placeholder="••••••••") }}
 
-    <label style="color: #aaa">Confirmar Contraseña</label>
+    <label>Confirmar Contraseña</label>
     {{ form.confirm_passwd(placeholder="••••••••") }} {{
     form.enviar(class="btns-menu") }}
   </form>
 
   <div style="text-align: center; margin-top: 15px">
-    <a
-      href="{{ url_for('homeLogin_route.index') }}"
-      style="color: #666; text-decoration: none"
-      >« Volver</a
-    >
+    <a class="volver" href="{{ url_for('homeLogin_route.index') }}">
+      « Volver
+    </a>
   </div>
 </div>
 {% endblock %}

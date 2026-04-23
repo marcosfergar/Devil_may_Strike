@@ -7,15 +7,12 @@
 
 {% block content %}
 <div class="reliquia-wrapper full-screen">
-    <div class="detalle-card-ritual">
-        <div class="corner top-left"></div>
-        <div class="corner top-right"></div>
-        <div class="corner bottom-left"></div>
-        <div class="corner bottom-right"></div>
+    <div class="detalle-card-item">
 
         <div class="detalle-grid">
             <div class="col-visual">
-                <div class="item-frame">
+                <a href="{{ url_for('tienda_route.ver_tienda', id=categoria_id) }}" class="btn-volver">TIENDA</a>
+                <div class="item-img-container">
                     <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}" 
                          alt="{{ producto.nombre }}" class="img-reliquia">
                 </div>
@@ -23,30 +20,36 @@
                 <h1 class="titulo-producto">{{ producto.nombre }}</h1>
                 <div class="badge-categoria">{{ producto.categoria | upper }}</div>
                 
-                <div class="precio-ritual">
+                <div class="precio-item">
                     <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
                     <span class="valor">{{ producto.precio }}</span>
                 </div>
 
                 <form action="{{ url_for('tienda_route.comprar', id=producto.id) }}" method="POST">
-                    <button type="submit" class="btn-comprar-ritual">ADQUIRIR PODER</button>
+                    <button type="submit" class="btn-comprar-item">ADQUIRIR ITEM</button>
                 </form>
+
+                <div class="user-currency">
+                    <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Tus Red Orb" class="orb-icon">
+                    <span id="orb-count">{{ usuario.orbes_rojos }}</span>
+                    <small>TUS ORBES ROJOS</small>
+                </div>
             </div>
 
             <div class="col-info-horizontal">
                 <div class="info-section">
-                    <h3 class="ritual-header">MANUSCRITO</h3>
-                    <div class="scroll-viejuno">
+                    <h3 class="item-header">DESCRIPCIÓN</h3>
+                    <div class="cont-descripcion">
                         <p class="descripcion-texto">{{ producto.descripcion }}</p>
                     </div>
                 </div>
 
                 <div class="comentarios-section">
-                    <h3 class="ritual-header">SUSURROS</h3>
+                    <h3 class="item-header">COMENTARIOS</h3>
                     
                     <div class="lista-comentarios-compacta">
                         {% for com in producto.comentarios %}
-                        <div class="comentario-ritual">
+                        <div class="comentario-item">
                             <div class="com-meta">
                                 <span class="autor">{{ com.autor_tienda.nombre }}</span>
                                 <span class="fecha">{{ com.fecha.strftime('%d/%m') }}</span>
@@ -62,9 +65,9 @@
                     <form action="{{ url_for('tienda_route.postear_comentario', producto_id=producto.id) }}" 
                           method="POST" class="form-comentario-mini">
                         {{ form.hidden_tag() }}
-                        <div class="input-group-ritual">
-                            {{ form.contenido(placeholder="Tu marca...", class="input-com-ritual") }}
-                            <button type="submit" class="btn-enviar-ritual">-></button>
+                        <div class="input-group-item">
+                            {{ form.contenido(placeholder="Escribe un comentario...", class="input-com-item") }}
+                            <button type="submit" class="btn-enviar-item">Enviar</button>
                         </div>
                     </form>
                     {% endif %}

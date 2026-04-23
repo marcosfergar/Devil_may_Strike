@@ -14,8 +14,8 @@
 
 .music-toggle i {
     font-size: 1.6rem;
-    color: #ff0000;
-    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5));
+    color: var(--dmc-red);
+    filter: drop-shadow(0 0 5px var(--dmc-red-glow));
 }
 
 /* Animación de rotación cuando suena */
@@ -32,10 +32,9 @@
     right: 0;
     width: 260px;
     background: linear-gradient(180deg, rgba(15, 15, 15, 0.98) 0%, rgba(0, 0, 0, 1) 100%);
-    border: 1px solid #ff0000;
-    border-top: 3px solid #ff0000;
+    border: 1px solid var(--dmc-red);
     z-index: 9999;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 10px 30px var(--shadow-dark);
     
     /* Lógica de la persiana */
     max-height: 0;
@@ -50,7 +49,7 @@
     max-height: 500px;
     opacity: 1;
     padding: 15px;
-    border-bottom: 3px solid #ff0000;
+    border-bottom: 3px solid var(--dmc-red);
 }
 
 /* INFO Y TEXTO */
@@ -61,13 +60,13 @@
 
 .now-playing {
     font-size: 10px;
-    color: #ff0000;
+    color: var(--dmc-red);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 #track-name {
-    color: #fff;
+    color: var(--text-white);
     font-size: 14px;
     font-weight: bold;
     display: block;
@@ -85,14 +84,14 @@
 .m-btn {
     background: none;
     border: none;
-    color: #fff;
+    color: var(--text-white);
     font-size: 1.2rem;
     cursor: pointer;
     transition: color 0.2s, transform 0.2s;
 }
 
 .m-btn:hover {
-    color: #ff0000;
+    color: var(--dmc-red);
     transform: scale(1.1);
 }
 
@@ -125,11 +124,11 @@
 
 .track-item:hover {
     background: rgba(255, 0, 0, 0.2);
-    color: #fff;
+    color: var(--text-white);
 }
 
 .active-track {
-    color: #ff0000 !important;
+    color: var(--dmc-red) !important;
     font-weight: bold;
     background: rgba(255, 0, 0, 0.1);
 }
@@ -139,12 +138,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #ff0000;
+    color: var(--dmc-red);
     font-size: 0.8rem;
 }
 
 #volume-control {
     flex-grow: 1;
-    accent-color: #ff0000;
+    accent-color: var(--dmc-red);
     cursor: pointer;
 }

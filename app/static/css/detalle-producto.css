@@ -4,7 +4,7 @@
     padding: 20px;
 }
 
-.detalle-card-ritual {
+.detalle-card-item {
     background: linear-gradient(145deg, #150a0a 0%, #050505 100%);
     border: 1px solid #332222;
     position: relative;
@@ -25,7 +25,7 @@
     padding-right: 20px;
 }
 
-.item-frame {
+.item-img-container {
     width: 200px;
     height: 200px;
     margin: 0 auto 20px;
@@ -43,8 +43,7 @@
 }
 
 .titulo-producto {
-    font-family: 'Mael', serif; /* O tu fuente gótica */
-    color: #eee;
+    color: var(--text-white);
     font-size: 2.2rem;
     letter-spacing: 2px;
     margin-bottom: 5px;
@@ -59,7 +58,7 @@
     margin-bottom: 20px;
 }
 
-.precio-ritual {
+.precio-item {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,32 +66,34 @@
     margin-bottom: 30px;
 }
 
-.precio-ritual .valor {
+.precio-item .valor {
     font-size: 1.8rem;
-    color: #ff3e3e;
+    color: var(--text-white);
     font-weight: bold;
 }
+.orb-icon { width: 40px; vertical-align: middle; margin-right: 5px; }
 
-.btn-comprar-ritual {
-    background: #910000;
+.btn-comprar-item {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to bottom, #8b0000, #4a0000);
     color: white;
     border: none;
-    padding: 15px 30px;
-    font-family: 'Mael', sans-serif;
-    letter-spacing: 2px;
+    border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: 0.3s;
-    width: 100%;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
 }
 
-.btn-comprar-ritual:hover {
-    background: #ff3e3e;
-    box-shadow: 0 0 20px rgba(255, 62, 62, 0.5);
+.btn-comprar-item:hover {
+    background: #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+    transform: scale(1.02);
 }
 
 /* Columna Info */
-.ritual-header {
+.item-header {
     color: #910000;
     font-size: 0.9rem;
     letter-spacing: 2px;
@@ -114,7 +115,7 @@
     margin-bottom: 20px;
 }
 
-.comentario-ritual {
+.comentario-item {
     background: rgba(255,255,255,0.03);
     padding: 15px;
     margin-bottom: 10px;
@@ -128,10 +129,17 @@
     margin-bottom: 5px;
 }
 
-.com-meta .autor { color: #eee; font-weight: bold; }
-.com-meta .fecha { color: #666; }
-
-.input-com-ritual {
+.com-meta .autor { 
+    color: #eee; 
+    font-weight: bold;
+ }
+.com-meta .fecha { 
+    color: #666; 
+}
+.com-contenido{
+    color: var(--text-white);
+}
+.input-com-item {
     width: 100%;
     background: #000;
     border: 1px solid #333;
@@ -140,30 +148,22 @@
     margin-bottom: 10px;
 }
 
-.btn-enviar-ritual {
+.btn-enviar-item {
     background: transparent;
     border: 1px solid #910000;
     color: #910000;
     padding: 5px 15px;
     cursor: pointer;
+
+    max-height: 40px;
+
 }
 
-.btn-enviar-ritual:hover {
+.btn-enviar-item:hover {
     background: #910000;
     color: white;
 }
 
-/* Esquinas (Reutiliza las que ya tienes o usa estas) */
-.corner {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #910000;
-}
-.top-left { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-.top-right { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
-.bottom-left { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
-.bottom-right { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
 /* Contenedor que ocupa casi toda la pantalla */
 .reliquia-wrapper.full-screen {
     max-width: 95vw;
@@ -172,12 +172,12 @@
     padding: 0;
 }
 
-.detalle-card-ritual {
+.detalle-card-item {
     background: linear-gradient(145deg, #100808 0%, #050505 100%);
     border: 1px solid #332222;
     position: relative;
     padding: 25px;
-    height: 80vh; /* Altura fija para evitar scroll de página */
+    height: 80vh;
     display: flex;
     align-items: center;
 }
@@ -199,17 +199,14 @@
     overflow: hidden;
 }
 
-/* Ajustes de scroll interno para que no crezca la página */
-.scroll-viejuno, .lista-comentarios-compacta {
+.cont-descripcion, .lista-comentarios-compacta {
     max-height: 50vh;
     overflow-y: auto;
     padding-right: 10px;
-    scrollbar-width: thin;
-    scrollbar-color: #910000 #111;
 }
 
 /* Estilo de los comentarios más compacto */
-.comentario-ritual {
+.comentario-item {
     background: rgba(255,255,255,0.02);
     padding: 10px;
     margin-bottom: 8px;
@@ -218,12 +215,12 @@
 }
 
 /* Formulario en una sola línea para ahorrar espacio */
-.input-group-ritual {
+.input-group-item {
     display: flex;
     gap: 5px;
 }
 
-.input-com-ritual {
+.input-com-item {
     flex-grow: 1;
     background: #000;
     border: 1px solid #333;
@@ -233,7 +230,7 @@
 }
 
 /* Imagen un poco más pequeña para ganar espacio vertical */
-.item-frame {
+.item-img-container {
     width: 180px;
     height: 180px;
     margin: 0 auto 15px;
@@ -243,10 +240,21 @@
     font-size: 1.8rem;
 }
 
-/* Personalización del scrollbar para que parezca de juego */
-.scroll-viejuno::-webkit-scrollbar, .lista-comentarios-compacta::-webkit-scrollbar {
-    width: 6px;
+.user-currency {
+    color: var(--text-white);
+    background: rgba(179, 0, 0, 0.1);
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid var(--dmc-red);
+    text-align: right;
 }
-.scroll-viejuno::-webkit-scrollbar-thumb, .lista-comentarios-compacta::-webkit-scrollbar-thumb {
-    background: #910000;
+
+.btn-volver {
+    color: #555;
+    text-decoration: none;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
 }
+
+.btn-volver:hover { color: #999; }
