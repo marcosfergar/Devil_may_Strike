@@ -30,8 +30,13 @@
     padding: 25px;
     border-radius: 5px 0 0 5px;
     box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+    animation: apareceStatus 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
+@keyframes apareceStatus {
+    0% { transform: translateX(-100vw); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
 .avatar-container {
     position: relative;
     border: 2px solid #2a2a2a;
