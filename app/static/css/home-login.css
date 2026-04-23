@@ -76,20 +76,6 @@ body{
   height: auto;
 }
 
-.imagen-fondo .dmc-back{
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
-  max-width: 2000px;
-
-  align-self: center;
-
-  z-index: 0;
-  -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
-  mask-image: radial-gradient(circle, black 60%, transparent 100%);
-  
-}
-
 
 /* Zona Botones */
 
