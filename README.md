@@ -55,6 +55,29 @@ flask --app main.py crear_tablas
 ```powershell
 python main.py
 ```
+---
+
+## 🛠️ Gestión de Base de Datos (Migraciones)
+
+Para evolucionar la base de datos sin perder los datos de los usuarios (como orbes rojos o inventario), utilizamos **Flask-Migrate**.
+
+### 1. Inicialización (Solo la primera vez)
+Si es la primera vez que configuras las migraciones en el proyecto, ejecuta:
+```powershell
+flask db init
+```
+
+### 2. Flujo para aplicar cambios
+
+Detectar cambios: Genera un archivo de migración con una descripción del cambio:
+```powershell
+flask db migrate -m "Añadida columna X a la tabla Y"
+```
+Aplicar cambios: Sincroniza la base de datos real con los modelos:
+
+```powershell
+flask db upgrade
+```
 
 ### 📂 Estructura del Proyecto
 ```powershell

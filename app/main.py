@@ -1,5 +1,6 @@
 import os,json
 from flask import Flask
+from flask_migrate import Migrate
 from flask_session import Session
 from dotenv import load_dotenv
 
@@ -34,6 +35,7 @@ BD_PATH = os.path.join(BASE_DIR, "jugadores.db")
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{BD_PATH}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+migrate = Migrate(app, db)
 
 
 
