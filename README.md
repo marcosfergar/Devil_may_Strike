@@ -44,12 +44,17 @@ pip install -r requirements.txt
 # 4. Configurar variables de entorno
 # Crea un archivo .env o establece las variables:
 $env:RAWG_API_KEY = "tu_api_key_aqui"
+```
 
 ### 3. Inicializar la Base de Datos
+```powershell
 flask --app main.py crear_tablas
+```
 
 ### 4. Ejecutar la Aplicación
+```powershell
 python main.py
+```
 
 ### 📂 Estructura del Proyecto
 
