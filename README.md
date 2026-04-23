@@ -57,7 +57,7 @@ python main.py
 ```
 
 ### 📂 Estructura del Proyecto
-
+```powershell
 /DevilMayStrike
 │
 ├── /app
@@ -72,7 +72,7 @@ python main.py
 ├── main.py            # Punto de entrada y comandos CLI
 ├── requirements.txt   # Librerías necesarias
 └── README.md          # Esta guía
-
+```
 ### Créditos y Notas
 Desarrollador: Marcos Fernández.
 
