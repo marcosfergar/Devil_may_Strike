@@ -7,7 +7,7 @@
 <div class="foro-wrapper">
     <header class="zona-header">
         <a href="{{ url_for('foro_route.index_foro') }}" class="btn-mapa">
-            <span class="icon">📜</span> VOLVER AL MAPA
+            VOLVER AL MAPA
         </a>
         <div class="header-main">
             <h1 class="titulo-zona">{{ categoria.nombre }}</h1>
@@ -17,7 +17,7 @@
         
         {% if usuario and not usuario.is_guest %}
         <div class="acciones-zona">
-            <a href="{{ url_for('foro_route.nuevo_tema', categoria_id=categoria.id) }}" class="btn-forjar">
+            <a href="{{ url_for('foro_route.nuevo_tema', categoria_id=categoria.id) }}" class="btn-crear">
                 + INICIAR NUEVO HILO
             </a>
         </div>
@@ -43,16 +43,20 @@
                 <div class="hilo-stats">
                     <div class="stat-box">
                         <span class="stat-num">{{ tema.mensajes|length - 1 }}</span>
-                        <span class="stat-label">SUSURROS</span>
+                        <span class="stat-label">COMENTARIOS</span>
                     </div>
                     <div class="hilo-indicator"></div>
                 </div>
             </div>
             {% endfor %}
         {% else %}
-            <div class="vacio-container">
-                <p>No hay susurros en esta zona... Sé el primero en dejar tu marca.</p>
+        <div class="holos-container">
+            <div class="hilo-card">
+                <div class="hilo-main">
+                    <span class="vacio">No hay hilos en esta categotia... Sé el primero en dejar un hilo.</span>
+                </div>
             </div>
+        </div>
         {% endif %}
     </div>
 </div>

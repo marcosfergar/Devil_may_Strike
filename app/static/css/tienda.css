@@ -102,3 +102,13 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px dashed #444;
 }
+
+.btn-ver-mas {
+    color: var(--dmc-red-dark);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-ver-mas:hover { color: var(--dmc-red); }
