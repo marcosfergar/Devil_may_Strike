@@ -1,6 +1,9 @@
 ### Especial ###
 jugadores.db
 
+# Ignorar subidas de fotos de perfil
+app/static/uploads/perfiles/
+
 ### Flask ###
 instance/*
 !instance/.gitignore

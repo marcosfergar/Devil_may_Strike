@@ -1,8 +1,12 @@
+import os
+
 from app.clients.rawg_clients import RAWGClient
 from app.models.juegoDMC import JuegoDMC
 
 def listar_saga_dmc():
-    cliente_instancia = RAWGClient(api_key="381a942d4ead4fa089ded136a5153827")
+    api_key = os.getenv("RAWG_API_KEY")
+    
+    cliente_instancia = RAWGClient(api_key=api_key)
     juegos_raw = cliente_instancia.get_saga_dmc()
     
     if not juegos_raw:
