@@ -1,10 +1,14 @@
 import os
-
+from dotenv import load_dotenv
 from app.clients.rawg_clients import RAWGClient
 from app.models.juegoDMC import JuegoDMC
 
+load_dotenv()
 def listar_saga_dmc():
     api_key = os.getenv("RAWG_API_KEY")
+    if not api_key:
+        print("Error: No se pudo cargar la API KEY desde el .env")
+        return []
     
     cliente_instancia = RAWGClient(api_key=api_key)
     juegos_raw = cliente_instancia.get_saga_dmc()

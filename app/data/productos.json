@@ -2,14 +2,14 @@
     {
         "nombre": "Alma de Sparda",
         "tipo": "avatar",
-        "precio": 5000,
+        "precio": 3000,
         "descripcion": "El legendario caballero oscuro.",
         "imagen_url": "avatar_sparda.png"
     },
     {
         "nombre": "Estilo Rebellion",
         "tipo": "avatar",
-        "precio": 2500,
+        "precio": 1500,
         "descripcion": "La herencia de Dante.",
         "imagen_url": "avatar_rebellion.png"
     },
@@ -23,19 +23,27 @@
     {
         "nombre": "Bury the Light",
         "tipo": "musica",
-        "precio": 1500,
-        "descripcion": "Tema de Vergil"
+        "precio": 500,
+        "descripcion": "Tema de Vergil - DMC5",
+        "imagen_url": "bury-the-light.mp3"
+    },
+    {
+        "nombre": "Devils Never Cry",
+        "tipo": "musica",
+        "precio": 300,
+        "descripcion": "Tema clásico - DMC3",
+        "imagen_url": "devils-never-cry.mp3"
     },
     {
         "nombre": "Dark Slayer",
         "tipo": "tema",
-        "precio": 5000,
+        "precio": 2000,
         "descripcion": "Interfaz estilo Vergil"
     },
     {
         "nombre": "Legendary Hunter",
         "tipo": "titulo",
-        "precio": 2000,
+        "precio": 1000,
         "descripcion": "Título de prestigio"
     }
 ]

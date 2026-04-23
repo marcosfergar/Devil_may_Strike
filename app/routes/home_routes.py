@@ -1,4 +1,5 @@
 from flask import Blueprint, redirect, render_template, session, url_for
+from flask import jsonify
 
 # importe de rutas
 # from app.routes.homeLogin_routes import homeLogin_pb
@@ -43,3 +44,21 @@ def biblioteca_dmc():
     juegos_saga = listar_saga_dmc()
     return render_template('biblioteca-dmc.html',usuario=user, juegos=juegos_saga)
 
+
+@home_pb.route('/mis-canciones')
+def obtener_mis_canciones():
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify([])
+
+    user = usuario_service.obtener_usuario_por_id(user_id)
+    
+    musica_comprada = [
+        {
+            "name": p.nombre,
+            "src": f"/static/music/{p.data_path}"
+        } 
+        for p in user.productos if p.categoria.lower() == 'musica'
+    ]
+    
+    return jsonify(musica_comprada)

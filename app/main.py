@@ -1,6 +1,7 @@
 import os,json
 from flask import Flask
 from flask_session import Session
+from dotenv import load_dotenv
 
 # importe database
 from app.database.db import db
@@ -16,8 +17,10 @@ from app.routes.foro_routes import foro_bp
 # importae modelos
 from app.models.schema import Categoria, Usuario, Producto, Comentario
 
+load_dotenv()
+
 app = Flask(__name__, template_folder='templates')
-app.secret_key = "DevilStrike3"
+app.secret_key = os.getenv("SECRET_KEY", "una-clave-por-defecto-segura")
 
 # Configuracion session
 app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
