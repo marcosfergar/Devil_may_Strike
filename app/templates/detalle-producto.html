@@ -1,56 +1,77 @@
 {% extends "plantilla_base.html" %}
-{% block title %}DevilMayStrike{% endblock %} 
+{% block title %}{{ producto.nombre }} - DevilMayStrike{% endblock %} 
+
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/detalle-producto.css') }}" />
-<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
 {% endblock %}
+
 {% block content %}
-<div class="container-detalle">
-    <img src="{{ url_for('static', filename='images/bg-detalle.jpg') }}" class="dmc-back">
+<div class="reliquia-wrapper full-screen">
+    <div class="detalle-card-item">
 
-    <div class="detalle-grid">
-        <div class="col-visual">
-            <h1 class="titulo-producto">{{ producto.nombre }}</h1>
-            <div class="badge-categoria">{{ producto.categoria }}</div>
-            
-            <div class="precio-tag">
-                <img src="{{ url_for('static', filename='images/red-orb.png') }}" alt="Orbe">
-                <span>{{ producto.precio }}</span>
-            </div>
-
-            <form action="{{ url_for('tienda_route.comprar', id=producto.id) }}" method="POST">
-                <button type="submit" class="btn-comprar">ADQUIRIR PODER</button>
-            </form>
-        </div>
-
-        <div class="col-info">
-            <div class="descripcion-box">
-                <h3>DESCRIPCIÓN</h3>
-                <p>{{ producto.descripcion }}</p>
-            </div>
-
-            <div class="comentarios-box">
-                <h3>RESEÑAS DE CAZADORES</h3>
+        <div class="detalle-grid">
+            <div class="col-visual">
+                <a href="{{ url_for('tienda_route.ver_tienda', id=categoria_id) }}" class="btn-volver">TIENDA</a>
+                <div class="item-img-container">
+                    <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}" 
+                         alt="{{ producto.nombre }}" class="img-reliquia">
+                </div>
                 
-                <div class="lista-comentarios">
-                    {% for com in producto.comentarios %}
-                    <div class="comentario">
-                        <span class="autor">{{ com.autor.nombre }}</span>
-                        <span class="fecha">{{ com.fecha.strftime('%d/%m/%Y') }}</span>
-                        <p>{{ com.contenido }}</p>
-                    </div>
-                    {% else %}
-                    <p class="no-com">Aún no hay susurros sobre este objeto...</p>
-                    {% endfor %}
+                <h1 class="titulo-producto">{{ producto.nombre }}</h1>
+                <div class="badge-categoria">{{ producto.categoria | upper }}</div>
+                
+                <div class="precio-item">
+                    <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
+                    <span class="valor">{{ producto.precio }}</span>
                 </div>
 
-                {% if usuario and not usuario.is_guest %}
-                <form action="{{ url_for('tienda_route.postear_comentario', producto_id=producto.id) }}" method="POST" class="form-comentario">
-                    {{ form.hidden_tag() }}
-                    {{ form.contenido(placeholder="Deja tu marca...", class="input-com") }}
-                    <button type="submit" class="btn-enviar">PUBLICAR</button>
+                <form action="{{ url_for('tienda_route.comprar', id=producto.id) }}" method="POST">
+                    <button type="submit" class="btn-comprar-item">ADQUIRIR ITEM</button>
                 </form>
-                {% endif %}
+
+                <div class="user-currency">
+                    <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Tus Red Orb" class="orb-icon">
+                    <span id="orb-count">{{ usuario.orbes_rojos }}</span>
+                    <small>TUS ORBES ROJOS</small>
+                </div>
+            </div>
+
+            <div class="col-info-horizontal">
+                <div class="info-section">
+                    <h3 class="item-header">DESCRIPCIÓN</h3>
+                    <div class="cont-descripcion">
+                        <p class="descripcion-texto">{{ producto.descripcion }}</p>
+                    </div>
+                </div>
+
+                <div class="comentarios-section">
+                    <h3 class="item-header">COMENTARIOS</h3>
+                    
+                    <div class="lista-comentarios-compacta">
+                        {% for com in producto.comentarios %}
+                        <div class="comentario-item">
+                            <div class="com-meta">
+                                <span class="autor">{{ com.autor_tienda.nombre }}</span>
+                                <span class="fecha">{{ com.fecha.strftime('%d/%m') }}</span>
+                            </div>
+                            <p class="com-contenido">{{ com.contenido }}</p>
+                        </div>
+                        {% else %}
+                        <p class="no-com">Sin registros...</p>
+                        {% endfor %}
+                    </div>
+
+                    {% if usuario and not usuario.is_guest %}
+                    <form action="{{ url_for('tienda_route.postear_comentario', producto_id=producto.id) }}" 
+                          method="POST" class="form-comentario-mini">
+                        {{ form.hidden_tag() }}
+                        <div class="input-group-item">
+                            {{ form.contenido(placeholder="Escribe un comentario...", class="input-com-item") }}
+                            <button type="submit" class="btn-enviar-item">Enviar</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

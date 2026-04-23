@@ -4,23 +4,14 @@
 {% endblock %} {% block content %}
 <div class="form-container">
     <h2>INICIAR SESIÓN</h2>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div style="color: #ff4d4d; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; border: 1px solid #ff4d4d;">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
 
     <form method="POST">
         {{ form.hidden_tag() }}
         
-        <label style="color: #aaa;">Nombre de Cazador</label>
+        <label>Nombre de Cazador</label>
         {{ form.usuario(placeholder="Nombre") }}
         
-        <label style="color: #aaa;">Contraseña</label>
+        <label>Contraseña</label>
         {{ form.passwd(placeholder="••••••••") }}
         
         {{ form.enviar(class="btns-menu") }}
@@ -33,7 +24,9 @@
     </p>
   </div>
   <div style="text-align: center; margin-top: 15px">
-    <a href="{{ url_for('homeLogin_route.index') }}" style="color: #666; text-decoration: none">« Volver</a>
+    <a class="volver" href="{{ url_for('homeLogin_route.index') }}">
+      « Volver
+    </a>
   </div>
 </div>
 {% endblock %}

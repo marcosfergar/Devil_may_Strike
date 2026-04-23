@@ -1,9 +1,38 @@
+:root {
+    /* Colores Principales */
+    --dmc-red: #e00000;
+    --dmc-red-dark: #8b0000;
+    --dmc-red-glow: rgba(255, 0, 0, 0.5);
+    
+    /* Fondos y Capas */
+    --bg-header: #111111da; /* Header */
+    --bg-dark: #0a0a0a; /* Fondo base */
+    --bg-card: rgba(15, 15, 15, 0.95); /* Tarjetas y paneles */
+    --bg-gradient: radial-gradient(circle, #640000 10%, #000000 90%);
+    
+    /* Textos */
+    --font-game:"Times New Roman", Times, serif;
+    --text-main: #e0e0e0;
+    --text-muted: #888888;
+    --text-white: #ffffff;
+    
+    /* Estados y Bordes */
+    --border-color: #333333;
+    --border-active: #ff0000;
+    --shadow-dark: rgba(0, 0, 0, 0.9);
 
-/* Creamos la animación */
+    /* Colores para mensajes */
+    --dmc-green-success: #00ff00;
+    --dmc-blue-info: #00aaff;
+    --dmc-red-error: #ff0000;
+}
+
 @keyframes fadeInPage {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* Quitar scroll en tos laos */
 
 /* Chrome, Safari, Edge */
 html::-webkit-scrollbar,
@@ -33,6 +62,7 @@ body {
     box-sizing: border-box;
 }
 
+/* Fuente principal */
 @font-face {
   font-family: "Mael";
   src: url("../fonts//MAEL____.TTF") format("truetype");
@@ -51,20 +81,20 @@ main{
     top: 0;
     z-index: 999;
 
-    background: #111111da;
-    color: white;
+    background: var(--bg-header);
+    color: var(--text-main);
     width: 100%;
 
     text-align: center;
 
     padding: 20px;
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.9rem;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border-color);
 }
 
 .index-menu a, ul{
-    color: #8b0000;
+    color: var(--dmc-red);
     list-style: none;
     text-decoration: none;
 }
@@ -197,7 +227,7 @@ footer {
 }
 
 footer a {
-    color: #8b0000;
+    color: var(--dmc-red);
     text-decoration: none;
 }
 
@@ -232,23 +262,24 @@ footer a {
 }
 
 /* Colores por categoría */
-.alert-success { border-left-color: #00ff00; box-shadow: 0 0 10px rgba(0, 255, 0, 0.1); }
-.alert-error { border-left-color: #ff0000; }
-.alert-info { border-left-color: #00aaff; }
+.alert-success { border-left-color: var(--dmc-green-success); box-shadow: 0 0 10px rgba(0, 255, 0, 0.1); }
+.alert-error { border-left-color: var(--dmc-red-error); }
+.alert-info { border-left-color: var(--dmc-blue-info); }
 
 .flash-icon { font-size: 1.2rem; }
-.alert-success .flash-icon { color: #00ff00; }
-.alert-error .flash-icon { color: #ff0000; }
+.alert-success .flash-icon { color: var(--dmc-green-success); }
+.alert-error .flash-icon { color: var(--dmc-red-error); }
+.alert-info .flash-icon { color: var(--dmc-blue-info); }
 
 .flash-close {
     background: none;
     border: none;
-    color: #666;
+    color: var(--text-muted);
     cursor: pointer;
     font-size: 1.5rem;
     margin-left: auto;
 }
-.flash-close:hover { color: #fff; }
+.flash-close:hover { color: var(--text-main); }
 
 @keyframes slideInRight {
     from { transform: translateX(110%); opacity: 0; }

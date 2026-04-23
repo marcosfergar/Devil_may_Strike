@@ -3,40 +3,11 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"/>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/widget-music.css') }}"/>
 
-<script src="{{ url_for('static', filename='js/scripts-login.js') }}"></script>
-<script src="{{ url_for('static', filename='js/widget-music.js') }}"></script>
 {% endblock %} 
 
 {% block content %}
 <div class="container-home">
-  {% if usuario %}
-<div id="music-widget" class="music-usuario">
-    <div class="track-info">
-        <span class="now-playing">NOW PLAYING:</span>
-        <marquee behavior="scroll" direction="left" id="track-name">Select a track...</marquee>
-    </div>
-    
-    <div class="usuario-controls">
-        <button id="prev-track" class="m-btn"><i class="fa-solid fa-backward-step"></i></button>
-        <button id="play-pause" class="m-btn play-main"><i class="fa-solid fa-play"></i></button>
-        <button id="next-track" class="m-btn"><i class="fa-solid fa-forward-step"></i></button>
-    </div>
-
-    <div class="track-list-container">
-        <ul id="playlist-items">
-            </ul>
-    </div>
-
-    <div class="volume-container">
-        <i class="fa-solid fa-volume-low"></i>
-        <input type="range" id="volume-control" min="0" max="1" step="0.1" value="0.5">
-    </div>
-
-    <audio id="game-audio"></audio>
-</div>
-  {% endif %}
 
   <div class="sparda">
     <img src="{{ url_for('static', filename='img/Dante-menu.png') }}" alt="Dante"/>

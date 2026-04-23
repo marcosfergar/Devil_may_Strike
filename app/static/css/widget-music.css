@@ -1,79 +1,111 @@
-.music-usuario {
-    position: fixed;
-    bottom: 100px;
-    left: 20px;
-    background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(0, 0, 0, 1) 100%);
-    border: 1px solid #333;
-    border-left: 3px solid #ff0000;
-    padding: 15px;
-    width: 220px;
-    z-index: 2000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+/* Contenedor padre en el Header */
+.music-container-wrapper {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
 }
 
+/* El Icono del Disco */
+.music-toggle {
+    cursor: pointer;
+    padding: 5px 15px;
+    transition: transform 0.3s ease;
+}
+
+.music-toggle i {
+    font-size: 1.6rem;
+    color: var(--dmc-red);
+    filter: drop-shadow(0 0 5px var(--dmc-red-glow));
+}
+
+/* Animación de rotación cuando suena */
+.spinning {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* EL WIDGET (ESTILO PERSIANA) */
+.music-usuario {
+    position: absolute;
+    top: 100%; /* Justo debajo del icono */
+    right: 0;
+    width: 260px;
+    background: linear-gradient(180deg, rgba(15, 15, 15, 0.98) 0%, rgba(0, 0, 0, 1) 100%);
+    border: 1px solid var(--dmc-red);
+    z-index: 9999;
+    box-shadow: 0 10px 30px var(--shadow-dark);
+    
+    /* Lógica de la persiana */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.3s ease;
+    padding: 0 15px;
+}
+
+/* Clase que activa el JS para abrir */
+.music-usuario.show {
+    max-height: 500px;
+    opacity: 1;
+    padding: 15px;
+    border-bottom: 3px solid var(--dmc-red);
+}
+
+/* INFO Y TEXTO */
 .track-info {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #222;
-    padding-bottom: 5px;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
 .now-playing {
     font-size: 10px;
-    color: #ff0000;
-    font-weight: bold;
-    display: block;
+    color: var(--dmc-red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #track-name {
-    color: #fff;
-    font-size: 13px;
-    font-family: 'Times New Roman', serif;
+    color: var(--text-white);
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-top: 4px;
 }
 
+/* CONTROLES */
 .usuario-controls {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .m-btn {
     background: none;
     border: none;
-    color: #555;
+    color: var(--text-white);
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .m-btn:hover {
-    color: #ff0000;
-    transform: scale(1.2);
+    color: var(--dmc-red);
+    transform: scale(1.1);
 }
 
-.play-main { font-size: 1.5rem; color: #8b0000; }
-
-.volume-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #444;
-    font-size: 12px;
+.play-main {
+    font-size: 1.8rem;
 }
 
-#volume-control {
-    flex-grow: 1;
-    accent-color: #8b0000;
-    cursor: pointer;
-}
-
-/* Contenedor de la lista */
+/* LISTA DE REPRODUCCIÓN */
 .track-list-container {
-    margin-top: 10px; margin-bottom: 10px;
-    background: rgba(20, 20, 20, 0.8);
-    border: 1px solid #333;
-    max-height: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    max-height: 150px;
     overflow-y: auto;
-    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 #playlist-items {
@@ -84,33 +116,34 @@
 
 .track-item {
     padding: 8px 12px;
-    font-size: 0.85rem;
-    color: #aaa;
+    font-size: 12px;
+    color: #ccc;
     cursor: pointer;
-    border-bottom: 1px solid #222;
-    transition: all 0.2s;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.1);
 }
 
 .track-item:hover {
-    background: rgba(139, 0, 0, 0.3);
-    color: #fff;
+    background: rgba(255, 0, 0, 0.2);
+    color: var(--text-white);
 }
 
-/* Estilo para la canción que está sonando */
-.track-item.active-track {
-    color: #ff0000;
+.active-track {
+    color: var(--dmc-red) !important;
     font-weight: bold;
-    background: rgba(139, 0, 0, 0.2);
-    border-left: 3px solid #ff0000;
+    background: rgba(255, 0, 0, 0.1);
 }
 
-.track-list-container::-webkit-scrollbar {
-    width: 5px;
+/* VOLUMEN */
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dmc-red);
+    font-size: 0.8rem;
 }
-.track-list-container::-webkit-scrollbar-thumb {
-    background: #8b0000;
-}
-.track-list-container::-webkit-scrollbar-track {
-    background: #111;
+
+#volume-control {
+    flex-grow: 1;
+    accent-color: var(--dmc-red);
+    cursor: pointer;
 }
