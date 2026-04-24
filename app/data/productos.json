@@ -28,6 +28,20 @@
         "imagen_url": "bury-the-light.mp3"
     },
     {
+        "nombre": "Devil Trigger",
+        "tipo": "musica",
+        "precio": 500,
+        "descripcion": "Tema de Nero - DMC5",
+        "imagen_url": "devil-trigger.mp3"
+    },
+    {
+        "nombre": "Crimson Cloud",
+        "tipo": "musica",
+        "precio": 500,
+        "descripcion": "Tema de V - DMC5",
+        "imagen_url": "crimson-cloud.mp3"
+    },
+    {
         "nombre": "Devils Never Cry",
         "tipo": "musica",
         "precio": 300,
@@ -45,5 +59,19 @@
         "tipo": "titulo",
         "precio": 1000,
         "descripcion": "Título de prestigio"
+    }
+    ,
+    {
+        "nombre": "Son of Sparda",
+        "tipo": "titulo",
+        "precio": 2000,
+        "descripcion": "Título del hijo de Sparda"
+    }
+    ,
+    {
+        "nombre": "Rey de San Cristobal",
+        "tipo": "titulo",
+        "precio": 3000,
+        "descripcion": "Título otorgado al maestro de la mazorca"
     }
 ]
