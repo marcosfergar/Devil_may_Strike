@@ -1,3 +1,7 @@
+body{
+  background: radial-gradient(circle, rgb(100, 0, 0) 10%, black 90%) !important;
+  background-color: black;
+}
 :root {
     /* Colores Principales */
     --dmc-red: #e00000;

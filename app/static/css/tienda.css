@@ -1,8 +1,3 @@
-body{
-  background: radial-gradient(circle, rgb(100, 0, 0) 10%, black 90%) !important;
-  background-color: black;
-}
-
 .dmc-back {
     position: absolute;
     width: 100%; height: 90vh;

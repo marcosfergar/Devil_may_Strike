@@ -434,7 +434,7 @@ header {
 /* Resalte para el OP (Original Poster) */
 .post-original {
     border-left: 4px solid #910000;
-    background: linear-gradient(90deg, rgba(145, 0, 0, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%);
+    background: rgba(44, 0, 0, 0.39);
 }
 
 /* Sidebar del Autor */
