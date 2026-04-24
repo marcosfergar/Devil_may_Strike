@@ -1,10 +1,9 @@
-from flask import Blueprint, jsonify, redirect, render_template, session, url_for, flash
+from flask import Blueprint, jsonify, redirect, render_template, request, session, url_for, flash
 
 # importe de rutas
 
 # importe modelos
 from app.database.db import db
-from app.models.schema import Producto,Usuario
 
 # importe formularios
 from app.forms.tienda_form import ComentarioForm
@@ -21,8 +20,11 @@ def ver_tienda():
     if "username" not in session:
         flash("Debes iniciar sesión para acceder a la tienda.", "error")
         return redirect(url_for('homeLogin_route.paginaLogin'))
-        
-    lista_productos = tienda_service.obtener_todos_los_productos()
+
+    categoria_activa = request.args.get('categoria', 'all')
+    pagina = request.args.get('page', 1, type=int)
+
+    lista_productos = tienda_service.obtener_productos_paginados(categoria_activa, pagina, 10)
 
     user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
 
@@ -32,7 +34,7 @@ def ver_tienda():
             flash("Los invitados no tienen acceso a la tienda. ¡Regístrate para comprar!", "error")
             return redirect(url_for('homeLogin_route.paginaLogin'))
     
-    return render_template('tienda.html', productos=lista_productos, usuario=user, form=form)
+    return render_template('tienda.html',productos=lista_productos.items,paginacion=lista_productos, usuario=user, form=form, categoria_activa=categoria_activa)
 
 @tienda_bp.route('/producto/<int:id>')
 def detalle_producto(id):
@@ -65,7 +67,7 @@ def comprar(id):
     else:
         flash(resultado["message"], "error")
         
-    return redirect(url_for('tienda_route.ver_tienda'))
+    return redirect(url_for('tienda_route.detalle_producto', id=id))
 
 @tienda_bp.route('/producto/<int:producto_id>/comentar', methods=['POST'])
 def postear_comentario(producto_id):

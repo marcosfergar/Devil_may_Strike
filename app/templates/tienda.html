@@ -3,7 +3,6 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tienda.css') }}" />
-<script src="{{ url_for('static', filename='js/tienda.js') }}"></script>
 {% endblock %}
 {% block links %}
 {% endblock %}
@@ -19,15 +18,20 @@
         <div class="shop-title">
             <img class="logo-tienda" src="{{ url_for('static', filename='img/logo-tienda.png') }}" alt="logo-tienda" />
             <nav class="filter-bar">
-                <button class="filter-btn active" onclick="filterShop('all')">TODO</button>
-                <button class="filter-btn" onclick="filterShop('musica')">MÚSICA</button>
-                <button class="filter-btn" onclick="filterShop('avatar')">AVATARES</button>
-                <button class="filter-btn" onclick="filterShop('titulo')">TÍTULOS</button>
-                <button class="filter-btn" onclick="filterShop('tema')">TEMAS</button>
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='all') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'all' else '' }}">TODO</a>        
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='musica') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'musica' else '' }}">MÚSICA</a>                
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='avatar') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'avatar' else '' }}">AVATARES</a>                
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='titulo') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'titulo' else '' }}">TÍTULOS</a>                
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='tema') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'tema' else '' }}">TEMAS</a>
             </nav>
         </div>
 
-        <section class="products-grid">
+        <div class="products-grid">
             {% for producto in productos %}
             <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="product-card-link">
                 <div class="product-card" data-category="{{ producto.categoria }}">
@@ -52,7 +56,21 @@
                 </div>
             </a>
             {% endfor %}
-        </section>
+
+        </div>
+        <div class="pagination-container">
+            {% if paginacion.has_prev %}
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria=categoria_activa, page=paginacion.prev_num) }}" 
+                class="pagi-btn"> < ANTERIOR </a>
+            {% endif %}
+
+            <span class="pagi-info">PÁGINA {{ paginacion.page }} DE {{ paginacion.pages }}</span>
+
+            {% if paginacion.has_next %}
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria=categoria_activa, page=paginacion.next_num) }}" 
+                class="pagi-btn"> SIGUIENTE > </a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="col-currency">

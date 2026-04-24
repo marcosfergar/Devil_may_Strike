@@ -99,9 +99,28 @@ body{
 }
 
 .btn-comprar-item:hover {
-    background: #ff0000;
     box-shadow: 0 0 15px #ff0000;
     transform: scale(1.02);
+}
+
+.btn-comprar-item {
+    display: block;
+    border: 1px solid var(--dmc-red);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-comprar-item:hover:not(.owned) {
+    background: var(--dmc-red);
+}
+.btn-comprar-item.owned {
+    border-color: #555;
+    color: #555;
+    cursor: default;
 }
 
 /* Columna Info */

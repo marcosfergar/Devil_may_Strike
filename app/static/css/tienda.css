@@ -41,6 +41,26 @@ body{
     border-right: 4px solid #b90000;
     overflow-y: auto;
 
+    padding-bottom: 100px;
+}
+
+.shop-main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.shop-main::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.shop-main::-webkit-scrollbar-thumb {
+    background: #920000;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.shop-main::-webkit-scrollbar-thumb:hover {
+    background: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
 }
 
 .products-grid {
@@ -61,6 +81,7 @@ body{
 .product-card {
     width: 100%;
     max-width: 220px;
+    min-width: 220px;
     background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
     border: 1px solid #444;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
@@ -189,4 +210,38 @@ body{
     max-width: 300px;
     filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.3));
     margin-bottom: 20px;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid #333;
+    width: 100%;
+}
+
+.pagi-btn {
+    background: #000;
+    color: #ff0000;
+    border: 1px solid #920000;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-family: 'Impact', sans-serif;
+    transition: 0.3s;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+}
+
+.pagi-btn:hover {
+    background: #920000;
+    color: white;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.pagi-info {
+    color: #888;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
 }
