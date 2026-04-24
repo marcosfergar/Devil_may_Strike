@@ -30,5 +30,17 @@ def agregar_respuesta(usuario_id, tema_id, contenido):
         return respuesta, "Respuesta enviada. +10 Orbes obtenidos."
     return None, "No se pudo enviar la respuesta."
 
+def obtener_categoria_por_id(categoria_id):
+    return ForoRepository.get_categorias_by_id(categoria_id)
+
+def obtener_todas_las_categorias():
+    return ForoRepository.get_all_categorias()
+
+def obtener_temas_por_categoria(categoria_id):
+    return ForoRepository.get_temas_by_categoria(categoria_id)
+
+def obtener_tema_por_id(tema_id):
+    return ForoRepository.get_tema_by_id(tema_id)
+
 def obtener_mensajes_de_tema(tema_id):
     return ForoRepository.get_mensajes_by_tema(tema_id)

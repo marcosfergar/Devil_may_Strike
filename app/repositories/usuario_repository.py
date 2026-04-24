@@ -47,6 +47,12 @@ class UsuarioRepository:
             return False
         
     @staticmethod
+    def get_top_ricos(limite=5):
+        return Usuario.query.filter_by(is_guest=False)\
+                            .order_by(Usuario.orbes_totales.desc())\
+                            .limit(limite).all()
+    
+    @staticmethod
     def get_inventario(usuario_id):
         usuario = Usuario.query.get(usuario_id)
         return usuario.productos if usuario else []
@@ -57,3 +63,19 @@ class UsuarioRepository:
         if not usuario:
             return []
         return [p for p in usuario.productos if p.categoria == categoria]
+    
+    @staticmethod
+    def sumar_orbes_truco(usuario_id, cantidad):
+        from app.models.schema import Usuario, db
+        try:
+            usuario = Usuario.query.get(usuario_id)
+            if usuario:
+                usuario.orbes_rojos = (usuario.orbes_rojos or 0) + cantidad
+                usuario.orbes_totales = (usuario.orbes_totales or 0) + cantidad
+                db.session.commit()
+                return True
+            return False
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error en UsuarioRepository (truco): {e}")
+            return False

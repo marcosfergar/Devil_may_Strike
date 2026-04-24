@@ -1,12 +1,6 @@
 from flask import Blueprint, redirect, render_template, session, url_for, flash
 import random
 
-# importe de rutas
-from app.database import db
-from app.routes.home_routes import home_pb
-
-# importe modelos
-
 # importe formularios
 from app.forms.usuario_form import UsuarioForm, LoginForm
 

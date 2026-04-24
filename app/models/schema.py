@@ -17,6 +17,7 @@ class Usuario(db.Model):
     nombre = Column(String(100), nullable=False, unique=True)
     password = Column(String(255), nullable=True)
     orbes_rojos = Column(Integer, default=1000)
+    orbes_totales = Column(Integer, default=1000)
     is_guest = Column(db.Boolean, default=False)
     
     imagen_perfil = db.Column(db.String(200), default='default.png')

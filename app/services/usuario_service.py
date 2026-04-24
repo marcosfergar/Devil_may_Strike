@@ -68,3 +68,9 @@ def actualizar_perfil_completo(usuario, nuevo_titulo, foto_data):
             usuario.imagen_perfil = foto_data
 
     return UsuarioRepository.save(usuario)
+
+def dar_orbes_truco(usuario_id, cantidad=1000):
+    return UsuarioRepository.sumar_orbes_truco(usuario_id, cantidad)
+
+def obtener_ranking_usuarios(limite=5):
+    return UsuarioRepository.get_top_ricos(limite)

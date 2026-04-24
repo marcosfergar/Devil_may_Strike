@@ -245,3 +245,55 @@ body{
     font-size: 0.8rem;
     letter-spacing: 2px;
 }
+
+.ranking-section {
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #444;
+    padding: 10px;
+}
+/* col-currency */
+
+.col-currency{
+    color: white;
+}
+
+/* Top-Masones */
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #222;
+    gap: 10px;
+}
+
+.rank-item.is-me {
+    background: rgba(255, 0, 0, 0.15);
+    border-left: 3px solid #ff0000;
+}
+
+.rank-number {
+    color: #ff0000;
+    font-weight: bold;
+    font-family: 'Impact', sans-serif;
+    width: 20px;
+}
+
+.rank-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #666;
+}
+
+.rank-name {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.rank-val {
+    font-size: 0.75rem;
+    color: #ffd700;
+}
