@@ -1,13 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 
-from app.services import usuario_service
-
-# importe de rutas
-
-# importe modelos
-
-# importe formularios
-
 # importe sercicios
 from app.services import usuario_service
 

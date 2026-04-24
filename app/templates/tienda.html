@@ -81,6 +81,22 @@
                 <span>{{ usuario.orbes_rojos }}</span>
             </div>
         </div>
+
+        <div class="ranking-section">
+            <h3 class="label">TOP HUNTERS</h3>
+            <div class="ranking-list">
+                {% for top_user in top_usuarios %}
+                <div class="rank-item {% if top_user.id == usuario.id %}is-me{% endif %}">
+                    <span class="rank-number">#{{ loop.index }}</span>
+                    <img src="{{ url_for('static', filename='uploads/perfiles/' + top_user.imagen_perfil) }}" class="rank-img">
+                    <div class="rank-info">
+                        <span class="rank-name">{{ top_user.nombre }}</span>
+                        <span class="rank-val">{{ top_user.orbes_totales }} <small>TOTAL</small></span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

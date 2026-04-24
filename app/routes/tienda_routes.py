@@ -1,15 +1,10 @@
 from flask import Blueprint, jsonify, redirect, render_template, request, session, url_for, flash
 
-# importe de rutas
-
-# importe modelos
-from app.database.db import db
 
 # importe formularios
 from app.forms.tienda_form import ComentarioForm
 
 # importe sercicios
-import app.services.inventario_service as inventario_service
 import app.services.tienda_service as tienda_service
 import app.services.usuario_service as usuario_service
 
@@ -25,8 +20,8 @@ def ver_tienda():
     pagina = request.args.get('page', 1, type=int)
 
     lista_productos = tienda_service.obtener_productos_paginados(categoria_activa, pagina, 10)
-
     user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
+    top_cazadores = usuario_service.obtener_ranking_usuarios(5)
 
     form = ComentarioForm()
 
@@ -34,7 +29,8 @@ def ver_tienda():
             flash("Los invitados no tienen acceso a la tienda. ¡Regístrate para comprar!", "error")
             return redirect(url_for('homeLogin_route.paginaLogin'))
     
-    return render_template('tienda.html',productos=lista_productos.items,paginacion=lista_productos, usuario=user, form=form, categoria_activa=categoria_activa)
+
+    return render_template('tienda.html',productos=lista_productos.items,paginacion=lista_productos, usuario=user, form=form, top_usuarios=top_cazadores, categoria_activa=categoria_activa)
 
 @tienda_bp.route('/producto/<int:id>')
 def detalle_producto(id):
@@ -83,27 +79,18 @@ def postear_comentario(producto_id):
             texto=form.contenido.data
         )
         flash("Tu reseña ha sido forjada.", "success")
-    
+    else:
+        flash("El comentario no pudo ser publicado.", "error")
+
     return redirect(url_for('tienda_route.detalle_producto', id=producto_id))
 
 @tienda_bp.route('/truco-orbes', methods=['POST'])
 def truco_orbes():
-    nombre_sesion = session.get("username")
-    if not nombre_sesion:
-       return jsonify({"success": False, "message": "Sesión no iniciada"}), 401
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"success": False, "message": "Sesión no iniciada"}), 401
 
-    user = usuario_service.obtener_usuario_por_nombre(nombre_sesion)
+    if usuario_service.dar_orbes_truco(user_id, 1000):
+        return jsonify({"success": True, "message": "¡JackPoot! +1000 Orbes"}), 200
     
-    if user:
-        try:
-            if user.orbes_rojos is None:
-                user.orbes_rojos = 0
-                
-            user.orbes_rojos += 1000
-            db.session.commit()
-            return jsonify({"success": True, "new_total": user.orbes_rojos})
-        except Exception as e:
-            db.session.rollback()
-            return jsonify({"success": False, "message": str(e)}), 500
-        
-    return jsonify({"success": False, "message": "Usuario no encontrado"}), 404
+    return jsonify({"success": False, "message": "Error al procesar el truco"}), 500

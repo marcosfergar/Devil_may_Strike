@@ -1,29 +1,34 @@
 from flask import Blueprint, render_template, session, redirect, url_for, flash
-from app.models.schema import Categoria, Tema
 from app.services import foro_service, usuario_service
-from app.forms.foro_form import TemaForm, MensajeForm # Los crearemos en el paso 3
+from app.forms.foro_form import TemaForm, MensajeForm
 
 foro_bp = Blueprint('foro_route', __name__, template_folder='templates')
 
 @foro_bp.route('/')
 def index_foro():
     user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
-    categorias = Categoria.query.all()
+    categorias = foro_service.obtener_todas_las_categorias()
     return render_template('foro/foro.html', categorias=categorias, usuario=user)
 
 @foro_bp.route('/categoria/<int:id>')
 def ver_categoria(id):
-    categoria = Categoria.query.get_or_404(id)
-    
     user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
+    categoria = foro_service.obtener_categoria_por_id(id)
+    if not categoria:
+            flash("La categoría no se pudo encontrar.", "error")
+            return redirect(url_for('foro_route.index_foro'))
     
-    temas = Tema.query.filter_by(categoria_id=id).order_by(Tema.fecha_creacion.desc()).all()
-    
+    temas = foro_service.obtener_temas_por_categoria(id)    
+
     return render_template('foro/categoria.html', categoria=categoria, temas=temas, usuario=user)
 
 @foro_bp.route('/tema/<int:id>', methods=['GET', 'POST'])
 def ver_tema(id):
-    tema = Tema.query.get_or_404(id)
+    tema = foro_service.obtener_tema_por_id(id)
+    if not tema:
+        flash("El tema no se pudo encontrar.", "error")
+        return redirect(url_for('foro_route.index_foro'))
+
     user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
     form = MensajeForm()
 
@@ -32,21 +37,14 @@ def ver_tema(id):
             flash("Debes ser un cazador registrado para responder.", "error")
             return redirect(url_for('homeLogin_route.paginaLogin'))
         
-        # Llamamos al service
         resultado, mensaje = foro_service.agregar_respuesta(
             usuario_id=user.id,
             tema_id=tema.id,
             contenido=form.contenido.data
         )
         
-        if resultado:
-            flash(mensaje, "success")
-        else:
-            flash(mensaje, "error")
-            
+        flash(mensaje, "success" if resultado else "error")
         return redirect(url_for('foro_route.ver_tema', id=tema.id))
-
-    return render_template('foro/tema.html', tema=tema, usuario=user, form=form)
 
     return render_template('foro/tema.html', tema=tema, usuario=user, form=form)
 

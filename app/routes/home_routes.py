@@ -1,17 +1,7 @@
 from flask import Blueprint, redirect, render_template, session, url_for
 from flask import jsonify
 
-# importe de rutas
-# from app.routes.homeLogin_routes import homeLogin_pb
-
-# importe modelos
-# from app.models import trainer
-
-# importe formularios
-# from app.forms.trainer_form import TrainerForm
-
 # importe sercicios
-from app.database import db
 from app.services import usuario_service
 from app.services.rawg_service import listar_saga_dmc
 
