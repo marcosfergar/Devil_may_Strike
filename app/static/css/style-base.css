@@ -1,28 +1,41 @@
-body{
-  background: radial-gradient(circle, rgb(100, 0, 0) 10%, black 90%) !important;
-  background-color: black;
-}
+
 :root {
-    /* Colores Principales */
-    --dmc-red: #e00000;
-    --dmc-red-dark: #8b0000;
+    /* --- COLORES PRIMARIOS (The Devil's Palette) --- */
+    --dmc-red: #ff0000;
+    --dmc-red-dark: #910000;
+    --dmc-red-blood: #640000;
     --dmc-red-glow: rgba(255, 0, 0, 0.5);
     
-    /* Fondos y Capas */
-    --bg-header: #111111da; /* Header */
-    --bg-dark: #0a0a0a; /* Fondo base */
-    --bg-card: rgba(15, 15, 15, 0.95); /* Tarjetas y paneles */
-    --bg-gradient: radial-gradient(circle, #640000 10%, #000000 90%);
-    
-    /* Textos */
-    --font-game:"Times New Roman", Times, serif;
-    --text-main: #e0e0e0;
+    /* --- FONDOS --- */
+    --bg-pure-black: #000000;
+    --bg-dark-gray: #0a0a0a;
+    --bg-card: rgba(15, 15, 15, 0.95);
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    --bg-header: #111111da;
+    --bg-gradient-main: radial-gradient(circle, #640000 10%, #000000 90%);
+    --bg-gradient-card: linear-gradient(145deg, #150a0a 0%, #050505 100%);
+
+    /* --- TEXTOS --- */
+    --text-main: #eeeeee;
     --text-muted: #888888;
-    --text-white: #ffffff;
-    
-    /* Estados y Bordes */
+    --text-dark: #555555;
+    --font-primary: "Times New Roman", Times, serif;
+    --font-gothic: 'Lora', serif;
+    --font-impact: 'Impact', sans-serif;
+
+    /* --- BORDES Y SEPARADORES --- */
+    --border-thin: 1px solid #333333;
+    --border-red: 1px solid var(--dmc-red-dark);
+    --border-thick-red: 3px solid var(--dmc-red-dark);
+    --radius-standard: 5px;
     --border-color: #333333;
     --border-active: #ff0000;
+
+    /* --- EFECTOS (Sombras y Luces) --- */
+    --shadow-gothic: 0 0 20px rgba(0, 0, 0, 0.9);
+    --glow-red: 0 0 10px var(--dmc-red-glow);
+    --transition-fast: all 0.3s ease;
+    --transition-slow: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     --shadow-dark: rgba(0, 0, 0, 0.9);
 
     /* Colores para mensajes */
@@ -36,12 +49,16 @@ body{
     --re-slot-size: 80px;
     --re-border-metal: 2px solid #2a2a2a;
     --re-highlight: rgba(255, 0, 0, 0.2);
-
 }
 
 @keyframes fadeInPage {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+body{
+  background: var(--bg-gradient-main) !important;
+  background-color: black;
 }
 
 /* Quitar scroll en tos laos */
@@ -102,7 +119,7 @@ main{
     padding: 20px;
     color: var(--text-muted);
     font-size: 0.9rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: var(--border-thin);
     
 }
 
@@ -112,15 +129,15 @@ main{
     text-decoration: none;
 }
 .menu{
-display: flex;
-    align-items: center; /* Centra verticalmente los elementos */
+    display: flex;
+    align-items: center;
     width: 100%;
-    justify-content: space-between; /* Crea aire entre los bloques */
+    justify-content: space-between;
 }
 .links {
     display: flex;
-    gap: 20px; /* Espacio entre los enlaces */
-    position: absolute; /* Truco para centrado absoluto respecto al header */
+    gap: 20px;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
