@@ -3,68 +3,84 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tienda.css') }}" />
-<script src="{{ url_for('static', filename='js/tienda.js') }}"></script>
 {% endblock %}
 {% block links %}
 {% endblock %}
 {% block content %}
-<div class="shop-wrapper">
-    <header class="shop-header">
-        <h1><i class="fa-solid fa-skull"></i> DIVINITY STATUE</h1>
-        <div class="user-currency">
-            <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
-            <span id="orb-count">{{ usuario.orbes_rojos }}</span>
-            <small>ORBES ROJOS</small>
+<div class="dmc-shop-layout">
+    <img class="dmc-back" src="{{ url_for('static', filename='img/fondo-tienda.png') }}" alt="fondo" />
+
+    <aside class="lady-col">
+        <img src="{{ url_for('static', filename='img/lady.png') }}" alt="Lady" class="character-img" />
+    </aside>
+
+    <div class="shop-main">
+        <div class="shop-title">
+            <img class="logo-tienda" src="{{ url_for('static', filename='img/logo-tienda.png') }}" alt="logo-tienda" />
+            <nav class="filter-bar">
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='all') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'all' else '' }}">TODO</a>        
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='musica') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'musica' else '' }}">MÚSICA</a>                
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='avatar') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'avatar' else '' }}">AVATARES</a>                
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='titulo') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'titulo' else '' }}">TÍTULOS</a>                
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='tema') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'tema' else '' }}">TEMAS</a>
+            </nav>
         </div>
-    </header>
 
-    <nav class="shop-nav">
-        <button class="filter-btn active" onclick="filterShop('all')">TODO</button>
-        <button class="filter-btn" onclick="filterShop('musica')">MÚSICA</button>
-        <button class="filter-btn" onclick="filterShop('avatar')">AVATARES</button>
-        <button class="filter-btn" onclick="filterShop('titulo')">TÍTULOS</button>
-        <button class="filter-btn" onclick="filterShop('tema')">TEMAS</button>
-    </nav>
-
-    <section class="products-grid">
-        {% for producto in productos %}
-        <div class="product-card" data-category="{{ producto.categoria }}">
-            <div class="product-badge">{{ producto.categoria | upper }}</div>
-            
-            <div class="product-info">
-                <h3>{{ producto.nombre }}</h3>
-                <p>{{ producto.descripcion }}</p>
-                {% if producto.categoria == 'avatar' and producto.data_path %}
-                    <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}" 
-                        class="avatar-preview" 
-                        alt="{{ producto.nombre }}">
-                {% elif producto.categoria == 'musica' %}
-                    <div class="icon-musica">🎵</div>
-                {% elif producto.categoria == 'titulo' %}
-                    <div class="icon-titulo">📜</div>
-                {% endif %}
-            </div>
-
-            <div class="product-footer">
-                <div class="price">
-                    <img src="{{ url_for('static', filename='img/red-orb.png') }}" width="15">
-                    {{ producto.precio }}
+        <div class="products-grid">
+            {% for producto in productos %}
+            <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="product-card-link">
+                <div class="product-card" data-category="{{ producto.categoria }}">
+                    <div class="product-thumb">
+                        {% if producto.categoria == 'avatar' and producto.data_path %}
+                            <img src="{{ url_for('static', filename='uploads/tienda/' + producto.data_path) }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                            <div class="placeholder-icon">
+                                <i class="fa-solid {% if producto.categoria == 'musica' %}fa-music{% else %}fa-box-open{% endif %}"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="product-info">
+                        <span class="category-tag">{{ producto.categoria }}</span>
+                        <h3>{{ producto.nombre }}</h3>
+                        <div class="price-box">
+                            <img src="{{ url_for('static', filename='img/red-orb.png') }}" width="15">
+                            <span>{{ producto.precio }}</span>
+                        </div>
+                    </div>
                 </div>
-                
-                {% if producto in usuario.productos %}
-                    <button class="btn-buy owned" disabled>DESBLOQUEADO</button>
-                {% else %}
-                    <a href="{{ url_for('tienda_route.comprar', id=producto.id) }}" class="btn-buy">
-                        ADQUIRIR
-                    </a>
-                {% endif %}
-            </div>
-            <a href="{{ url_for('tienda_route.detalle_producto', id=producto.id) }}" class="btn-ver-mas">
-            VER DETALLES
             </a>
-        </div>
+            {% endfor %}
 
-        {% endfor %}
-    </section>
+        </div>
+        <div class="pagination-container">
+            {% if paginacion.has_prev %}
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria=categoria_activa, page=paginacion.prev_num) }}" 
+                class="pagi-btn"> < ANTERIOR </a>
+            {% endif %}
+
+            <span class="pagi-info">PÁGINA {{ paginacion.page }} DE {{ paginacion.pages }}</span>
+
+            {% if paginacion.has_next %}
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria=categoria_activa, page=paginacion.next_num) }}" 
+                class="pagi-btn"> SIGUIENTE > </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-currency">
+        <div class="card-prb">
+            <h3 class="label">CURRENT ORBS</h3>
+            <div class="orb-count-large">
+                <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
+                <span>{{ usuario.orbes_rojos }}</span>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -19,16 +19,17 @@
             </div>
         </div>
         <h2 class="nombre-cazador">{{ usuario.nombre }}</h2>
-        <span>{{ usuario.titulo_actual}}</span>
+        <span>Titulo de Cazador: {{ usuario.titulo_actual}}</span>
         <div class="currency-display">
             Orbes:
             <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
             {{ usuario.orbes_rojos }}
-        </div>
+        </div><br>
         <div class="stat-item">
             <span class="stat-label">Tipo:</span>
             <span class="stat-value">{% if session.get('is_guest') %}Invitado{% else %}Cazador Registrado{% endif %}</span>
         </div>
+        <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span>
     </div>
 
     <div class="col-maletin">

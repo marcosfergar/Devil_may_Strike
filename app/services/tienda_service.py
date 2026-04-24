@@ -1,9 +1,13 @@
 from app.database.db import db
 from app.models.schema import Usuario,Producto,Comentario
 
-
-def obtener_todos_los_productos():
-    return Producto.query.all()
+def obtener_productos_paginados(categoria='all', pagina=1, por_pagina=10):
+    query = Producto.query
+    
+    if categoria != 'all':
+        query = query.filter_by(categoria=categoria)
+    
+    return query.paginate(page=pagina, per_page=por_pagina, error_out=False)
 
 def comprar_producto(usuario_id, producto_id):
     usuario = Usuario.query.get(usuario_id)

@@ -7,6 +7,8 @@
 
 {% block content %}
 <div class="reliquia-wrapper full-screen">
+        <img class="dmc-back" src="{{ url_for('static', filename='img/fondo-tienda.png') }}" alt="fondo" />
+
     <div class="detalle-card-item">
 
         <div class="detalle-grid">
@@ -24,11 +26,15 @@
                     <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
                     <span class="valor">{{ producto.precio }}</span>
                 </div>
-
-                <form action="{{ url_for('tienda_route.comprar', id=producto.id) }}" method="POST">
-                    <button type="submit" class="btn-comprar-item">ADQUIRIR ITEM</button>
-                </form>
-
+                <div class="cont-comprar">
+                {% if producto in usuario.productos %}
+                    <button class="btn-buy owned" disabled>DESBLOQUEADO</button>
+                {% else %}
+                   <a href="{{ url_for('tienda_route.comprar', id=producto.id) }}" class="btn-comprar-item">
+                        ADQUIRIR
+                    </a>
+                {% endif %}
+                </div>
                 <div class="user-currency">
                     <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Tus Red Orb" class="orb-icon">
                     <span id="orb-count">{{ usuario.orbes_rojos }}</span>
