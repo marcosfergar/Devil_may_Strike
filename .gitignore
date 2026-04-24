@@ -3,6 +3,7 @@ jugadores.db
 
 # Ignorar subidas de fotos de perfil
 app/static/uploads/perfiles/*
+!app/static/uploads/perfiles/default.png
 
 ### Flask ###
 instance/*
