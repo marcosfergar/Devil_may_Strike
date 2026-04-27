@@ -57,7 +57,7 @@
 }
 
 body{
-  background: var(--bg-gradient-main) !important;
+  background: var(--bg-gradient-main) ;
   background-color: black;
 }
 
@@ -142,6 +142,7 @@ main{
     transform: translateX(-50%);
 }
 
+/* Mejorar */
 /* Perfil */
 .user-profile-zone {
     z-index: 1000;
@@ -160,16 +161,16 @@ main{
 
     /* Tipografía */
     color: #e0e0e0;
-    font-family: 'Times New Roman', serif; /* O una fuente gótica que prefieras */
+    font-family: 'Times New Roman', serif;
     font-size: 1rem;
     font-weight: bold;
-    text-transform: uppercase; /* Todo en mayúsculas para más fuerza */
-    letter-spacing: 2px; /* Espaciado entre letras */
+    text-transform: uppercase;
+    letter-spacing: 2px;
 
     /* Espaciado y Tamaño */
     padding: 5px;
     cursor: pointer;
-    min-width: 100px; /* Asegura un tamaño mínimo */
+    min-width: 100px;
     
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7),
@@ -225,9 +226,7 @@ body {
   width: 600px;
   max-width: 90%;
   height: auto;
-  filter: drop-shadow(
-    0 0 15px rgba(0, 0, 0, 0.8)
-  );
+  filter: drop-shadow(var(--shadow-gothic));
 }
 
 #titulo img {
@@ -238,16 +237,16 @@ body {
 footer {
     position: fixed;
     bottom: 0;
-    background: #111;
-    color: white;
+    background: var(--bg-pure-black);
+    color: var(--text-main);
     width: 100%;
 
     text-align: center;
 
     padding: 20px;
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.9rem;
-    border-top: 1px solid #333;
+    border-top: var(--border-thin);
 }
 
 footer a {
@@ -271,22 +270,21 @@ footer a {
 .flash-message {
     pointer-events: auto;
     background: rgba(10, 10, 10, 0.95);
-    border-left: 5px solid #ff0000;
-    color: #fff;
+    border-left: 5px solid var(--dmc-red);
+    color: var(--text-main);
     padding: 15px 20px;
     min-width: 300px;
     display: flex;
     align-items: center;
     gap: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 0, 0, 0.1);
-    font-family: 'monospace';
     text-transform: uppercase;
     animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
 }
 
 /* Colores por categoría */
-.alert-success { border-left-color: var(--dmc-green-success); box-shadow: 0 0 10px rgba(0, 255, 0, 0.1); }
+.alert-success { border-left-color: var(--dmc-green-success); }
 .alert-error { border-left-color: var(--dmc-red-error); }
 .alert-info { border-left-color: var(--dmc-blue-info); }
 
