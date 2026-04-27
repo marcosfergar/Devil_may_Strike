@@ -12,11 +12,11 @@
 }
 
 .detalle-card-item {
-    background: linear-gradient(145deg, #150a0a 0%, #050505 100%);
+    background: var(--bg-card);
     border: 1px solid #332222;
     position: relative;
     padding: 40px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.9);
+    box-shadow: 0 0 50px var(--shadow-dark);
 }
 
 .detalle-grid {
@@ -58,10 +58,10 @@
 
 .badge-categoria {
     display: inline-block;
-    color: #910000;
+    color: var(--dmc-red-blood);
     font-size: 0.8rem;
     letter-spacing: 3px;
-    border-bottom: 1px solid #910000;
+    border-bottom: 1px solid var(--dmc-red-blood);
     margin-bottom: 20px;
 }
 
@@ -84,7 +84,7 @@
     width: 100%;
     padding: 12px;
     background: linear-gradient(to bottom, #8b0000, #4a0000);
-    color: white;
+    color: var(--text-main);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -94,14 +94,14 @@
 }
 
 .btn-comprar-item:hover {
-    box-shadow: 0 0 15px #ff0000;
+    box-shadow: 0 0 15px var(--dmc-red);
     transform: scale(1.02);
 }
 
 .btn-comprar-item {
     display: block;
     border: 1px solid var(--dmc-red);
-    color: white;
+    color: var(--text-main);
     text-align: center;
     padding: 10px;
     text-decoration: none;
@@ -113,14 +113,14 @@
     background: var(--dmc-red);
 }
 .btn-comprar-item.owned {
-    border-color: #555;
-    color: #555;
+    border-color: var(--border-thin);
+    color: var(--text-dark);
     cursor: default;
 }
 
 /* Columna Info */
 .item-header {
-    color: #910000;
+    color: var(--dmc-red-blood);
     font-size: 0.9rem;
     letter-spacing: 2px;
     border-bottom: 1px solid #222;
@@ -129,7 +129,7 @@
 }
 
 .descripcion-texto {
-    color: #bbb;
+    color: var(--text-muted);
     line-height: 1.6;
     font-style: italic;
 }
@@ -145,7 +145,7 @@
     background: rgba(255,255,255,0.03);
     padding: 15px;
     margin-bottom: 10px;
-    border-left: 2px solid #910000;
+    border-left: 2px solid var(--dmc-red-blood);
 }
 
 .com-meta {
@@ -156,28 +156,28 @@
 }
 
 .com-meta .autor { 
-    color: #eee; 
+    color: var(--text-main); 
     font-weight: bold;
  }
 .com-meta .fecha { 
-    color: #666; 
+    color: var(--text-dark); 
 }
 .com-contenido{
     color: var(--text-white);
 }
 .input-com-item {
     width: 100%;
-    background: #000;
-    border: 1px solid #333;
-    color: #eee;
+    background: var(--bg-pure-black);
+    border: var(--border-thin);
+    color: var(--text-main);
     padding: 10px;
     margin-bottom: 10px;
 }
 
 .btn-enviar-item {
     background: transparent;
-    border: 1px solid #910000;
-    color: #910000;
+    border: 1px solid var(--dmc-red-blood);
+    color: var(--dmc-red-blood);
     padding: 5px 15px;
     cursor: pointer;
 
@@ -186,11 +186,10 @@
 }
 
 .btn-enviar-item:hover {
-    background: #910000;
-    color: white;
+    background: var(--dmc-red-blood);
+    color: var(--text-main);
 }
 
-/* Contenedor que ocupa casi toda la pantalla */
 .reliquia-wrapper.full-screen {
     max-width: 95vw;
     width: 95vw;
@@ -199,7 +198,7 @@
 }
 
 .detalle-card-item {
-    background: linear-gradient(145deg, #100808 0%, #050505 100%);
+    background: var(--bg-card);
     border: 1px solid #332222;
     position: relative;
     padding: 25px;
@@ -210,16 +209,16 @@
 
 .detalle-grid {
     display: grid;
-    grid-template-columns: 350px 1fr; /* Columna fija para imagen, el resto para info */
+    grid-template-columns: 350px 1fr;
     gap: 30px;
     width: 100%;
     height: 100%;
 }
 
-/* Columna Info ahora es interna en horizontal */
+
 .col-info-horizontal {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Descripción y comentarios lado a lado */
+    grid-template-columns: 1fr 1fr; 
     gap: 25px;
     height: 100%;
     overflow: hidden;
@@ -231,16 +230,14 @@
     padding-right: 10px;
 }
 
-/* Estilo de los comentarios más compacto */
 .comentario-item {
     background: rgba(255,255,255,0.02);
     padding: 10px;
     margin-bottom: 8px;
-    border-left: 2px solid #910000;
+    border-left: 2px solid var(--dmc-red-blood);
     font-size: 0.85rem;
 }
 
-/* Formulario en una sola línea para ahorrar espacio */
 .input-group-item {
     display: flex;
     gap: 5px;
@@ -250,12 +247,11 @@
     flex-grow: 1;
     background: #000;
     border: 1px solid #333;
-    color: #eee;
+    color: var(--text-main);
     padding: 8px;
     height: 40px;
 }
 
-/* Imagen un poco más pequeña para ganar espacio vertical */
 .item-img-container {
     width: 180px;
     height: 180px;
@@ -276,11 +272,11 @@
 }
 
 .btn-volver {
-    color: #555;
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 1.5rem;
     letter-spacing: 1px;
     transition: 0.3s;
 }
 
-.btn-volver:hover { color: #999; }
+.btn-volver:hover { color: var(--dmc-red); }

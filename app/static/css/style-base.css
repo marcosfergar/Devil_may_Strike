@@ -9,7 +9,7 @@
     /* --- FONDOS --- */
     --bg-pure-black: #000000;
     --bg-dark-gray: #0a0a0a;
-    --bg-card: rgba(15, 15, 15, 0.95);
+    --bg-card: linear-gradient(145deg, #150a0a 0%, #050505 100%);
     --bg-overlay: rgba(0, 0, 0, 0.8);
     --bg-header: #111111da;
     --bg-gradient-main: radial-gradient(circle, #640000 10%, #000000 90%);
@@ -20,7 +20,7 @@
     --text-muted: #888888;
     --text-dark: #555555;
     --font-primary: "Times New Roman", Times, serif;
-    --font-gothic: 'Lora', serif;
+    --font-gothic: 'Mael', sans-serif;
     --font-impact: 'Impact', sans-serif;
 
     /* --- BORDES Y SEPARADORES --- */
@@ -31,11 +31,9 @@
     --border-color: #333333;
     --border-active: #ff0000;
 
-    /* --- EFECTOS (Sombras y Luces) --- */
+    /* --- EFECTOS (Sombras) --- */
     --shadow-gothic: 0 0 20px rgba(0, 0, 0, 0.9);
     --glow-red: 0 0 10px var(--dmc-red-glow);
-    --transition-fast: all 0.3s ease;
-    --transition-slow: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     --shadow-dark: rgba(0, 0, 0, 0.9);
 
     /* Colores para mensajes */
