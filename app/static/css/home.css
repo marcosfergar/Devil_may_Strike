@@ -30,17 +30,57 @@
     height: 100%;
     max-width: 600px;
 }
+/* Estilo base para ambas imágenes */
+.img-personaje {
+    transition: all 0.5s ease; /* Transición suave para el brillo */
+    cursor: pointer;
+    max-width: 300px; /* Ajusta según tu diseño */
+}
 
+/* cambio de modo */
+
+/* (Dante activo) */
+.img-dante {
+    filter: brightness(1) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+    opacity: 1;
+}
+
+.img-vergil {
+    filter: brightness(0.3);
+    opacity: 0.6;
+}
+
+/* (Vergil activo) */
+body.mode-vergil .img-vergil {
+    filter: brightness(1) drop-shadow(0 0 15px rgba(0, 162, 255, 0.8));
+    opacity: 1;
+}
+
+body.mode-vergil .img-dante {
+    filter: brightness(0.3);
+    opacity: 0.6;
+}
+
+/* Pa que brillen mis niños cuando toca */
+body.mode-vergil .img-dante:hover {
+    filter: brightness(1); 
+    opacity: 1;
+}
+
+body:not(.mode-vergil) .img-vergil:hover {
+    filter: brightness(1);
+    opacity: 1;
+}
 
 /* Zona Botones */
 @keyframes entradaMenu {
     0% {
-        opacity: 0;           /* Totalmente invisible */
-        transform: scale(1); /* Opcional: empieza un pelín más pequeño para dar efecto de profundidad */
+        opacity: 0;
+        transform: scale(1);
     }
     100% {
-        opacity: 1;           /* Totalmente opaco */
-        transform: scale(1);   /* Tamaño original */
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
@@ -57,11 +97,11 @@
 }
 
 .btns-menu{
-    border: 1px solid grey;
+    border: var(--border-thin);
     border-radius: 5px;
-    background-color: #190303b3;
+    background-color: var(--bg-dark-semitransparent);
 
-    color: grey;
+    color: var(--text-dark);
 
     width: 90%;
     height: 55px;
@@ -81,25 +121,25 @@
 
 .btns-menu:hover {
   filter: brightness(1.2);
-  color: white;
+  color: var(--text-main);
 }
 
 
 h1 {
     font-family: "Times New Roman", Times, serif;
     text-align: center;
-    color: #fff;
+    color: var(--text-main);
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-top: 50px;
-    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.7);
+    text-shadow: var(--border-thick-red);
     display: inline-block;
     width: 100%;
 }
 
 .menu-botones-home hr{
     width: 100%;
-    border-color: rgba(207, 0, 0, 0.7);
+    border-color: var(--border-active);
 
     margin: 20px;
 }

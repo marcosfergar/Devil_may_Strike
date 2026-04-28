@@ -1,10 +1,10 @@
 body {
     color: var(--main);
-    font-family: "Times New Roman", Times, serif;
+    font-family: var(--font-primary);
 }
 
 h1 {
-    font-family: 'Mael', sans-serif;
+    font-family: var(--font-gothic);
     text-align: center;
     color: var(--text-main);
     text-transform: uppercase;
@@ -28,12 +28,12 @@ h1 {
 
 /* Tarjetas */
 .card {
-    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    background: var(--bg-card);
     border: 1px solid #333;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-gothic);
 
     display: flex;
     flex-direction: column;
@@ -42,8 +42,7 @@ h1 {
 
 .card:hover {
     transform: scale(1.03);
-    border-color: var(--dmc-red);
-    box-shadow: 0 0 25px var(--dmc-red-dark);
+    border-color: var(--border-active);
 }
 
 /* Imagen con efecto de desvanecimiento */
@@ -81,14 +80,14 @@ h1 {
 
 .platforms-list {
     display: flex;
-    flex-wrap: wrap; /* Permite que pasen a la siguiente fila si no caben */
-    gap: 8px;       /* Espacio entre etiquetas */
-    margin-top: auto; /* Opcional: empuja las plataformas al final del body de la card */
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
     padding-top: 15px;
 }
 
 .card-text strong {
-    color: var(--dmc-red-dark); /* Color rojo para etiquetas */
+    color: var(--dmc-red-dark);
 }
 
 

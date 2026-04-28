@@ -1,43 +1,90 @@
+
 :root {
-    /* Colores Principales */
-    --dmc-red: #e00000;
-    --dmc-red-dark: #8b0000;
+    /* --- COLORES PRIMARIOS --- */
+    --dmc-red: #ff0000;
+    --dmc-red-dark: #910000;
+    --dmc-red-blood: #640000;
     --dmc-red-glow: rgba(255, 0, 0, 0.5);
     
-    /* Fondos y Capas */
-    --bg-header: #111111da; /* Header */
-    --bg-dark: #0a0a0a; /* Fondo base */
-    --bg-card: rgba(15, 15, 15, 0.95); /* Tarjetas y paneles */
-    --bg-gradient: radial-gradient(circle, #640000 10%, #000000 90%);
-    
-    /* Textos */
-    --font-game:"Times New Roman", Times, serif;
-    --text-main: #e0e0e0;
+    /* --- FONDOS --- */
+    --bg-pure-black: #000000;
+    --bg-dark-semitransparent: rgba(10, 10, 10, 0.8);
+    --bg-dark-gray: #242424;
+    --bg-card: linear-gradient(145deg, #150a0a 0%, #050505 100%);
+    --bg-overlay: rgba(0, 0, 0, 0.8);
+    --bg-header: #111111da;
+    --bg-gradient-main: radial-gradient(circle, #640000 10%, #000000 90%);
+    --bg-gradient-card: linear-gradient(145deg, #150a0a 0%, #050505 100%);
+    --bg-comentario-detalle: rgba(255,255,255,0.02);
+    --bg-semi-red: rgba(139, 0, 0, 0.1);
+
+    --bg-item-pr: #300;
+
+    /* --- TEXTOS --- */
+    --text-main: #eeeeee;
     --text-muted: #888888;
-    --text-white: #ffffff;
-    
-    /* Estados y Bordes */
-    --border-color: #333333;
+    --text-dark: #555555;
+    --font-primary: "Times New Roman", Times, serif;
+    --font-gothic: 'Mael', sans-serif;
+
+    /* --- BORDES Y SEPARADORES --- */
+    --border-thin: 1px solid #333333;
+    --border-red: 3px solid var(--dmc-red-dark);
     --border-active: #ff0000;
+
+    /* --- EFECTOS (Sombras) --- */
+    --shadow-gothic: 0 0 20px rgba(0, 0, 0, 0.9);
+    --glow-red: 0 0 10px var(--dmc-red-glow);
     --shadow-dark: rgba(0, 0, 0, 0.9);
+    --shadow-red: 0 0 10px rgba(139, 0, 0, 0.3);
 
     /* Colores para mensajes */
     --dmc-green-success: #00ff00;
     --dmc-blue-info: #00aaff;
     --dmc-red-error: #ff0000;
+}
 
-    /* Estética Maletín RE */
-    --re-grid-bg: #050505;
-    --re-grid-line: rgba(255, 255, 255, 0.05);
-    --re-slot-size: 80px;
-    --re-border-metal: 2px solid #2a2a2a;
-    --re-highlight: rgba(255, 0, 0, 0.2);
 
+body.mode-vergil{
+    /* --- COLORES PRIMARIOS (Vergil Style) --- */
+    --dmc-red: #00aaff;
+    --dmc-red-dark: #0044cc;
+    --dmc-red-blood: #001a4d;
+    --dmc-red-glow: rgba(0, 170, 255, 0.5); 
+
+    --bg-item-pr: #00163d;
+    
+    /* --- FONDOS --- */
+    --bg-dark-semitransparent: rgba(5, 5, 15, 0.8);
+    --bg-dark-gray: #1a1a24;
+    --bg-card: linear-gradient(145deg, #0a0a15 0%, #050505 100%);
+    --bg-overlay: rgba(0, 0, 5, 0.8);
+    --bg-header: #0a0a15da;
+    --bg-gradient-main: radial-gradient(circle, #001a4d 10%, #000000 90%);
+    --bg-gradient-card: linear-gradient(145deg, #051025 0%, #050505 100%);
+    --bg-semi-red: rgba(0, 170, 255, 0.1);
+
+    /* --- BORDES Y SEPARADORES --- */
+    --border-thin: 1px solid #1a2a44;
+    --border-red: 3px solid var(--dmc-red-dark);
+    --border-active: #00aaff;
+
+    /* --- EFECTOS (Sombras) --- */
+    --glow-red: 0 0 10px var(--dmc-red-glow);
+    --shadow-red: 0 0 10px rgba(0, 68, 204, 0.3);
 }
 
 @keyframes fadeInPage {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+body{
+  background: var(--bg-gradient-main) ;
+  background-color: var(--bg-pure-black);
+  color: var(--text-main);
+
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* Quitar scroll en tos laos */
@@ -98,7 +145,7 @@ main{
     padding: 20px;
     color: var(--text-muted);
     font-size: 0.9rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: var(--border-thin);
     
 }
 
@@ -108,19 +155,20 @@ main{
     text-decoration: none;
 }
 .menu{
-display: flex;
-    align-items: center; /* Centra verticalmente los elementos */
+    display: flex;
+    align-items: center;
     width: 100%;
-    justify-content: space-between; /* Crea aire entre los bloques */
+    justify-content: space-between;
 }
 .links {
     display: flex;
-    gap: 20px; /* Espacio entre los enlaces */
-    position: absolute; /* Truco para centrado absoluto respecto al header */
+    gap: 20px;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
+/* Mejorar */
 /* Perfil */
 .user-profile-zone {
     z-index: 1000;
@@ -129,52 +177,43 @@ display: flex;
     align-items: center;
 }
 .btns-perfil {
-    /* Fondos y Bordes */
-    background: linear-gradient(135deg, rgba(20, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
-    border-top: 1px solid rgba(255, 0, 0, 0.4);
-    border-bottom: 2px solid #8b0000;
-    border-left: 1px solid rgba(255, 0, 0, 0.2);
-    border-right: 1px solid rgba(255, 0, 0, 0.2);
-    border-radius: 4px;
-
-    /* Tipografía */
-    color: #e0e0e0;
-    font-family: 'Times New Roman', serif; /* O una fuente gótica que prefieras */
-    font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase; /* Todo en mayúsculas para más fuerza */
-    letter-spacing: 2px; /* Espaciado entre letras */
-
-    /* Espaciado y Tamaño */
-    padding: 5px;
+    /* --- ESTRUCTURA Y FORMA --- */
+    background: linear-gradient(145deg, #150a0a 0%, #050505 100%);
+    border: none;
+    /* Un borde izquierdo que sirve de indicador de color */
+    border-left: 3px solid var(--dmc-red); 
+    padding: 8px 25px;
+    min-width: 140px;
     cursor: pointer;
-    min-width: 100px; /* Asegura un tamaño mínimo */
-    
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7),
-                inset 0 0 10px rgba(139, 0, 0, 0.3);
-    
     position: relative;
     overflow: hidden;
+    
+    /* Corte diagonal estilo menú DMC */
+    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+    
+    /* --- TIPOGRAFÍA --- */
+    color: var(--text-main);
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .btns-perfil:hover {
-    color: #ffffff;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6), 
-                0 0 40px rgba(255, 0, 0, 0.3),
-                inset 0 0 15px rgba(255, 0, 0, 0.5);
-    border-bottom-color: #ff0000;
-    border-top-color: rgba(255, 255, 255, 0.5);
-    
-    transform: translateY(-3px) scale(1.03);
-    
+    transform: translateX(8px); /* Desplazamiento lateral al seleccionar */
+    border-left: var(--border-red);
+    box-shadow: var(--shadow-red);
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 @keyframes neonPulse {
-    0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(139, 0, 0, 0.3); }
-    50% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(180, 0, 0, 0.5); }
-    100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(139, 0, 0, 0.3); }
+    0% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px var(--dmc-red-blood); }
+    50% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 15px var(--dmc-red-dark); }
+    100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), inset 0 0 10px var(--dmc-red-blood); }
 }
 
 .btns-perfil {
@@ -204,9 +243,7 @@ body {
   width: 600px;
   max-width: 90%;
   height: auto;
-  filter: drop-shadow(
-    0 0 15px rgba(0, 0, 0, 0.8)
-  );
+  filter: drop-shadow(var(--shadow-gothic));
 }
 
 #titulo img {
@@ -217,16 +254,16 @@ body {
 footer {
     position: fixed;
     bottom: 0;
-    background: #111;
-    color: white;
+    background: var(--bg-pure-black);
+    color: var(--text-main);
     width: 100%;
 
     text-align: center;
 
     padding: 20px;
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.9rem;
-    border-top: 1px solid #333;
+    border-top: var(--border-thin);
 }
 
 footer a {
@@ -250,22 +287,21 @@ footer a {
 .flash-message {
     pointer-events: auto;
     background: rgba(10, 10, 10, 0.95);
-    border-left: 5px solid #ff0000;
-    color: #fff;
+    border-left: 5px solid var(--dmc-red);
+    color: var(--text-main);
     padding: 15px 20px;
     min-width: 300px;
     display: flex;
     align-items: center;
     gap: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 0, 0, 0.1);
-    font-family: 'monospace';
     text-transform: uppercase;
     animation: slideInRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
 }
 
 /* Colores por categoría */
-.alert-success { border-left-color: var(--dmc-green-success); box-shadow: 0 0 10px rgba(0, 255, 0, 0.1); }
+.alert-success { border-left-color: var(--dmc-green-success); }
 .alert-error { border-left-color: var(--dmc-red-error); }
 .alert-info { border-left-color: var(--dmc-blue-info); }
 
