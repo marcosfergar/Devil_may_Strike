@@ -37,31 +37,39 @@
     max-width: 300px; /* Ajusta según tu diseño */
 }
 
-/* --- ESTADO POR DEFECTO (Dante activo) --- */
+/* cambio de modo */
+
+/* (Dante activo) */
 .img-dante {
     filter: brightness(1) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
     opacity: 1;
 }
 
 .img-vergil {
-    filter: brightness(0.3); /* Vergil oscurecido */
+    filter: brightness(0.3);/
     opacity: 0.6;
 }
 
-/* --- ESTADO MODO VERGIL (Vergil activo) --- */
+/* (Vergil activo) */
 body.mode-vergil .img-vergil {
     filter: brightness(1) drop-shadow(0 0 15px rgba(0, 162, 255, 0.8));
     opacity: 1;
 }
 
 body.mode-vergil .img-dante {
-    filter: brightness(0.3); /* Dante oscurecido */
+    filter: brightness(0.3);
     opacity: 0.6;
 }
 
-/* Efecto hover simple para que se sepa que son clickeables */
-.img-personaje:hover {
-    filter: brightness(1.2);
+/* Pa que brillen mis niños cuando toca */
+body.mode-vergil .img-dante:hover {
+    filter: brightness(1); 
+    opacity: 1;
+}
+
+body:not(.mode-vergil) .img-vergil:hover {
+    filter: brightness(1);
+    opacity: 1;
 }
 
 /* Zona Botones */
