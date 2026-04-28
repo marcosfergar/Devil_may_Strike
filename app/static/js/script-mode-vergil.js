@@ -1,17 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btnVergil = document.getElementById('btn-vergil');
-      
-        if (localStorage.getItem('theme') === 'vergil') {
-            document.body.classList.add('mode-vergil');
-        }
+    const imgDante = document.querySelector('.img-dante');
+    const imgVergil = document.querySelector('.img-vergil');
+    const body = document.body;
 
-        btnVergil.addEventListener('click', () => {
-            document.body.classList.toggle('mode-vergil');
-            
-            if (document.body.classList.contains('mode-vergil')) {
-                localStorage.setItem('theme', 'vergil');
-            } else {
-                localStorage.setItem('theme', 'dante');
-            }
-        });
+    // Cargar preferencia guardada
+    if (localStorage.getItem('theme') === 'vergil') {
+        body.classList.add('mode-vergil');
+    }
+
+    // Si clickas en Vergil -> Activa su modo
+    imgVergil.addEventListener('click', () => {
+        if (!body.classList.contains('mode-vergil')) {
+            body.classList.add('mode-vergil');
+            localStorage.setItem('theme', 'vergil');
+            console.log("Power... I need more power!");
+        }
+    });
+
+    // Si clickas en Dante -> Vuelve al modo normal
+    imgDante.addEventListener('click', () => {
+        if (body.classList.contains('mode-vergil')) {
+            body.classList.remove('mode-vergil');
+            localStorage.setItem('theme', 'dante');
+            console.log("Let's rock, baby!");
+        }
+    });
 });

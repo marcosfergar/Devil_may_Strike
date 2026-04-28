@@ -30,7 +30,39 @@
     height: 100%;
     max-width: 600px;
 }
+/* Estilo base para ambas imágenes */
+.img-personaje {
+    transition: all 0.5s ease; /* Transición suave para el brillo */
+    cursor: pointer;
+    max-width: 300px; /* Ajusta según tu diseño */
+}
 
+/* --- ESTADO POR DEFECTO (Dante activo) --- */
+.img-dante {
+    filter: brightness(1) drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+    opacity: 1;
+}
+
+.img-vergil {
+    filter: brightness(0.3); /* Vergil oscurecido */
+    opacity: 0.6;
+}
+
+/* --- ESTADO MODO VERGIL (Vergil activo) --- */
+body.mode-vergil .img-vergil {
+    filter: brightness(1) drop-shadow(0 0 15px rgba(0, 162, 255, 0.8));
+    opacity: 1;
+}
+
+body.mode-vergil .img-dante {
+    filter: brightness(0.3); /* Dante oscurecido */
+    opacity: 0.6;
+}
+
+/* Efecto hover simple para que se sepa que son clickeables */
+.img-personaje:hover {
+    filter: brightness(1.2);
+}
 
 /* Zona Botones */
 @keyframes entradaMenu {
