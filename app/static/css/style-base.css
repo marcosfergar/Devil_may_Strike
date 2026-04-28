@@ -45,6 +45,53 @@
     --dmc-red-error: #ff0000;
 }
 
+
+body.mode-vergil{
+    /* --- COLORES PRIMARIOS (Vergil Style) --- */
+    --dmc-red: #00aaff;
+    --dmc-red-dark: #0044cc;
+    --dmc-red-blood: #001a4d;
+    --dmc-red-glow: rgba(0, 170, 255, 0.5); 
+
+    /* --- FONDOS --- */
+    --bg-pure-black: #000000;
+    --bg-dark-semitransparent: rgba(5, 5, 15, 0.8);
+    --bg-dark-gray: #1a1a24;
+    --bg-card: linear-gradient(145deg, #0a0a15 0%, #050505 100%);
+    --bg-overlay: rgba(0, 0, 5, 0.8);
+    --bg-header: #0a0a15da;
+    --bg-gradient-main: radial-gradient(circle, #001a4d 10%, #000000 90%);
+    --bg-gradient-card: linear-gradient(145deg, #051025 0%, #050505 100%);
+    --bg-comentario-detalle: rgba(255,255,255,0.02);
+    --bg-semi-blue: rgba(0, 170, 255, 0.1);
+
+    /* --- TEXTOS --- */
+    --text-main: #e0eaff;
+    --text-muted: #708090;
+    --text-dark: #444455;
+    --font-primary: "Times New Roman", Times, serif;
+    --font-gothic: 'Mael', sans-serif;
+
+    /* --- BORDES Y SEPARADORES --- */
+    --border-thin: 1px solid #1a2a44;
+    --border-blue: 3px solid var(--dmc-blue-dark);
+    --border-thick-blue: 3px solid var(--dmc-blue-dark);
+    --radius-standard: 2px;
+    --border-color: #1a2a44;
+    --border-active: #00aaff;
+
+    /* --- EFECTOS (Sombras) --- */
+    --shadow-gothic: 0 0 20px rgba(0, 0, 0, 0.9);
+    --glow-blue: 0 0 10px var(--dmc-blue-glow);
+    --shadow-dark: rgba(0, 0, 0, 0.9);
+    --shadow-blue: 0 0 10px rgba(0, 68, 204, 0.3);
+
+    /* Colores para mensajes (Mantenemos semántica, pero ajustamos tonos) */
+    --dmc-green-success: #00ffcc;
+    --dmc-blue-info: #00aaff;
+    --dmc-red-error: #ff3333;
+}
+
 @keyframes fadeInPage {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -52,7 +99,10 @@
 
 body{
   background: var(--bg-gradient-main) ;
-  background-color: black;
+  background-color: var(--bg-pure-black);
+  color: var(--text-main);
+
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* Quitar scroll en tos laos */

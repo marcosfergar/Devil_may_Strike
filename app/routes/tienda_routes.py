@@ -73,7 +73,7 @@ def postear_comentario(producto_id):
     
     form = ComentarioForm()
     if form.validate_on_submit():
-        tienda_service.agregar_comentario(
+        tienda_service.agregar_comentario_producto(
             usuario_id=session.get("user_id"),
             producto_id=producto_id,
             texto=form.contenido.data
