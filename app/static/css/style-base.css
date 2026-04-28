@@ -18,6 +18,8 @@
     --bg-comentario-detalle: rgba(255,255,255,0.02);
     --bg-semi-red: rgba(139, 0, 0, 0.1);
 
+    --bg-item-pr: #300;
+
     /* --- TEXTOS --- */
     --text-main: #eeeeee;
     --text-muted: #888888;
@@ -50,6 +52,8 @@ body.mode-vergil{
     --dmc-red-blood: #001a4d;
     --dmc-red-glow: rgba(0, 170, 255, 0.5); 
 
+    --bg-item-pr: #00163d;
+    
     /* --- FONDOS --- */
     --bg-dark-semitransparent: rgba(5, 5, 15, 0.8);
     --bg-dark-gray: #1a1a24;
