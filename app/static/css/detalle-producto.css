@@ -83,7 +83,7 @@
 .btn-comprar-item {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(to bottom, #8b0000, #4a0000);
+    background: linear-gradient(to bottom, var(--dmc-red-dark), var(--dmc-red-blood));
     color: var(--text-main);
     border: none;
     border-radius: 5px;
@@ -123,7 +123,7 @@
     color: var(--dmc-red-blood);
     font-size: 0.9rem;
     letter-spacing: 2px;
-    border-bottom: 1px solid #222;
+    border-bottom: var(--border-thin);
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
@@ -142,7 +142,7 @@
 }
 
 .comentario-item {
-    background: rgba(255,255,255,0.03);
+    background: var(--bg-comentario-detalle);
     padding: 15px;
     margin-bottom: 10px;
     border-left: 2px solid var(--dmc-red-blood);
@@ -199,7 +199,7 @@
 
 .detalle-card-item {
     background: var(--bg-card);
-    border: 1px solid #332222;
+    border: var(--border-thin);
     position: relative;
     padding: 25px;
     height: 80vh;
@@ -231,7 +231,7 @@
 }
 
 .comentario-item {
-    background: rgba(255,255,255,0.02);
+    background: var(--bg-comentario-detalle);
     padding: 10px;
     margin-bottom: 8px;
     border-left: 2px solid var(--dmc-red-blood);
@@ -245,8 +245,8 @@
 
 .input-com-item {
     flex-grow: 1;
-    background: #000;
-    border: 1px solid #333;
+    background: var(--bg-pure-black);
+    border: var(--border-thin);
     color: var(--text-main);
     padding: 8px;
     height: 40px;
@@ -264,7 +264,7 @@
 
 .user-currency {
     color: var(--text-white);
-    background: rgba(179, 0, 0, 0.1);
+    background: var(--bg-semi-red);
     padding: 10px 20px;
     border-radius: 5px;
     border: 1px solid var(--dmc-red);

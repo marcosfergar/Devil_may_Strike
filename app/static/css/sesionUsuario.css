@@ -1,40 +1,28 @@
-/* Contenedor principal que ocupa toda la pantalla */
 body {
     margin: 0;
     padding: 0;
-    height: 100vh; /* 100% de la altura de la ventana */
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-    background-color: #0a0a0a; /* Fondo oscuro por si falla la imagen */
-    background-image: url('../img/fondo-dms.jpg'); /* Tu imagen de fondo */
-    background-size: cover;
-    background-position: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-pure-black) !important;
 }
 
 /* El logo arriba del formulario */
 #titulo img {
     width: 300px;
     margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+    filter: drop-shadow(var(--shadow-red));
 }
 
 /* El contenedor del formulario */
 .form-container {
-    /* Lo fijamos a la pantalla */
     position: fixed;
-    
-    /* Lo movemos al centro exacto */
     top: 50%;
     left: 50%;
-    
-    /* El truco mágico: se desplaza a sí mismo la mitad de su ancho y alto 
-       para quedar perfectamente centrado */
     transform: translate(-50%, -50%);
     
-    /* Estética Devil May Strike */
     width: 90%;
     max-width: 400px;
     padding: 30px;
@@ -43,9 +31,9 @@ body {
         rgba(40, 40, 40, 0.95) 0%,
         rgba(0, 0, 0, 1) 100%
     );
-    border: 2px solid #8b0000;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
-    z-index: 1000; /* Para que esté por encima de todo */
+    border: var(--border-red);
+    box-shadow: var(--shadow-red);
+    z-index: 1000;
     
     display: flex;
     flex-direction: column;
@@ -53,7 +41,7 @@ body {
 }
 
 h2 {
-    color: #f1f1f1;
+    color: var(--text-main);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -66,25 +54,25 @@ input[type="password"] {
     width: 100%;
     padding: 12px;
     margin: 10px 0 20px 0;
-    border: 1px solid #444;
-    background: #1a1a1a;
-    color: white;
+    border: var(--border-thin);
+    background: var(--bg-dark-gray);
+    color: var(--text-main);
     border-radius: 5px;
-    box-sizing: border-box; /* Para que el padding no rompa el ancho */
+    box-sizing: border-box;
 }
 
 input:focus {
     outline: none;
-    border-color: #ff0000;
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    border-color: var(--border-red);
+    box-shadow: var(--shadow-red);
 }
 
 /* Botón de envío (usando tu clase btns-menu) */
 .btns-menu {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(to bottom, #8b0000, #4a0000);
-    color: white;
+    background: linear-gradient(to bottom, var(--dmc-red-dark), var(--dmc-red-blood));
+    color: var(--text-main);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -94,8 +82,8 @@ input:focus {
 }
 
 .btns-menu:hover {
-    background: #ff0000;
-    box-shadow: 0 0 15px #ff0000;
+    background: var(--dmc-red-glow);
+    box-shadow: var(--shadow-red);
     transform: scale(1.02);
 }
 

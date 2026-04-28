@@ -1,5 +1,5 @@
 *{
-    color: #fff;
+    color: var(--text-main);
 
 }
 
@@ -34,11 +34,11 @@
 /* Avatar */
 .col-status {
     height: calc(100vh - 80px);
-    background: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
-    border-right: 3px solid #8b0000;
+    background: var(--bg-gradient-card);
+    border-right: var(--border-red);
     padding: 25px;
     border-radius: 5px 0 0 5px;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+    box-shadow: var(--shadow-gothic);
     animation: apareceStatus 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
@@ -50,7 +50,7 @@
     position: relative;
     border: 2px solid #2a2a2a;
     padding: 5px;
-    background: #000;
+    background: var(--bg-pure-black);
     margin-bottom: 25px;
 }
 
@@ -61,8 +61,8 @@
 
 /* Editar */
 .status-badge {
-    background: #ff0000;
-    color: white;
+    background: var(--dmc-red-dark);
+    color: var(--text-main);
     font-size: 0.7rem;
     text-align: center;
     font-weight: bold;
@@ -70,11 +70,11 @@
 
 /* Datos */
 .user-data-re4 h2 {
-    font-family: 'Mael', serif;
+    font-family: var(--font-gothic);
     font-size: 2rem;
-    color: #fff;
+    color: var(--text-main);
     margin: 0;
-    text-shadow: 0 0 10px rgba(255,0,0,0.5);
+    text-shadow: var(--shadow-red);
 }
 
 .currency-display {
@@ -112,7 +112,7 @@
 
 .tit-maletin {
     font-size: 1.8rem;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 20px;
     text-shadow: 0 0 10px rgba(255,0,0,0.5);
 }
@@ -128,14 +128,14 @@
 .close-inspeccion {
     background: none;
     border: none;
-    color: #910000;
+    color: var(--dmc-red-dark);
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.close-inspeccion:hover { color: #ff3e3e; }
-
+.close-inspeccion:hover { color: var(--border-acti); }
+/* Modificar css */
 /* Items */
 .item-slot {
     width: 85px;
@@ -174,7 +174,7 @@
 /* Estilo Columna Inspección */
 .col-inspeccion {
     background: linear-gradient(180deg, rgba(30, 0, 0, 0.9) 0%, rgba(10, 0, 0, 1) 100%);
-    border-left: 2px solid #ff0000;
+    border-left: var(--border-red);
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
@@ -190,7 +190,7 @@
     width: 100%;
     height: 200px;
     background: radial-gradient(circle, #300 0%, #000 70%);
-    border: 1px solid #555;
+    border: var(--border-thin);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,7 +200,7 @@
 .item-preview-frame img {
     max-width: 80%;
     max-height: 80%;
-    filter: drop-shadow(0 0 15px rgba(255,0,0,0.5));
+    filter: drop-shadow(var(--shadow-red));
     animation: floating 3s ease-in-out infinite;
 }
 
@@ -211,30 +211,49 @@
 
 .inspeccion-separator {
     height: 2px;
-    background: linear-gradient(90deg, #ff0000, transparent);
+    background: linear-gradient(90deg, var(--dmc-red-dark), transparent);
     margin: 15px 0;
 }
 
 /* formulario editar foto */
-.seccion-ajuste { margin-bottom: 30px; padding: 20px; border: 1px solid #333; background: rgba(0,0,0,0.3); }
-.avatar-preview img { width: 120px; height: 120px; border: 2px solid #910000; margin-bottom: 15px; object-fit: cover; }
+.seccion-ajuste { 
+    margin-bottom: 30px; 
+    padding: 20px; 
+    border: var(--border-thin); 
+    background: rgba(0,0,0,0.3); 
+}
+.avatar-preview img { 
+    width: 120px; 
+    height: 120px; 
+    border: 2px solid var(--dmc-red-dark); 
+    margin-bottom: 15px; 
+    object-fit: cover; 
+}
 
-.btn-subir { background: #222; padding: 10px; cursor: pointer; border: 1px dashed #910000; display: inline-block; }
-.btn-subir input { display: none; }
+.btn-subir { 
+    background: var(--bg-pure-black); 
+    padding: 10px; 
+    cursor: pointer; 
+    border: 1px dashed var(--dmc-red); 
+    display: inline-block;
+}
+.btn-subir input { 
+    display: none; 
+}
 
 .btn-guardar-perfil {
     width: 100%;
-    background: #910000;
-    color: white;
+    background: var(--dmc-red-dark);
+    color: var(--text-main);
     padding: 15px;
     font-weight: bold;
     border: none;
     cursor: pointer;
     clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
 }
-.btn-guardar-perfil:hover { background: #ff3e3e; box-shadow: 0 0 20px #ff3e3e; }
+.btn-guardar-perfil:hover { background: var(--dmc-red-dark); box-shadow: var(--shadow-red); }
 
-    /* form nuevo */
+/* formulario */
 
 .modal-overlay {
     display: none; 
@@ -244,36 +263,35 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Oscuridad del inframundo */
-    backdrop-filter: blur(5px); /* Desenfoque elegante */
+    background-color: var(--bg-overlay);
+    backdrop-filter: blur(5px);
 }
 
 /* Caja del formulario centrada */
 .modal-content {
-    background: #111;
+    background: var(--bg-pure-black);
     margin: 5% auto;
     padding: 30px;
-    border: 2px solid #910000;
+    border: var(--border-red);
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 0 30px #910000;
+    box-shadow: var(--shadow-red);
     position: relative;
     animation: aparecerModal 0.4s ease-out;
 }
 
-/* Botón de cerrar (X) */
 .btn-cerrar {
-    background-color: #000;
+    background-color: var(--bg-pure-black);
     position: absolute;
     right: 20px;
     top: 10px;
-    color: #910000;
+    color: var(--dmc-red-dark);
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.btn-cerrar:hover { color: #ff3e3e; }
+.btn-cerrar:hover { color: var(--dmc-red-dark); }
 
 /* Animación de entrada */
 @keyframes aparecerModal {
@@ -285,13 +303,13 @@
     max-width: 100% !important;
 }
 .cropper-wrapper {
-    background-color: #000;
+    background-color: var(--bg-pure-black);
     min-height: 200px;
 }
 
 .avatar-selector-grid {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid #333;
+    background: var(--bg-dark-semitransparent);
+    border: var(--border-thin);
     padding: 10px;
     margin-bottom: 15px;
 }
@@ -305,14 +323,14 @@
 
 /* Scrollbar estilo gótico */
 .grid-scroll::-webkit-scrollbar { height: 4px; }
-.grid-scroll::-webkit-scrollbar-thumb { background: #910000; }
+.grid-scroll::-webkit-scrollbar-thumb { background: var(--dmc-red-dark); }
 
 .avatar-option {
     position: relative;
     cursor: pointer;
     flex: 0 0 70px;
     height: 70px;
-    border: 1px solid #444;
+    border: var(--border-thin);
     transition: 0.3s;
 }
 
@@ -324,14 +342,13 @@
 
 .avatar-option input { position: absolute; opacity: 0; }
 
-.avatar-option:hover { border-color: #910000; }
+.avatar-option:hover { border-color: var(--dmc-red-dark); }
 
 .avatar-option:has(input:checked) {
-    border-color: #ff3e3e;
-    box-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
+    border-color: var(--dmc-red-dark);
+    box-shadow: var(--shadow-red);
 }
 #btn-confirmar-inventario {
-    font-family: 'Mael', 'monospace';
     letter-spacing: 2px;
     padding: 10px;
     cursor: pointer;
@@ -340,8 +357,8 @@
 }
 
 #btn-confirmar-inventario:hover {
-    background: #910000 !important;
-    color: white !important;
-    box-shadow: 0 0 15px rgba(145, 0, 0, 0.5);
+    background: var(--dmc-red-dark) !important;
+    color: var(--text-main) !important;
+    box-shadow: var(--shadow-red);
 }
 /* se acabo formulario */
