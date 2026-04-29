@@ -64,6 +64,15 @@ class UsuarioRepository:
             return []
         return [p for p in usuario.productos if p.categoria == categoria]
     
+    def actualizar_orbes(usuario_id, orbes_a_sumar):
+        user = Usuario.query.get(usuario_id)
+        if user:
+            user.orbes += orbes_a_sumar
+            db.session.commit() 
+            return user.orbes
+        
+        return None
+
     @staticmethod
     def sumar_orbes_truco(usuario_id, cantidad):
         from app.models.schema import Usuario, db

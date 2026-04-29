@@ -74,3 +74,21 @@ def dar_orbes_truco(usuario_id, cantidad=1000):
 
 def obtener_ranking_usuarios(limite=5):
     return UsuarioRepository.get_top_ricos(limite)
+
+# app/services/usuario_service.py
+
+def obtener_multiplicador_total(usuario_id):
+    multiplicador_total = 1.0
+    Objetos = UsuarioRepository.get_items_por_categoria(usuario_id, 'Objeto')
+
+    multiplicador_total += (Objetos.multiplicador - 1.0)
+    return multiplicador_total
+
+def sumar_puntos_con_bonus(usuario_id, puntos_base):
+    bonus = obtener_multiplicador_total(usuario_id)
+    
+    puntos_finales = int(puntos_base * bonus)
+    
+    UsuarioRepository.actualizar_orbes(usuario_id, puntos_finales)
+    
+    return puntos_finales

@@ -68,9 +68,11 @@ class Producto(db.Model):
     precio = Column(Integer, nullable=False)
     data_path = Column(String(255))
     descripcion = Column(String(255))
+    multiplicador = db.Column(db.Float, default=1.0)
 
     comentarios = db.relationship('Comentario', backref='producto_asociado', lazy=True)
 
+# Tienda
 class Comentario(db.Model):
     __tablename__ = "comentarios"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -79,6 +81,7 @@ class Comentario(db.Model):
     usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
     producto_id = Column(Integer, db.ForeignKey('productos.id'), nullable=True)
 
+# Foro
 class Categoria(db.Model):
     __tablename__ = "categorias"
     id = Column(Integer, primary_key=True, autoincrement=True)

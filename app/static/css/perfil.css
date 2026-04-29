@@ -137,6 +137,7 @@
 .close-inspeccion:hover { color: var(--border-acti); }
 /* Items */
 .item-slot {
+    cursor: pointer;
     width: 85px;
     height: 85px;
     background: rgba(0, 0, 0, 0.3);
@@ -370,3 +371,76 @@
     margin: 10px 0;
 }
 /* se acabo formulario */
+
+/* --- SECCIÓN ARSENAL DE APOYO --- */
+.seccion-apoyo {
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #444;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.seccion-apoyo h3 {
+    font-size: 0.85rem;
+    color: #aaa;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    border-left: 3px solid #00ff00; /* Verde estilo DMC */
+    padding-left: 10px;
+    text-transform: uppercase;
+}
+
+.objetos-activos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-objeto {
+    background: linear-gradient(90deg, rgba(0, 255, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    padding: 8px 12px;
+    border-left: 2px solid rgba(0, 255, 0, 0.5);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.item-objeto:hover {
+    background: rgba(0, 255, 0, 0.15);
+    transform: translateX(5px);
+}
+
+.item-objeto span {
+    font-family: 'Courier New', Courier, monospace; /* Toque técnico */
+    font-size: 0.9rem;
+    color: #eee;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+}
+
+/* Resaltar el multiplicador x1.1, x1.2... */
+.item-objeto span::after {
+    content: ''; /* Aquí podrías añadir un pequeño icono de rayo o energía */
+}
+
+/* Mensaje cuando no hay objetos */
+.objetos-activos p {
+    font-style: italic;
+    color: #666;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Animación de "pulso" sutil para los objetos activos */
+@keyframes pulse-border {
+    0% { border-left-color: rgba(0, 255, 0, 0.5); }
+    50% { border-left-color: rgba(0, 255, 0, 1); }
+    100% { border-left-color: rgba(0, 255, 0, 0.5); }
+}
+
+.item-objeto {
+    animation: pulse-border 2s infinite ease-in-out;
+}

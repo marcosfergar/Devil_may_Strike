@@ -79,4 +79,23 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 5000);
         });
     });
+
+    setInterval(() => {
+    fetch('/recompensa-tiempo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log(`¡Estilo! Has ganado ${data.puntos} orbes por tu lealtad.`);
+            // Opcional: Mostrar un pequeño mensaje flash dinámico
+            if (typeof crearFlashJS === 'function') {
+                crearFlashJS(`+${data.puntos} Orbes por tiempo de juego`, 'success');
+            }
+        }
+    });
+}, 300000);
 });

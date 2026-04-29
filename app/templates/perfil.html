@@ -31,6 +31,18 @@
         </div>
         <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span><br>
         <span class="comment-count">Orbes totales: {{ usuario.orbes_totales }}</span>
+        <div class="seccion-apoyo">
+            <h3>ARSENAL DE APOYO (Multiplicadores)</h3>
+            <div class="objetos-activos">
+                {% for item in usuario.inventario if item.categoria == 'Objeto' %}
+                    <div class="item-objeto">
+                        <span>{{ item.nombre }} (x{{ item.multiplicador }})</span>
+                    </div>
+                {% else %}
+                    <p>No tienes objetos potenciadores.</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <div class="col-maletin">
