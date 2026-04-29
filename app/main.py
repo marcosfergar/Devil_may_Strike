@@ -15,7 +15,7 @@ from app.routes.foro_routes import foro_bp
 
 
 # importae modelos
-from app.models.schema import Categoria, Usuario, Producto, Comentario
+from app.models.schema import Categoria, Producto
 from app.services.procesos_service import inject_vergil_status
 
 load_dotenv()
@@ -23,6 +23,7 @@ load_dotenv()
 app = Flask(__name__, template_folder='templates')
 app.secret_key = os.getenv("SECRET_KEY")
 app.context_processor(inject_vergil_status)
+
 # Configuracion session
 app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
 app.config["SESSION_PERMANENT"] = False     # Sesiones temporales
