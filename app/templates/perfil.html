@@ -29,7 +29,8 @@
             <span class="stat-label">Tipo:</span>
             <span class="stat-value">{% if session.get('is_guest') %}Invitado{% else %}Cazador Registrado{% endif %}</span>
         </div>
-        <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span>
+        <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span><br>
+        <span class="comment-count">Orbes totales: {{ usuario.orbes_totales }}</span>
     </div>
 
     <div class="col-maletin">
@@ -76,7 +77,7 @@
                 <div class="seccion-ajuste">
                     <h3>AJUSTAR APARIENCIA</h3>
                     <div id="inventario-avatares-selector" class="avatar-selector-grid">
-                        <p class="ritual-label" style="font-size: 0.7rem; margin-bottom: 10px;">SELECCIONA UN ALMA DE TU INVENTARIO</p>
+                        <p class="label" style="font-size: 0.7rem; margin-bottom: 10px;">SELECCIONA UNA FOTO DE TU INVENTARIO</p>
                         <div class="grid-scroll">
                             {% for item in usuario.productos if item.categoria == 'avatar' %}
                                 <label class="avatar-option">
@@ -88,37 +89,39 @@
                             {% endfor %}
                         </div>
 
-                        <button type="button" id="btn-confirmar-inventario" class="btn-action" 
-                                style="display: none; margin-top: 15px; width: 100%; border: 1px solid #ff3e3e; color: #ff3e3e; background: rgba(145, 0, 0, 0.1);">
-                            EQUIPAR ALMA SELECCIONADA
+                        <button type="button" id="btn-confirmar-inventario" class="btn-action" style="display: none; margin-top: 15px; width: 100%;">
+                            EQUIPAR FOTO SELECCIONADA
                         </button>
                     </div>
                     <div id="wrapper-editor" style="display: none; margin-bottom: 15px;">
-                        <div class="cropper-wrapper" style="max-height: 400px; overflow: hidden; border: 2px solid #910000;">
+                        <div class="cropper-wrapper" style="max-height: 400px; overflow: hidden;">
                             <img src="" id="image-to-crop" style="max-width: 100%;">
                         </div>
-                        <button type="button" id="btn-confirmar" class="btn-action" onclick="confirmarRecorte()" style="margin-top: 10px; width: 100%; border: 1px solid #00ff00; color: #00ff00;">
+                        <button type="button" id="btn-confirmar" class="btn-action" onclick="confirmarRecorte()" 
+                        style="margin-top: 10px; width: 100%; padding: 3% ; background-color: #222 ; color: white;">
                             CONFIRMAR RECORTE
                         </button>
                     </div>
                     
-                    <div id="mensaje-exito" style="display: none; color: #00ff00; text-align: center; font-weight: bold; margin: 10px 0;">
-                        ¡ALMA PREPARADA PARA EL COMBATE!
+                    <div id="mensaje-exito">
+                        Foto recortada con exito
                     </div>
 
                     <input type="hidden" name="cropped_data" id="cropped_data">
 
                     <label class="btn-subir" id="label-archivo">
-                        <input type="file" name="foto" id="input-foto" accept="image/*"> SELECCIONAR NUEVA ALMA
+                        <input type="file" name="foto" id="input-foto" accept="image/*"> SELECCIONAR NUEVA FOTO
                     </label>
                 </div>
 
                 <div class="seccion-ajuste">
                     <h3>TÍTULO DE PRESTIGIO</h3>
+
                     <select name="titulo" class="input-dmc">
                         <option value="{{ usuario.titulo_actual }}">{{ usuario.titulo_actual }} (Actual)</option>
-                        <option value="Legendary Hunter">Legendary Hunter</option>
-                        <option value="Dark Slayer">Dark Slayer</option>
+                        {% for item in usuario.productos if item.categoria == 'titulo' %}
+                            <option value="{{ item.nombre }}">{{ item.nombre }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 

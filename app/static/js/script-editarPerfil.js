@@ -71,7 +71,7 @@ function confirmarRecorte() {
 
     wrapperEditor.style.display = 'none';
     mensajeExito.style.display = 'block';
-    mensajeExito.innerText = "¡ALMA PREPARADA PARA EL COMBATE!";
+    mensajeExito.innerText = "Foto recortada con exito";
     cropper.destroy();
     cropper = null;
 }
