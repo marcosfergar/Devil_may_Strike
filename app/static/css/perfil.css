@@ -135,7 +135,6 @@
 }
 
 .close-inspeccion:hover { color: var(--border-acti); }
-/* Modificar css */
 /* Items */
 .item-slot {
     width: 85px;
@@ -156,16 +155,15 @@
 }
 
 .item-slot:hover {
-    background: rgba(0, 255, 0, 0.1);
-    border-color: #00ff41;
-    transform: scale(1.02);
+    background: var(--bg-semi-red);
+    border: 1px solid var(--dmc-red-dark);    transform: scale(1.02);
     z-index: 5;
 }
 
 .item-desc-bar {
     margin-top: 30px;
-    background: #050805;
-    border: 1px solid #1a331a;
+    background: var(--bg-semi-red);
+    border: 1px solid var(--dmc-red-dark);
     padding: 10px 20px;
     position: relative;
     overflow: hidden;
@@ -305,6 +303,7 @@
 .cropper-wrapper {
     background-color: var(--bg-pure-black);
     min-height: 200px;
+    border: 2px solid var(--dmc-red-dark);
 }
 
 .avatar-selector-grid {
@@ -360,5 +359,14 @@
     background: var(--dmc-red-dark) !important;
     color: var(--text-main) !important;
     box-shadow: var(--shadow-red);
+}
+
+#mensaje-exito{
+    cursor: pointer;
+    display: none; 
+    color: var(--dmc-red); 
+    text-align: center; 
+    font-weight: bold; 
+    margin: 10px 0;
 }
 /* se acabo formulario */

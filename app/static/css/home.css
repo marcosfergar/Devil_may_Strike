@@ -72,6 +72,17 @@ body:not(.mode-vergil) .img-vergil:hover {
     opacity: 1;
 }
 
+.img-personaje.locked {
+    filter: brightness(0.05) grayscale(1); /* Casi negro y sin color */
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Opcional: que al pasar el ratón por el bloqueado no brille nada */
+.img-personaje.locked:hover {
+    filter: brightness(0.05) grayscale(1);
+    transform: none;
+}
 /* Zona Botones */
 @keyframes entradaMenu {
     0% {
