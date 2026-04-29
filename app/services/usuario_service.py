@@ -79,13 +79,16 @@ def obtener_ranking_usuarios(limite=5):
 
 def obtener_multiplicador_total(usuario_id):
     multiplicador_total = 1.0
-    Objetos = UsuarioRepository.get_items_por_categoria(usuario_id, 'Objeto')
+    objetos = UsuarioRepository.get_items_por_categoria(usuario_id, 'Objeto')
 
-    multiplicador_total += (Objetos.multiplicador - 1.0)
-    return multiplicador_total
+    for obj in objetos:
+        if obj.multiplicador:
+            multiplicador_total += (obj.multiplicador - 1.0)
+    
+    return round(multiplicador_total, 2)
 
 def sumar_puntos_con_bonus(usuario_id, puntos_base):
-    bonus = obtener_multiplicador_total(usuario_id)
+    bonus = obtener_multiplicador_total(usuario_id) 
     
     puntos_finales = int(puntos_base * bonus)
     

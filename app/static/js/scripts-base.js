@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const messages = document.querySelectorAll('.flash-message');
         
         messages.forEach(msg => {
-            // Auto-eliminar después de 5 segundos
             setTimeout(() => {
                 msg.style.animation = "fadeOut 0.5s forwards";
                 setTimeout(() => msg.remove(), 500);
@@ -81,21 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     setInterval(() => {
-    fetch('/recompensa-tiempo', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            console.log(`¡Estilo! Has ganado ${data.puntos} orbes por tu lealtad.`);
-            // Opcional: Mostrar un pequeño mensaje flash dinámico
-            if (typeof crearFlashJS === 'function') {
-                crearFlashJS(`+${data.puntos} Orbes por tiempo de juego`, 'success');
+        fetch('/home/recompensa-tiempo', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Solo dejamos un log para que tú sepas que funciona al probar
+                console.log(`Sistema: +${data.puntos} orbes sumados con éxito.`);
             }
-        }
-    });
-}, 300000);
+        })
+        .catch(err => console.error("Error en sistema de recompensa:", err));
+    }, 10000); // 5 minutos
 });
