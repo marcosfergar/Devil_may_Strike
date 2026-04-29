@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, session, url_for
 from flask import jsonify
 
 # importe sercicios
-from app.services import usuario_service
+from app.services import usuario_service, inventario_service
 from app.services.rawg_service import listar_saga_dmc
 
 home_pb = Blueprint('home_route', __name__, template_folder='templates')
@@ -20,8 +20,10 @@ def paginaBienvenida():
     if not user:
         session.clear()
         return redirect(url_for('homeLogin_route.paginaLogin'))
+    
+    desbloqueado = inventario_service.tiene_tema_vergil(user_id)
 
-    return render_template('home.html', usuario=user)
+    return render_template('home.html', usuario=user, tiene_vergil=desbloqueado)
 
 @home_pb.route('/biblioteca-dmc')
 def biblioteca_dmc():

@@ -11,4 +11,4 @@ def obtener_titulos_desbloqueados(usuario_id):
 
 def tiene_tema_vergil(usuario_id):
     productos = UsuarioRepository.get_items_por_categoria(usuario_id, 'tema')
-    return any('vergil' in p.nombre.lower() for p in productos)
+    return any('dark slayer' in p.nombre.lower() for p in productos)

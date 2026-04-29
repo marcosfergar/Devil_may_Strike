@@ -28,7 +28,20 @@
   </div>
 
   <div class="sparda">
-    <img src="{{ url_for('static', filename='img/Vergil-menu.png') }}" alt="Vergil" class="img-personaje img-vergil" style="cursor: pointer;"/>
+    {% if tiene_vergil %}
+      <img src="{{ url_for('static', filename='img/Vergil-menu.png') }}" 
+           alt="Vergil" 
+           class="img-personaje img-vergil" 
+           id="seleccionar-vergil"/>
+    {% else %}
+      <img src="{{ url_for('static', filename='img/Vergil-menu.png') }}" 
+           alt="Vergil" 
+           class="img-personaje img-vergil locked" 
+           id="seleccionar-vergil"/>
+    {% endif %}
   </div>
+  <script>
+      const HAS_VERGIL = {{ tiene_vergil_global | tojson }};
+  </script>
 </div>
 {% endblock %}

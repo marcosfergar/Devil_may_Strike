@@ -17,7 +17,7 @@
   {% block style %}{% endblock %}
 </head>
 
-<body>
+<body class="{% if tiene_vergil_global %}has-vergil-access{% endif %}">
   <header class="index-menu">
     <div class="menu">
       <div class="user-profile-zone">
@@ -91,6 +91,23 @@
     <p>Datos proporcionados por <a href="https://rawg.io/" target="_blank">RAWG API</a>.</p>
     <p>&copy; 2026 | Creditos Marcos Fernández | Todos los contenidos son usados para un fin educativo</p>
   </footer>
+  <script>
+      (function() {
+          // 1. Obtener la preferencia del navegador
+          const savedTheme = localStorage.getItem('theme');
+          // 2. Obtener el permiso real del servidor (inyectado por procesos_service.py)
+          const tienePermiso = {{ tiene_vergil_global | tojson }};
+          
+          // Si el usuario eligió Vergil y tiene permiso, aplicamos el tema de inmediato
+          if (savedTheme === 'vergil' && tienePermiso) {
+              document.body.classList.add('mode-vergil');
+          } else if (!tienePermiso) {
+              // Seguridad: si no tiene permiso (cambió de cuenta), borramos rastro
+              localStorage.removeItem('theme');
+              document.body.classList.remove('mode-vergil');
+          }
+      })();
+  </script>
 </body>
 
 </html>
