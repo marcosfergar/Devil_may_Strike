@@ -66,23 +66,16 @@
   {% endif %}
   </div>
   </header>
+<div id="flash-container" class="flash-global-wrapper">
   {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <div id="flash-container" class="flash-global-wrapper">
+    {% if messages %}
       {% for category, message in messages %}
         <div class="flash-message alert-{{ category }}">
-            <div class="flash-icon">
-                {% if category == 'success' %}<i class="fas fa-check-circle"></i>
-                {% elif category == 'error' %}<i class="fas fa-exclamation-triangle"></i>
-                {% else %}<i class="fas fa-info-circle"></i>{% endif %}
             </div>
-            <div class="flash-text">{{ message }}</div>
-            <button class="flash-close" onclick="this.parentElement.remove()">×</button>
-        </div>
       {% endfor %}
-    </div>
-  {% endif %}
-{% endwith %}
+    {% endif %}
+  {% endwith %}
+</div>
   <main>
     {% block content %}
     {% endblock %}

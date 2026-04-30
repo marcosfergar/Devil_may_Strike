@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, session, url_for
+from flask import Blueprint, flash, redirect, render_template, session, url_for
 from flask import jsonify
 
 # importe sercicios
@@ -41,11 +41,14 @@ def recompensa_tiempo():
     if "user_id" in session:
         user = usuario_service.obtener_usuario_por_id(session["user_id"])
         puntos_base = 10
+        puntos_ganados = usuario_service.sumar_puntos_con_bonus(user.id, puntos_base)
         
-        puntos_ganados = usuario_service.sumar_puntos_con_bonus(user, puntos_base)
-        
-        return {"success": True, "message": "puntos_ganados"}
-    return {"success": False, "message": "Error al procesar la compra"}, 401
+        return {
+            "success": True, 
+            "puntos": puntos_ganados,
+            "message": f"¡Estilo! Has ganado {puntos_ganados} orbes por tu lealtad."
+        }
+    return {"success": False, "message": "Sesión expirada"}, 401
 
 @home_pb.route('/mis-canciones')
 def obtener_mis_canciones():
