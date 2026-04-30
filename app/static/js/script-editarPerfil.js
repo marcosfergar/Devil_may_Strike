@@ -88,19 +88,49 @@ document.querySelectorAll('.radio-inventario').forEach(radio => {
 
 if (btnConfirmarInv) {
     btnConfirmarInv.addEventListener('click', function() {
-const seleccionada = document.querySelector('.radio-inventario:checked');
-    if (seleccionada) {
-        // ASIGNAMOS EL NOMBRE DEL ARCHIVO AL INPUT QUE SE ENVÍA AL SERVIDOR
-        document.getElementById('cropped_data').value = seleccionada.value; 
+        const seleccionada = document.querySelector('.radio-inventario:checked');
+        if (seleccionada) {
+            document.getElementById('cropped_data').value = seleccionada.value;
+            avatarPrincipal.src = "/static/uploads/tienda/" + seleccionada.value;
+            mensajeExito.style.display = 'block';
+            mensajeExito.innerText = "¡ALMA EQUIPADA! HAZ CLIC EN 'GUARDAR CAMBIOS'.";
+        }
+    });
+}
+
+document.addEventListener('submit', function (e) {
+    
+    if (e.target && e.target.classList.contains('form-perfil')) {
+        e.preventDefault(); 
         
-        // Cambiamos la miniatura visualmente
-        avatarPrincipal.src = "/static/uploads/tienda/" + seleccionada.value;
-        
-        mensajeExito.style.display = 'block';
-        mensajeExito.innerText = "¡ALMA EQUIPADA! HAZ CLIC EN 'GUARDAR CAMBIOS'.";
+        console.log("¡LOG: Formulario detectado correctamente!");
+
+        const form = e.target;
+        const formData = new FormData(form);
+        const url = form.getAttribute('action');
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error 404 o servidor no encontrado');
+            return response.json();
+        })
+        .then(data => {
+            console.log("Respuesta servidor:", data);
+            if (data.success) {
+                crearFlashDinamico(data.message, 'success');
+                cerrarModal();
+            } else {
+                crearFlashDinamico(data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error en la petición:', error);
+        });
     }
 });
-}
 
 window.onclick = function(event) {
     if (event.target == modal) cerrarModal();

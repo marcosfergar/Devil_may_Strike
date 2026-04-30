@@ -49,25 +49,49 @@ def gestionar_cierre_sesion(user_id):
 # PAL PERFIL
 
 def actualizar_perfil_completo(usuario, nuevo_titulo, foto_data):
-    if nuevo_titulo:
-        usuario.titulo_actual = nuevo_titulo
+    try:
+        if nuevo_titulo:
+            usuario.titulo_actual = nuevo_titulo
 
-    if foto_data:
-        if foto_data.startswith('data:image'):
-            format, imgstr = foto_data.split(';base64,') 
-            ext = format.split('/')[-1]
-            nombre_archivo = f"perfil_{usuario.id}.{ext}"
-            
-            ruta = os.path.join('app/static/uploads/perfiles/', nombre_archivo)
-            with open(ruta, "wb") as fh:
-                fh.write(base64.b64decode(imgstr))
-            
-            usuario.imagen_perfil = nombre_archivo
+        if foto_data:
+            if foto_data.startswith('data:image'):
+                import base64, os, glob
+                format, imgstr = foto_data.split(';base64,') 
+                ext = format.split('/')[-1]
+                
+                nombre_base = f"perfil_{usuario.id}"
+                nombre_archivo = f"{nombre_base}.{ext}"
+                directorio = 'app/static/uploads/perfiles/'
+                
+                if not os.path.exists(directorio):
+                    os.makedirs(directorio)
 
-        else:
-            usuario.imagen_perfil = foto_data
+                # Limpiar archivos viejos para evitar duplicados .png/.jpg
+                for archivo_viejo in glob.glob(os.path.join(directorio, f"{nombre_base}.*")):
+                    os.remove(archivo_viejo)
+                
+                ruta = os.path.join(directorio, nombre_archivo)
+                with open(ruta, "wb") as fh:
+                    fh.write(base64.b64decode(imgstr))
+                
+                usuario.imagen_perfil = nombre_archivo
+            else:
+                # Si viene del inventario
+                usuario.imagen_perfil = foto_data
 
-    return UsuarioRepository.save(usuario)
+        exito = UsuarioRepository.save(usuario)
+        
+        if exito:
+            return {
+                "success": True, 
+                "message": "¡Identidad actualizada, cazador!",
+                "nueva_imagen": usuario.imagen_perfil
+            }
+        return {"success": False, "message": "Error al guardar en la base de datos."}
+
+    except Exception as e:
+        print(f"Error en actualizar_perfil: {e}")
+        return {"success": False, "message": str(e)}
 
 def dar_orbes_truco(usuario_id, cantidad=1000):
     return UsuarioRepository.sumar_orbes_truco(usuario_id, cantidad)
