@@ -56,7 +56,7 @@ def actualizar_perfil_completo(usuario, nuevo_titulo, foto_data):
         if foto_data.startswith('data:image'):
             format, imgstr = foto_data.split(';base64,') 
             ext = format.split('/')[-1]
-            nombre_archivo = f"perfil_{usuario.id}_{int(datetime.utcnow().timestamp())}.{ext}"
+            nombre_archivo = f"perfil_{usuario.id}.{ext}"
             
             ruta = os.path.join('app/static/uploads/perfiles/', nombre_archivo)
             with open(ruta, "wb") as fh:

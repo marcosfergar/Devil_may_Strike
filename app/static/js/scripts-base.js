@@ -112,4 +112,61 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => console.error("Error en sistema de recompensa:", err));
     }, 300000); // 5 minutos
+
+    document.addEventListener('submit', (e) => {
+    if (e.target.classList.contains('form-respuesta')) {
+        e.preventDefault();
+        
+        const form = e.target;
+        const textArea = form.querySelector('textarea');
+        const temaId = form.getAttribute('data-tema-id');
+        
+    fetch(`/foro/tema/${temaId}/comentar-ajax`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contenido: textArea.value })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                crearFlashDinamico(data.message, 'success');
+                
+                const listaMensajes = document.querySelector('.bitacora-combate');
+                if (listaMensajes) {
+                    const nuevoMensaje = document.createElement('article');
+                    nuevoMensaje.className = 'mensaje-cont';
+                    
+                    nuevoMensaje.innerHTML = `
+                        <aside class="autor-sidebar">
+                            <div class="avatar-marco">
+                                <img src="/static/${data.autor_avatar}" class="avatar">
+                            </div>
+                            <div class="autor-datos">
+                                <span class="nombre-autor">${data.autor_nombre}</span>
+                                <span class="rango-badge">CAZADOR</span>
+                            </div>
+                        </aside>
+                        <section class="mensaje-cuerpo">
+                            <header class="mensaje-meta">
+                                <span class="fecha-cont">Recién publicado</span>
+                            </header>
+                            <div class="mensaje-texto">
+                                ${textArea.value}
+                            </div>
+                        </section>
+                    `;
+                    listaMensajes.appendChild(nuevoMensaje);
+                    
+                    nuevoMensaje.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                textArea.value = '';
+            } else {
+                crearFlashDinamico(data.message, 'error');
+            }
+        })
+        .catch(err => console.error("Error al enviar comentario:", err));
+    }
+    }, false);
 });
+

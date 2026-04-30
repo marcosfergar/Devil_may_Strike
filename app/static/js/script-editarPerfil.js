@@ -43,7 +43,6 @@ inputFoto.addEventListener('change', function (e) {
     if (files && files.length > 0) {
         const reader = new FileReader();
         reader.onload = function (event) {
-            // Ocultar inventario al subir nueva
             if (inventarioSelector) inventarioSelector.style.display = 'none';
             
             imageToCrop.src = event.target.result;
@@ -66,7 +65,7 @@ function confirmarRecorte() {
     const canvas = cropper.getCroppedCanvas({ width: 400, height: 400 });
     const dataURL = canvas.toDataURL('image/jpeg');
 
-    croppedDataInput.value = dataURL; // Guardamos el Base64
+    croppedDataInput.value = dataURL;
     avatarPrincipal.src = dataURL;
 
     wrapperEditor.style.display = 'none';

@@ -48,7 +48,7 @@ def recompensa_tiempo():
             "puntos": puntos_ganados,
             "message": f"¡Estilo! Has ganado {puntos_ganados} orbes por tu lealtad."
         }
-    return {"success": False, "message": "Sesión expirada"}, 401
+    return {"success": False, "message": "Necesitas Iniciar Sesión para ganar puntos"}, 401
 
 @home_pb.route('/mis-canciones')
 def obtener_mis_canciones():
