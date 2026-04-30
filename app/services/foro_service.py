@@ -1,5 +1,6 @@
 from app.repositories.foro_repository import ForoRepository
 from app.repositories.usuario_repository import UsuarioRepository
+from app.services import usuario_service
 
 def crear_nuevo_tema(usuario_id, categoria_id, titulo, contenido):
     user = UsuarioRepository.get_by_id(usuario_id)
@@ -35,8 +36,8 @@ def agregar_respuesta(usuario_id, tema_id, contenido):
     recompensa_base = 10
     
     # Bonus
-    from app.services import usuario_service
     bonus = usuario_service.obtener_multiplicador_total(user.id)
+
     recompensa_final = int(recompensa_base * bonus)
     
     respuesta = ForoRepository.crear_respuesta(user, tema_id, contenido, recompensa_final)

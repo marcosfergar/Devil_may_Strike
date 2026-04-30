@@ -28,6 +28,8 @@
                 class="filter-btn {{ 'active' if categoria_activa == 'titulo' else '' }}">TÍTULOS</a>                
                 <a href="{{ url_for('tienda_route.ver_tienda', categoria='tema') }}" 
                 class="filter-btn {{ 'active' if categoria_activa == 'tema' else '' }}">TEMAS</a>
+                <a href="{{ url_for('tienda_route.ver_tienda', categoria='objeto') }}" 
+                class="filter-btn {{ 'active' if categoria_activa == 'tema' else '' }}">OBJETOS</a>
             </nav>
         </div>
 

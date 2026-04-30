@@ -34,7 +34,7 @@
         <div class="seccion-apoyo">
             <h3>ARSENAL DE APOYO (Multiplicadores)</h3>
             <div class="objetos-activos">
-                {% for item in usuario.inventario if item.categoria == 'Objeto' %}
+                {% for item in usuario.inventario if item.categoria == 'objeto' %}
                     <div class="item-objeto">
                         <span>{{ item.nombre }} (x{{ item.multiplicador }})</span>
                     </div>
