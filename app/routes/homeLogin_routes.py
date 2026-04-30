@@ -1,4 +1,6 @@
 from flask import Blueprint, redirect, render_template, session, url_for, flash
+from flask import request, jsonify
+
 import random
 
 # importe formularios
@@ -14,21 +16,14 @@ homeLogin_pb = Blueprint('homeLogin_route', __name__, template_folder='templates
 def index():
     return render_template('home-login.html')
 
+@homeLogin_pb.route('/register', methods=['GET', 'POST'])
+def registro():
+    form = UsuarioForm()
+    return render_template('registro.html', form=form)
+
 @homeLogin_pb.route('/login', methods=['GET', 'POST'])
 def paginaLogin():
-    form = LoginForm()
-    
-    if form.validate_on_submit():
-        username = form.usuario.data
-        password = form.passwd.data
-        exito, resultado = verificar_usuario(username, password)
-        
-        if exito:
-            session['user_id'] = resultado.id
-            session['username'] = resultado.nombre
-            return redirect(url_for('home_route.paginaBienvenida'))
-        else:
-            flash("Tu usuario o contraseña son incorrectos", "error")            
+    form = LoginForm()       
     return render_template('login.html', form=form)
             
 @homeLogin_pb.route('/invitado')
@@ -47,23 +42,47 @@ def iniciar_invitado():
     else:
         return "Error al forjar la identidad del invitado", 500
 
-@homeLogin_pb.route('/register', methods=['GET', 'POST'])
-def registro():
-    form = UsuarioForm()
+
+@homeLogin_pb.route('/login-ajax', methods=['POST'])
+def login_ajax():
+    data = request.get_json()
+    username = data.get("usuario", "").strip()
+    password = data.get("passwd", "").strip()
+
+    if not username or not password:
+        return jsonify({"success": False, "message": "Rellena todos los campos."})
+
+    exito, resultado = verificar_usuario(username, password)
+
+    if exito:
+        session['user_id'] = resultado.id
+        session['username'] = resultado.nombre
+        return jsonify({"success": True, "redirect": url_for('home_route.paginaBienvenida')})
     
-    if form.validate_on_submit():
-        username = form.usuario.data
-        password = form.passwd.data
-        
-        exito, mensaje = registrar_usuario(username, password)
-        
-        if exito:
-            session['username'] = username
-            return redirect(url_for('home_route.paginaBienvenida'))
-        else:
-            return render_template('registro.html', form=form, error=mensaje)
-        
-    return render_template('registro.html', form=form)
+    return jsonify({"success": False, "message": "Tu usuario o contraseña son incorrectos."})
+
+@homeLogin_pb.route('/register-ajax', methods=['POST'])
+def registro_ajax():
+    data = request.get_json()
+    username = data.get("usuario", "").strip()
+    password = data.get("passwd", "").strip()
+    password2 = data.get("passwd2", "").strip()
+
+    if not username or not password:
+        return jsonify({"success": False, "message": "Rellena todos los campos."})
+    
+    if password != password2:
+        return jsonify({"success": False, "message": "Las contraseñas no coinciden."})
+
+    exito, mensaje = registrar_usuario(username, password)
+
+    if exito:
+        session['username'] = username
+        user = usuario_service.obtener_usuario_por_nombre(username)
+        session['user_id'] = user.id
+        return jsonify({"success": True, "redirect": url_for('home_route.paginaBienvenida')})
+    
+    return jsonify({"success": False, "message": mensaje})
 
 @homeLogin_pb.route('/logout')
 def logout():

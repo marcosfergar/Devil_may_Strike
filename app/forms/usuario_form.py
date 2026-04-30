@@ -19,12 +19,11 @@ class UsuarioForm(FlaskForm):
         ]
     )
     
-    # Campo extra para registro
-    confirm_passwd = PasswordField(
-        "Repite la contraseña",
+    passwd2 = PasswordField(
+        "Contraseña",
         validators=[
-            DataRequired(message="Debes confirmar la contraseña."),
-            EqualTo('passwd', message="Las contraseñas deben coincidir.")
+            DataRequired(message="El campo no puede estar vacío."),
+            Length(min=6, message="La contraseña debe ser más larga.") # Por seguridad
         ]
     )
 
