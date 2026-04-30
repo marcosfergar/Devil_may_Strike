@@ -32,9 +32,9 @@
         <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span><br>
         <span class="comment-count">Orbes totales: {{ usuario.orbes_totales }}</span>
         <div class="seccion-apoyo">
-            <h3>ARSENAL DE APOYO (Multiplicadores)</h3>
+            <h3>ARSENAL DE MULTIPLICADORES</h3>
             <div class="objetos-activos">
-                {% for item in usuario.inventario if item.categoria == 'objeto' %}
+                {% for item in usuario.productos if item.categoria == 'objeto' %}
                     <div class="item-objeto">
                         <span>{{ item.nombre }} (x{{ item.multiplicador }})</span>
                     </div>

@@ -81,6 +81,6 @@
         "precio": 1000,
         "descripcion": "Espada que utiliza dante heredada de su padre, multiplica los puntos obtenidos 1.2",
         "multiplicador": 1.2,
-        "data_path": "rebelion.png"
+        "imagen_url": "rebelion.png"
     }
 ]
