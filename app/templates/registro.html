@@ -1,37 +1,8 @@
 {% extends "plantilla_base.html" %} {% block title %}DevilMayStrike{% endblock%}
 {% block style %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"
-/>
-<script defer>
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"/>
+<script src="{{ url_for('static', filename='js/register-script.js') }}"></script>
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const usuario = form.querySelector('[name="usuario"]').value;
-        const passwd = form.querySelector('[name="passwd"]').value;
-        const passwd2 = form.querySelector('[name="passwd2"]').value;
-
-        fetch('/register-ajax', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ usuario, passwd, passwd2 })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = data.redirect;
-            } else {
-                crearFlashDinamico(data.message, 'error');
-            }
-        })
-        .catch(() => crearFlashDinamico('Error de conexión.', 'error'));
-    });
-});
-</script>
 {% endblock %} {% block content %}
 
 <div class="form-container">

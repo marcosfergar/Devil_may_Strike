@@ -1,33 +1,7 @@
 {% extends "plantilla_base.html" %} {% block title %}DevilMayStrike{% endblock%}
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/sesionUsuario.css') }}" />
-<script defer>
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const usuario = form.querySelector('[name="usuario"]').value;
-        const passwd = form.querySelector('[name="passwd"]').value;
-
-        fetch('/login-ajax', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ usuario, passwd })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = data.redirect;
-            } else {
-                crearFlashDinamico(data.message, 'error');
-            }
-        })
-        .catch(() => crearFlashDinamico('Error de conexión.', 'error'));
-    });
-});
-</script>
+<script src="{{ url_for('static', filename='js/login-script.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="form-container">
     <h2>INICIAR SESIÓN</h2>
