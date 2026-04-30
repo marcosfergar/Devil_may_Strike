@@ -44,45 +44,51 @@ def detalle_producto(id):
     
     return render_template('detalle-producto.html', producto=producto, usuario=user, form=form)
 
-@tienda_bp.route('/comprar/<int:id>')
-def comprar(id):
-    if "username" not in session:
-        flash("Debes iniciar sesión para acceder a la tienda.", "error")
-        return redirect(url_for('homeLogin_route.paginaLogin'))
-        
-    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
-
-    if user and user.is_guest:
-            flash("Los invitados no tienen acceso a la tienda. ¡Regístrate para comprar!", "error")
-            return redirect(url_for('homeLogin_route.paginaLogin'))
-    
-    resultado = tienda_service.comprar_producto(user.id, id)
-    
-    if resultado["success"]:
-        flash(resultado["message"], "success")
-    else:
-        flash(resultado["message"], "error")
-        
-    return redirect(url_for('tienda_route.detalle_producto', id=id))
-
 @tienda_bp.route('/producto/<int:producto_id>/comentar', methods=['POST'])
 def postear_comentario(producto_id):
     if "username" not in session:
-        flash("Debes iniciar sesión para acceder a la tienda.", "error")
-        return redirect(url_for('homeLogin_route.paginaLogin'))
+        return jsonify({"success": False, "message": "Sesión no iniciada"}), 401
     
-    form = ComentarioForm()
-    if form.validate_on_submit():
-        tienda_service.agregar_comentario_producto(
-            usuario_id=session.get("user_id"),
-            producto_id=producto_id,
-            texto=form.contenido.data
-        )
-        flash("Tu reseña ha sido forjada.", "success")
-    else:
-        flash("El comentario no pudo ser publicado.", "error")
+    data = request.get_json()
+    texto = data.get("contenido", "").strip()
+    
+    if not texto:
+        return jsonify({"success": False, "message": "El comentario está vacío."})
+    
+    exito = tienda_service.agregar_comentario_producto(
+        usuario_id=session.get("user_id"),
+        producto_id=producto_id,
+        texto=texto
+    )
+    
+    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
 
-    return redirect(url_for('tienda_route.detalle_producto', id=producto_id))
+    if exito:
+        return jsonify({
+            "success": True,
+            "message": "¡Reseña forjada!",
+            "autor": user.nombre,
+            "contenido": texto
+        })
+    return jsonify({"success": False, "message": "Error al publicar."})
+
+
+@tienda_bp.route('/comprar/<int:id>', methods=['POST'])
+def comprar(id):
+    if "username" not in session:
+        return jsonify({"success": False, "message": "Sesión no iniciada"}), 401
+
+    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
+
+    if user and user.is_guest:
+        return jsonify({"success": False, "message": "Los invitados no pueden comprar."})
+
+    resultado = tienda_service.comprar_producto(user.id, id)
+    
+    if resultado["success"]:
+        resultado["nuevos_orbes"] = user.orbes_rojos  # ya descontados tras la compra
+    
+    return jsonify(resultado)
 
 @tienda_bp.route('/truco-orbes', methods=['POST'])
 def truco_orbes():

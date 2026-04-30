@@ -103,8 +103,6 @@ document.addEventListener('submit', function (e) {
     if (e.target && e.target.classList.contains('form-perfil')) {
         e.preventDefault(); 
         
-        console.log("¡LOG: Formulario detectado correctamente!");
-
         const form = e.target;
         const formData = new FormData(form);
         const url = form.getAttribute('action');
@@ -118,7 +116,6 @@ document.addEventListener('submit', function (e) {
             return response.json();
         })
         .then(data => {
-            console.log("Respuesta servidor:", data);
             if (data.success) {
                 crearFlashDinamico(data.message, 'success');
                 cerrarModal();

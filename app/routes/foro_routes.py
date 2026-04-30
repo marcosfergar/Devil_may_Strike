@@ -63,7 +63,7 @@ def nuevo_tema(categoria_id):
     
         if tema:
             flash(resultado['texto'], resultado['categoria'])
-            return redirect(url_for('foro.ver_tema', id=tema.id))
+            return redirect(url_for('foro_route.ver_tema', id=tema.id))
         else:
             flash(resultado, "error")
 
