@@ -13,12 +13,12 @@ inventario = db.Table('inventario',
 
 class Usuario(db.Model):
     __tablename__ = "Usuarios"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String(100), nullable=False, unique=True)
-    password = Column(String(255), nullable=True)
-    orbes_rojos = Column(Integer, default=1000)
-    orbes_totales = Column(Integer, default=1000)
-    is_guest = Column(db.Boolean, default=False)
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
+    nombre = db.Column(String(100), nullable=False, unique=True)
+    password = db.Column(String(255), nullable=True)
+    orbes_rojos = db.Column(Integer, default=1000)
+    orbes_totales = db.Column(Integer, default=1000)
+    is_guest = db.Column(db.Boolean, default=False)
     
     imagen_perfil = db.Column(db.String(200), default='default.png')
     titulo_actual = db.Column(db.String(100), default='Cazador Novato')
@@ -62,48 +62,51 @@ class Usuario(db.Model):
     
 class Producto(db.Model):
     __tablename__ = "productos"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String(100), nullable=False)
-    categoria = Column(String(50), nullable=False)
-    precio = Column(Integer, nullable=False)
-    data_path = Column(String(255))
-    descripcion = Column(String(255))
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
+    nombre = db.Column(String(100), nullable=False)
+    categoria = db.Column(String(50), nullable=False)
+    precio = db.Column(Integer, nullable=False)
+    data_path = db.Column(String(255))
+    descripcion = db.Column(String(255))
+    multiplicador = db.Column(db.Float, default=1.0)
 
     comentarios = db.relationship('Comentario', backref='producto_asociado', lazy=True)
 
+# Tienda
 class Comentario(db.Model):
     __tablename__ = "comentarios"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    contenido = Column(Text, nullable=False)
-    fecha = Column(DateTime, default=datetime.utcnow)
-    usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
-    producto_id = Column(Integer, db.ForeignKey('productos.id'), nullable=True)
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
+    contenido = db.Column(Text, nullable=False)
+    fecha = db.Column(DateTime, default=datetime.utcnow)
+    usuario_id = db.Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
+    producto_id = db.Column(Integer, db.ForeignKey('productos.id'), nullable=True)
 
+# Foro
 class Categoria(db.Model):
     __tablename__ = "categorias"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String(50), nullable=False, unique=True)
-    descripcion = Column(String(255))
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
+    nombre = db.Column(String(50), nullable=False, unique=True)
+    descripcion = db.Column(String(255))
 
     temas = db.relationship('Tema', backref='categoria_asociada', lazy=True, cascade="all, delete-orphan")
 
 class Tema(db.Model):
     __tablename__ = "temas"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    titulo = Column(String(100), nullable=False)
-    fecha_creacion = Column(DateTime, default=datetime.utcnow)
-    categoria_id = Column(Integer, db.ForeignKey('categorias.id'), nullable=False)
-    usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
+    titulo = db.Column(String(100), nullable=False)
+    fecha_creacion = db.Column(DateTime, default=datetime.utcnow)
+    categoria_id = db.Column(Integer, db.ForeignKey('categorias.id'), nullable=False)
+    usuario_id = db.Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
     
     mensajes = db.relationship('Mensaje', backref='tema_asociado', lazy=True, cascade="all, delete-orphan")
     creador = db.relationship('Usuario', backref='temas_creados')
 
 class Mensaje(db.Model):
     __tablename__ = "mensajes"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    contenido = Column(Text, nullable=False)
-    fecha_publicacion = Column(DateTime, default=datetime.utcnow)
-    tema_id = Column(Integer, db.ForeignKey('temas.id'), nullable=False)
-    usuario_id = Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
+    id = db.Column(Integer, primary_key=True, autoincrement=True)
+    contenido = db.Column(Text, nullable=False)
+    fecha_publicacion = db.Column(DateTime, default=datetime.utcnow)
+    tema_id = db.Column(Integer, db.ForeignKey('temas.id'), nullable=False)
+    usuario_id = db.Column(Integer, db.ForeignKey('Usuarios.id'), nullable=False)
     
     autor = db.relationship('Usuario', backref='mensajes_foro')

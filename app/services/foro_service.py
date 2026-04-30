@@ -1,34 +1,54 @@
 from app.repositories.foro_repository import ForoRepository
 from app.repositories.usuario_repository import UsuarioRepository
+from app.services import usuario_service
 
 def crear_nuevo_tema(usuario_id, categoria_id, titulo, contenido):
     user = UsuarioRepository.get_by_id(usuario_id)
     if not user:
         return None, "Usuario no encontrado."
 
-    recompensa = 50
+    # recompensa normla
+    recompensa_base = 50
     cat = ForoRepository.get_categoria_by_id(categoria_id)
     if cat and cat.nombre == "Reporte de Fallos (Bugs)":
-        recompensa = 100 
+        recompensa_base = 100 
 
-    tema = ForoRepository.crear_tema_completo(user, categoria_id, titulo, contenido, recompensa)
+    # Bonus
+    from app.services import usuario_service
+    bonus = usuario_service.obtener_multiplicador_total(user.id)
+    recompensa_final = int(recompensa_base * bonus)
+
+    tema = ForoRepository.crear_tema_completo(user, categoria_id, titulo, contenido, recompensa_final)
     
     if tema:
-        return tema, f"¡Tema creado! +{recompensa} Orbes obtenidos."
-    return None, "Hubo un error al crear el tema."
+        return tema, {
+            "puntos": recompensa_final,
+            "texto": f"¡Tema creado! +{recompensa_final} Orbes obtenidos.",
+            "categoria": "success"
+        }
+    return None, {"texto": "Hubo un error", "categoria": "error"}
 
 def agregar_respuesta(usuario_id, tema_id, contenido):
     user = UsuarioRepository.get_by_id(usuario_id)
     if not user:
-        return None, "Usuario no encontrado."
+        return None, {"texto": "Usuario no encontrado.", "categoria": "error"}
 
-    recompensa = 10
+    recompensa_base = 10
     
-    respuesta = ForoRepository.crear_respuesta(user, tema_id, contenido, recompensa)
+    # Bonus
+    bonus = usuario_service.obtener_multiplicador_total(user.id)
+
+    recompensa_final = int(recompensa_base * bonus)
+    
+    respuesta = ForoRepository.crear_respuesta(user, tema_id, contenido, recompensa_final)
     
     if respuesta:
-        return respuesta, "Respuesta enviada. +10 Orbes obtenidos."
-    return None, "No se pudo enviar la respuesta."
+        return respuesta, {
+            "puntos": recompensa_final,
+            "texto": f"Respuesta enviada. +{recompensa_final} Orbes obtenidos.",
+            "categoria": "success",
+        }
+    return None, {"texto": "No se pudo enviar la respuesta.", "categoria": "error"}
 
 def obtener_categoria_por_id(categoria_id):
     return ForoRepository.get_categorias_by_id(categoria_id)

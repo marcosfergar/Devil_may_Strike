@@ -100,7 +100,8 @@ def crear_tablas():
                     categoria=p['tipo'],
                     precio=p['precio'],
                     descripcion=p.get('descripcion', ''),
-                    data_path=p.get('imagen_url', 'default_item.png')
+                    data_path=p.get('imagen_url', 'default_item.png'),
+                    multiplicador=p.get('multiplicador', 1.0)
                 )
                 db.session.add(nuevo_producto)
             

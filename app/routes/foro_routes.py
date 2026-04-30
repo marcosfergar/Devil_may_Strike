@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for, flash
+from flask import Blueprint, jsonify, render_template, request, session, redirect, url_for, flash
 from app.services import foro_service, usuario_service
 from app.forms.foro_form import TemaForm, MensajeForm
 
@@ -59,17 +59,36 @@ def nuevo_tema(categoria_id):
     form = TemaForm()
 
     if form.validate_on_submit():
-        tema, mensaje = foro_service.crear_nuevo_tema(
-            usuario_id=user.id,
-            categoria_id=categoria_id,
-            titulo=form.titulo.data,
-            contenido=form.contenido.data
-        )
-
+        tema, resultado = foro_service.crear_nuevo_tema(user_id, categoria_id, form.titulo.data, form.contenido.data)
+    
         if tema:
-            flash(mensaje, "success")
+            flash(resultado['texto'], resultado['categoria'])
             return redirect(url_for('foro_route.ver_tema', id=tema.id))
         else:
-            flash(mensaje, "error")
+            flash(resultado, "error")
 
     return render_template('foro/crear-tema.html', form=form, categoria_id=categoria_id, usuario=user)
+
+@foro_bp.route('/tema/<int:tema_id>/comentar-ajax', methods=['POST'])
+def comentar_ajax(tema_id):
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"success": False, "message": "Inicia sesión primero"}), 401
+    
+    data = request.get_json()
+    contenido = data.get("contenido")
+    
+    if not contenido or len(contenido.strip()) < 2:
+        return jsonify({"success": False, "message": "El mensaje es muy corto"}), 400
+    user = usuario_service.obtener_usuario_por_id(user_id)
+    respuesta, info = foro_service.agregar_respuesta(user_id, tema_id, contenido)
+    
+    if respuesta:
+        return jsonify({
+            "success": True,
+            "message": info["texto"],
+            "puntos": info["puntos"],
+            "autor_nombre": user.nombre,
+            "autor_avatar": user.url_avatar,
+        })
+    return jsonify({"success": False, "message": info["texto"]}), 500

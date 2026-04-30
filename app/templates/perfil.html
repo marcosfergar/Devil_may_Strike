@@ -31,6 +31,18 @@
         </div>
         <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span><br>
         <span class="comment-count">Orbes totales: {{ usuario.orbes_totales }}</span>
+        <div class="seccion-apoyo">
+            <h3>ARSENAL DE MULTIPLICADORES</h3>
+            <div class="objetos-activos">
+                {% for item in usuario.productos if item.categoria == 'objeto' %}
+                    <div class="item-objeto">
+                        <span>{{ item.nombre }} (x{{ item.multiplicador }})</span>
+                    </div>
+                {% else %}
+                    <p>No tienes objetos potenciadores.</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <div class="col-maletin">
@@ -73,8 +85,8 @@
             <span class="btn-cerrar" onclick="cerrarModal()">&times;</span>
             <h1 class="titulo-dmc">CONFIGURACIÓN DE CAZADOR</h1>
 
-            <form action="{{ url_for('perfil_route.actualizar_perfil') }}" method="POST" enctype="multipart/form-data" class="form-gotico">
-                <div class="seccion-ajuste">
+            <form action="{{ url_for('perfil_route.actualizar_perfil') }}" method="POST" class="form-perfil">
+            <div class="seccion-ajuste">
                     <h3>AJUSTAR APARIENCIA</h3>
                     <div id="inventario-avatares-selector" class="avatar-selector-grid">
                         <p class="label" style="font-size: 0.7rem; margin-bottom: 10px;">SELECCIONA UNA FOTO DE TU INVENTARIO</p>

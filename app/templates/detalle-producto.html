@@ -3,6 +3,8 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/detalle-producto.css') }}" />
+<script src="{{ url_for('static', filename='js/script-detalle-producto.js') }}" defer></script>
+
 {% endblock %}
 
 {% block content %}
@@ -30,9 +32,10 @@
                 {% if producto in usuario.productos %}
                     <button class="btn-buy owned" disabled>DESBLOQUEADO</button>
                 {% else %}
-                   <a href="{{ url_for('tienda_route.comprar', id=producto.id) }}" class="btn-comprar-item">
+                    <button class="btn-comprar-item" id="btn-comprar" 
+                            data-producto-id="{{ producto.id }}">
                         ADQUIRIR
-                    </a>
+                    </button>
                 {% endif %}
                 </div>
                 <div class="user-currency">
@@ -68,14 +71,15 @@
                     </div>
 
                     {% if usuario and not usuario.is_guest %}
-                    <form action="{{ url_for('tienda_route.postear_comentario', producto_id=producto.id) }}" 
-                          method="POST" class="form-comentario-mini">
-                        {{ form.hidden_tag() }}
-                        <div class="input-group-item">
-                            {{ form.contenido(placeholder="Escribe un comentario...", class="input-com-item") }}
-                            <button type="submit" class="btn-enviar-item">Enviar</button>
-                        </div>
-                    </form>
+                        <form class="form-comentario-mini" id="form-comentario" 
+                            data-producto-id="{{ producto.id }}">
+                            {{ form.hidden_tag() }}
+                            <div class="input-group-item">
+                                {{ form.contenido(placeholder="Escribe un comentario...", 
+                                class="input-com-item", id="input-comentario") }}
+                                <button type="submit" class="btn-enviar-item">Enviar</button>
+                            </div>
+                        </form>
                     {% endif %}
                 </div>
             </div>

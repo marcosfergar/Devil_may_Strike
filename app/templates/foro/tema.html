@@ -43,7 +43,7 @@
     {% if usuario %}
     <section class="respuesta-cont">
         <h3 class="titulo-responder">AÑADIR AL HILO</h3>
-        <form method="POST" class="form-respuesta">
+        <form method="POST" class="form-respuesta" data-tema-id="{{ tema.id }}">
             {{ form.hidden_tag() }}
             <div class="input-wrapper">
                 {{ form.contenido(class="cont-input cont-area", placeholder="Escribe tu respuesta aquí...", rows="5") }}
@@ -55,4 +55,5 @@
     </section>
     {% endif %}
 </div>
+
 {% endblock %}

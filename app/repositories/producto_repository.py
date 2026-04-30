@@ -18,20 +18,13 @@ class ProductoRepository:
 
     @staticmethod
     def registrar_compra(usuario, producto):
-        """
-        Realiza la transacción de compra: resta orbes y añade al inventario.
-        Recibe los objetos de modelo ya cargados.
-        """
         try:
-            # 1. Modificamos los objetos (SQLAlchemy trackea estos cambios)
             usuario.orbes_rojos -= producto.precio
             usuario.productos.append(producto)
             
-            # 2. Intentamos persistir ambos cambios en una sola transacción
             db.session.commit()
             return True
         except Exception as e:
-            # Si algo falla (ej: conexión perdida), volvemos atrás
             db.session.rollback()
             print(f"Error crítico en la transacción de compra: {e}")
             return False

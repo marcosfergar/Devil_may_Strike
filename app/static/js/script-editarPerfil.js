@@ -43,7 +43,6 @@ inputFoto.addEventListener('change', function (e) {
     if (files && files.length > 0) {
         const reader = new FileReader();
         reader.onload = function (event) {
-            // Ocultar inventario al subir nueva
             if (inventarioSelector) inventarioSelector.style.display = 'none';
             
             imageToCrop.src = event.target.result;
@@ -66,7 +65,7 @@ function confirmarRecorte() {
     const canvas = cropper.getCroppedCanvas({ width: 400, height: 400 });
     const dataURL = canvas.toDataURL('image/jpeg');
 
-    croppedDataInput.value = dataURL; // Guardamos el Base64
+    croppedDataInput.value = dataURL;
     avatarPrincipal.src = dataURL;
 
     wrapperEditor.style.display = 'none';
@@ -89,19 +88,46 @@ document.querySelectorAll('.radio-inventario').forEach(radio => {
 
 if (btnConfirmarInv) {
     btnConfirmarInv.addEventListener('click', function() {
-const seleccionada = document.querySelector('.radio-inventario:checked');
-    if (seleccionada) {
-        // ASIGNAMOS EL NOMBRE DEL ARCHIVO AL INPUT QUE SE ENVÍA AL SERVIDOR
-        document.getElementById('cropped_data').value = seleccionada.value; 
+        const seleccionada = document.querySelector('.radio-inventario:checked');
+        if (seleccionada) {
+            document.getElementById('cropped_data').value = seleccionada.value;
+            avatarPrincipal.src = "/static/uploads/tienda/" + seleccionada.value;
+            mensajeExito.style.display = 'block';
+            mensajeExito.innerText = "¡ALMA EQUIPADA! HAZ CLIC EN 'GUARDAR CAMBIOS'.";
+        }
+    });
+}
+
+document.addEventListener('submit', function (e) {
+    
+    if (e.target && e.target.classList.contains('form-perfil')) {
+        e.preventDefault(); 
         
-        // Cambiamos la miniatura visualmente
-        avatarPrincipal.src = "/static/uploads/tienda/" + seleccionada.value;
-        
-        mensajeExito.style.display = 'block';
-        mensajeExito.innerText = "¡ALMA EQUIPADA! HAZ CLIC EN 'GUARDAR CAMBIOS'.";
+        const form = e.target;
+        const formData = new FormData(form);
+        const url = form.getAttribute('action');
+
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Error 404 o servidor no encontrado');
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                crearFlashDinamico(data.message, 'success');
+                cerrarModal();
+            } else {
+                crearFlashDinamico(data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error en la petición:', error);
+        });
     }
 });
-}
 
 window.onclick = function(event) {
     if (event.target == modal) cerrarModal();

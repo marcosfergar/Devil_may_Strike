@@ -1,3 +1,34 @@
+    // Mensaje flash
+    function crearFlashDinamico(mensaje, categoria = 'success') {
+        const container = document.getElementById('flash-container');
+        
+        if (!container) {
+            const nuevoContenedor = document.createElement('div');
+            nuevoContenedor.id = 'flash-container';
+            nuevoContenedor.className = 'flash-global-wrapper';
+            document.body.appendChild(nuevoContenedor);
+        }
+
+        const flashDiv = document.createElement('div');
+        flashDiv.className = `flash-message alert-${categoria}`;
+        
+        flashDiv.innerHTML = `
+            <div class="flash-icon">
+                <i class="fas ${categoria === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i>
+            </div>
+            <div class="flash-text">${mensaje}</div>
+            <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+        `;
+
+        document.getElementById('flash-container').appendChild(flashDiv);
+
+        // Auto-eliminación
+        setTimeout(() => {
+            flashDiv.style.animation = "fadeOut 0.5s forwards";
+            setTimeout(() => flashDiv.remove(), 500);
+        }, 5000);
+    }
+    
 document.addEventListener("DOMContentLoaded", () => {
     const btnInvitado = document.getElementById("jugarInvitado");
 
@@ -67,16 +98,75 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Lógica global para mensajes Flash
-    document.addEventListener('DOMContentLoaded', () => {
-        const messages = document.querySelectorAll('.flash-message');
+    setInterval(() => {
+        fetch('/home/recompensa-tiempo', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                crearFlashDinamico(data.message, 'success');
+                console.log(`Sistema: +${data.puntos} orbes sumados.`);
+            }
+        })
+        .catch(err => console.error("Error en sistema de recompensa:", err));
+    }, 300000); // 5 minutos
+
+    document.addEventListener('submit', (e) => {
+    if (e.target.classList.contains('form-respuesta')) {
+        e.preventDefault();
         
-        messages.forEach(msg => {
-            // Auto-eliminar después de 5 segundos
-            setTimeout(() => {
-                msg.style.animation = "fadeOut 0.5s forwards";
-                setTimeout(() => msg.remove(), 500);
-            }, 5000);
-        });
-    });
+        const form = e.target;
+        const textArea = form.querySelector('textarea');
+        const temaId = form.getAttribute('data-tema-id');
+        
+    fetch(`/foro/tema/${temaId}/comentar-ajax`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ contenido: textArea.value })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                crearFlashDinamico(data.message, 'success');
+                
+                const listaMensajes = document.querySelector('.bitacora-combate');
+                if (listaMensajes) {
+                    const nuevoMensaje = document.createElement('article');
+                    nuevoMensaje.className = 'mensaje-cont';
+                    
+                    nuevoMensaje.innerHTML = `
+                        <aside class="autor-sidebar">
+                            <div class="avatar-marco">
+                                <img src="/static/${data.autor_avatar}" class="avatar">
+                            </div>
+                            <div class="autor-datos">
+                                <span class="nombre-autor">${data.autor_nombre}</span>
+                                <span class="rango-badge">CAZADOR</span>
+                            </div>
+                        </aside>
+                        <section class="mensaje-cuerpo">
+                            <header class="mensaje-meta">
+                                <span class="fecha-cont">Recién publicado</span>
+                            </header>
+                            <div class="mensaje-texto">
+                                ${textArea.value}
+                            </div>
+                        </section>
+                    `;
+                    listaMensajes.appendChild(nuevoMensaje);
+                    
+                    nuevoMensaje.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                textArea.value = '';
+            } else {
+                crearFlashDinamico(data.message, 'error');
+            }
+        })
+        .catch(err => console.error("Error al enviar comentario:", err));
+    }
+    }, false);
 });
+

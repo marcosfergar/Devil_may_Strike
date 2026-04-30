@@ -1,9 +1,8 @@
 {% extends "plantilla_base.html" %} {% block title %}DevilMayStrike{% endblock%}
 {% block style %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"/>
+<script src="{{ url_for('static', filename='js/register-script.js') }}"></script>
+
 {% endblock %} {% block content %}
 
 <div class="form-container">
@@ -18,7 +17,7 @@
     {{ form.passwd(placeholder="••••••••") }}
 
     <label>Confirmar Contraseña</label>
-    {{ form.confirm_passwd(placeholder="••••••••") }} {{
+    {{ form.passwd2(placeholder="••••••••") }} {{
     form.enviar(class="btns-menu") }}
   </form>
 

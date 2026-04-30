@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, render_template, request, session, url_for
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, session, url_for
 
 # importe sercicios
 from app.services import usuario_service
@@ -21,12 +21,11 @@ def actualizar_perfil():
     user = usuario_service.obtener_usuario_por_nombre(nombre_sesion)
     
     if not user:
-        return redirect(url_for('homeLogin_route.paginaLogin'))
+        return jsonify({"success": False, "message": "Sesión expirada"}), 401
     
     nuevo_titulo = request.form.get('titulo')
     foto_recortada_or_inventario = request.form.get('cropped_data')
     
-    usuario_service.actualizar_perfil_completo(user, nuevo_titulo, foto_recortada_or_inventario)
+    resultado = usuario_service.actualizar_perfil_completo(user, nuevo_titulo, foto_recortada_or_inventario)
 
-    flash("¡Identidad actualizada, cazador!", "success")
-    return redirect(url_for('perfil_route.perfil'))
+    return jsonify(resultado)

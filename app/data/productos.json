@@ -74,4 +74,13 @@
         "precio": 3000,
         "descripcion": "Título otorgado al maestro de la mazorca"
     }
+    ,
+    {
+        "nombre": "Rebelion",
+        "tipo": "objeto",
+        "precio": 1000,
+        "descripcion": "Espada que utiliza dante heredada de su padre, multiplica los puntos obtenidos 1.2",
+        "multiplicador": 1.2,
+        "imagen_url": "rebelion.png"
+    }
 ]
