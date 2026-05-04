@@ -430,3 +430,7 @@
     text-align: center;
     margin-top: 5px;
 }
+
+option {
+    color: #000;
+}
