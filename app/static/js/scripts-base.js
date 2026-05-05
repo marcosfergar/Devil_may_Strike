@@ -31,7 +31,7 @@
     
 document.addEventListener("DOMContentLoaded", () => {
     intentarCobrarRecompensa();
-    
+
     const btnInvitado = document.getElementById("jugarInvitado");
 
     if (btnInvitado) {
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function intentarCobrarRecompensa() {
-    fetch('/home/recompensa-tiempo', { // Asegúrate de que la ruta sea /home/...
+    fetch('/home/recompensa-tiempo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         })
@@ -110,12 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.success) {
                 crearFlashDinamico(data.message, 'success');
 
-                // --- AQUÍ ESTÁ EL AJAX EN TIEMPO REAL ---
                 const contadorVisual = document.getElementById('cantidad-orbes');
                 if (contadorVisual && data.total_actual) {
                     contadorVisual.innerText = data.total_actual;
                     
-                    // Efecto visual opcional: que el número parpadee en rojo/blanco
                     contadorVisual.style.textShadow = "0 0 10px red";
                     setTimeout(() => contadorVisual.style.textShadow = "none", 1000);
                 }

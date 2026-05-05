@@ -95,7 +95,6 @@ class UsuarioRepository:
         try:
             usuario = Usuario.query.get(usuario_id)
             if usuario:
-                # Calculamos la diferencia para sumársela también a los orbes totales
                 diferencia = nuevos_orbes_rojos - (usuario.orbes_rojos or 0)
                 
                 usuario.orbes_rojos = nuevos_orbes_rojos

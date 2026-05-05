@@ -132,10 +132,8 @@ def verificar_y_sumar_recompensa_pasiva(usuario_id):
         multiplicador = obtener_multiplicador_total(usuario_id)
         puntos_finales = int(puntos_base * multiplicador)
 
-        # Calculamos el nuevo valor
         nuevos_orbes_rojos = (usuario.orbes_rojos or 0) + puntos_finales
         
-        # Llamamos al repository con los nombres correctos
         exito = UsuarioRepository.actualizar_recompensa_pasiva(usuario_id, nuevos_orbes_rojos, ahora)
         
         if exito:
