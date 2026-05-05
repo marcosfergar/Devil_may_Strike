@@ -23,7 +23,7 @@
         <div class="currency-display">
             Orbes:
             <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
-            {{ usuario.orbes_rojos }}
+            <span id="cantidad-orbes">{{ usuario.orbes_rojos }}</span>
         </div><br>
         <div class="stat-item">
             <span class="stat-label">Tipo:</span>

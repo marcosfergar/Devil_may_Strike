@@ -90,3 +90,22 @@ class UsuarioRepository:
             db.session.rollback()
             print(f"Error en UsuarioRepository (truco): {e}")
             return False
+    @staticmethod
+    def actualizar_recompensa_pasiva(usuario_id, nuevos_orbes_rojos, nueva_fecha):
+        try:
+            usuario = Usuario.query.get(usuario_id)
+            if usuario:
+                # Calculamos la diferencia para sumársela también a los orbes totales
+                diferencia = nuevos_orbes_rojos - (usuario.orbes_rojos or 0)
+                
+                usuario.orbes_rojos = nuevos_orbes_rojos
+                usuario.orbes_totales = (usuario.orbes_totales or 0) + diferencia
+                usuario.ultimo_cobro = nueva_fecha
+                
+                db.session.commit()
+                return True
+            return False
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error en repository: {e}")
+            return False

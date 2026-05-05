@@ -1,6 +1,4 @@
-from datetime import datetime
-import os
-import base64
+from datetime import datetime, timedelta
 from werkzeug.security import check_password_hash
 from app.repositories.usuario_repository import UsuarioRepository
 
@@ -118,3 +116,29 @@ def sumar_puntos_con_bonus(usuario_id, puntos_base):
     UsuarioRepository.actualizar_orbes(usuario_id, puntos_finales)
     
     return puntos_finales
+
+
+def verificar_y_sumar_recompensa_pasiva(usuario_id):
+    usuario = UsuarioRepository.get_by_id(usuario_id)
+    if not usuario:
+        return 0
+        
+    ahora = datetime.now()
+
+    # COMPROBACIÓN: 30 segundos para probar
+    if not usuario.ultimo_cobro or ahora >= usuario.ultimo_cobro + timedelta(seconds=30):
+        
+        puntos_base = 100 
+        multiplicador = obtener_multiplicador_total(usuario_id)
+        puntos_finales = int(puntos_base * multiplicador)
+
+        # Calculamos el nuevo valor
+        nuevos_orbes_rojos = (usuario.orbes_rojos or 0) + puntos_finales
+        
+        # Llamamos al repository con los nombres correctos
+        exito = UsuarioRepository.actualizar_recompensa_pasiva(usuario_id, nuevos_orbes_rojos, ahora)
+        
+        if exito:
+            return puntos_finales
+    
+    return 0

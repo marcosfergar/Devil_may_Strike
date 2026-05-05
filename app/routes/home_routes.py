@@ -40,15 +40,22 @@ def biblioteca_dmc():
 def recompensa_tiempo():
     if "user_id" in session:
         user = usuario_service.obtener_usuario_por_id(session["user_id"])
-        puntos_base = 10
-        puntos_ganados = usuario_service.sumar_puntos_con_bonus(user.id, puntos_base)
         
-        return {
-            "success": True, 
-            "puntos": puntos_ganados,
-            "message": f"¡Estilo! Has ganado {puntos_ganados} orbes por tu lealtad."
+        puntos_ganados = usuario_service.verificar_y_sumar_recompensa_pasiva(user.id)
+
+        if puntos_ganados > 0:
+            return {
+                "success": True, 
+                "puntos": puntos_ganados,
+                "total_actual": user.orbes_rojos,
+                "message": f"¡Estilo SS! +{puntos_ganados} orbes."
+            }
+        else:
+            return {
+                "success": False, 
+                "message": "Aún no es tiempo de recolectar orbes."
         }
-    return {"success": False, "message": "Necesitas Iniciar Sesión para ganar puntos"}, 401
+    return {"success": False, "message": "Inicia sesión primero"}, 401
 
 @home_pb.route('/mis-canciones')
 def obtener_mis_canciones():

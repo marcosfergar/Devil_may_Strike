@@ -22,7 +22,8 @@ class Usuario(db.Model):
     
     imagen_perfil = db.Column(db.String(200), default='default.png')
     titulo_actual = db.Column(db.String(100), default='Cazador Novato')
-
+    ultimo_cobro = db.Column(db.DateTime, default=datetime.utcnow)
+    
     # RELACIONES
     productos = db.relationship('Producto', secondary=inventario, backref='compradores')
     comentarios = db.relationship('Comentario', backref='autor_tienda', lazy=True)
