@@ -30,8 +30,6 @@
     }
     
 document.addEventListener("DOMContentLoaded", () => {
-    intentarCobrarRecompensa();
-
     const btnInvitado = document.getElementById("jugarInvitado");
 
     if (btnInvitado) {
