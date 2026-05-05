@@ -1,7 +1,7 @@
 {% extends "plantilla_base.html" %} {% block title %}DevilMayStrike{% endblock%}
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/sesionUsuario.css') }}"/>
-<script src="{{ url_for('static', filename='js/register-script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/register-script.js') }}" defer></script>
 
 {% endblock %} {% block content %}
 

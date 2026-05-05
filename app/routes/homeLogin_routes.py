@@ -77,10 +77,7 @@ def registro_ajax():
     exito, mensaje = registrar_usuario(username, password)
 
     if exito:
-        session['username'] = username
-        user = usuario_service.obtener_usuario_por_nombre(username)
-        session['user_id'] = user.id
-        return jsonify({"success": True, "redirect": url_for('home_route.paginaBienvenida')})
+        return jsonify({"success": True, "redirect": url_for('homeLogin_route.paginaLogin')})
     
     return jsonify({"success": False, "message": mensaje})
 

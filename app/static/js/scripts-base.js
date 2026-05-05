@@ -30,6 +30,8 @@
     }
     
 document.addEventListener("DOMContentLoaded", () => {
+    intentarCobrarRecompensa();
+
     const btnInvitado = document.getElementById("jugarInvitado");
 
     if (btnInvitado) {
@@ -98,21 +100,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    setInterval(() => {
-        fetch('/home/recompensa-tiempo', { 
+    function intentarCobrarRecompensa() {
+    fetch('/home/recompensa-tiempo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         })
-        .then(response => response.json())
+        .then(res => res.json())
         .then(data => {
             if (data.success) {
                 crearFlashDinamico(data.message, 'success');
-                console.log(`Sistema: +${data.puntos} orbes sumados.`);
+
+                const contadorVisual = document.getElementById('cantidad-orbes');
+                if (contadorVisual && data.total_actual) {
+                    contadorVisual.innerText = data.total_actual;
+                    
+                    contadorVisual.style.textShadow = "0 0 10px red";
+                    setTimeout(() => contadorVisual.style.textShadow = "none", 1000);
+                }
             }
         })
-        .catch(err => console.error("Error en sistema de recompensa:", err));
-    }, 300000); // 5 minutos
+        .catch(err => console.error("Error:", err));
+    }
 
+    setInterval(intentarCobrarRecompensa, 15000);
+    
     document.addEventListener('submit', (e) => {
     if (e.target.classList.contains('form-respuesta')) {
         e.preventDefault();
