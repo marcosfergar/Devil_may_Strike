@@ -30,8 +30,6 @@
     }
     
 document.addEventListener("DOMContentLoaded", () => {
-    intentarCobrarRecompensa();
-
     const btnInvitado = document.getElementById("jugarInvitado");
 
     if (btnInvitado) {
@@ -122,8 +120,14 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(err => console.error("Error:", err));
     }
 
-    setInterval(intentarCobrarRecompensa, 15000);
-    
+setInterval(() => {
+        const estaLogueado = document.getElementById('cantidad-orbes');
+        
+        if (estaLogueado) {
+            intentarCobrarRecompensa();
+        } 
+
+    }, 15000);    
     document.addEventListener('submit', (e) => {
     if (e.target.classList.contains('form-respuesta')) {
         e.preventDefault();

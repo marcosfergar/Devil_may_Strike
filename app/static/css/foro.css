@@ -286,13 +286,17 @@ header {
 
 /* Contenedor del Formulario */
 .form-mision-container {
-    background: linear-gradient(180deg, #150a0a 0%, #0a0a0a 100%);
-    border: 1px solid #332222;
+    background: var(--bg-card);
+    border: var(--border-thin);
+
     padding: 50px;
     position: relative;
     max-width: 800px;
-    margin: 60px auto;
+    margin: 10px auto 40px auto; 
     box-shadow: var(--shadow-gothic);
+
+    margin-top: 0 !important;
+    top: 0 !important;
 }
 
 /* Decoraciones de Esquina */
@@ -525,16 +529,6 @@ header {
     margin-top: 15px;
 }
 
-.form-mision-container {
-    background: var(--bg-card);
-    border: var(--border-thin);
-    padding: 50px;
-    position: relative;
-    max-width: 800px;
-    margin: 10px auto 40px auto; 
-    box-shadow: var(--shadow-gothic);
-}
-
 main {
     height: auto !important; 
     min-height: 0 !important;
@@ -547,16 +541,11 @@ main {
     padding-top: 10px !important;
 }
 
-.form-mision-container {
-    margin-top: 0 !important;
-    top: 0 !important;
-}
-
 .form-header {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
 
 .vacio{
-    color: var(--text-white);
+    color: var(--text-main);
 }

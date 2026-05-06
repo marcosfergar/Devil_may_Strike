@@ -430,7 +430,7 @@
     text-align: center;
     margin-top: 5px;
 }
-
-option {
-    color: #000;
+select, option {
+    color: #000000;
+    background-color: #ffffff;
 }

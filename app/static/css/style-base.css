@@ -170,12 +170,7 @@ main{
 
 /* Mejorar */
 /* Perfil */
-.user-profile-zone {
-    z-index: 1000;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
+
 .btns-perfil {
     /* --- ESTRUCTURA Y FORMA --- */
     background: linear-gradient(145deg, #150a0a 0%, #050505 100%);
@@ -327,4 +322,83 @@ footer a {
 
 @keyframes fadeOut {
     to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Contenedor principal */
+.zona-perfil{
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.menu-desplegable {
+    position: relative;
+    display: inline-block;
+}
+
+/* El botón que siempre se ve */
+.menu-trigger {
+    background: var(--bg-semi-red); 
+    color: var(--text-main);
+    padding: 8px 20px;
+    border-left: 3px solid var(--dmc-red); 
+    cursor: pointer;
+    font-family: var(--font-primary); 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s;
+
+    animation: neonPulse 3s infinite ease-in-out;
+}
+
+
+/* El menú oculto */
+.menu-content {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bg-pure-black);
+    min-width: 200px;
+    border: var(--border-thin);
+    z-index: 1000;
+    flex-direction: column;
+    box-shadow: var(--bg-semi-red);
+}
+
+/* MOSTRAR AL PASAR EL RATÓN */
+.menu-desplegable:hover .menu-content {
+    display: flex;
+    animation: fadeInDown 0.3s ease forwards;
+}
+
+/* Enlaces individuales */
+.menu-item {
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: var(--border-thin);
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background: var(--bg-semi-red);
+    color: var(--text-main);
+    padding-left: 25px;
+}
+
+.orbes-display{
+ padding: 10px;
+}
+
+.orb-icon { width: 25px; vertical-align: middle;}
+
+/* Animación de entrada */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

@@ -30,7 +30,7 @@
             <span class="stat-value">{% if session.get('is_guest') %}Invitado{% else %}Cazador Registrado{% endif %}</span>
         </div>
         <span class="comment-count">Reseñas: {{ usuario.comentarios|length }}</span><br>
-        <span class="comment-count">Orbes totales: {{ usuario.orbes_totales }}</span>
+        <span class="comment-count" id="cantidad-orbes">Orbes totales: {{ usuario.orbes_totales }}</span>
         <div class="seccion-apoyo">
             <h3>ARSENAL DE MULTIPLICADORES</h3>
             <div class="objetos-activos">
