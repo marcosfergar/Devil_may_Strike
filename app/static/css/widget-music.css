@@ -121,7 +121,7 @@
 
 .track-item:hover {
     background: var(--bg-semi-red);
-    color: var(--text-white);
+    color: var(--text-main);
 }
 
 .active-track {
