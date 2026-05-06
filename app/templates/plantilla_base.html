@@ -34,9 +34,10 @@
           <a href="{{ url_for('home_route.biblioteca_dmc') }}" class="menu-item"><i class="fa-solid fa-book"></i> Biblioteca</a>
           <a href="{{ url_for('tienda_route.ver_tienda') }}" class="menu-item"><i class="fa-solid fa-cart-shopping"></i> Tienda</a>
           <a href="{{ url_for('foro_route.index_foro') }}" class="menu-item"><i class="fa-solid fa-comments"></i> Foro</a>
+          <a href="{{ url_for('homeLogin_route.logout') }}" class="menu-item"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesion</a>
           
           <div class="orbes-display">
-            <img src="{{ url_for('static', filename='img/red_orb.png') }}" class="orb-icon">
+            <img src="{{ url_for('static', filename='img/red-orb.png') }}" alt="Red Orb" class="orb-icon">
             <span id="cantidad-orbes">{{ usuario.orbes_rojos }}</span>
           </div>
         </nav>
