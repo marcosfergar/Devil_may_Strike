@@ -20,14 +20,11 @@
 <body>
 <header class="index-menu">
   <div class="menu">
+    <div class="zona-perfil">
     {% if usuario %}
-      <div class="user-profile-zone">
-        <input class="btns-perfil" id="Perfil" type="button" value="{{ usuario.nombre }}" data-url="{{ url_for('perfil_route.perfil') }}"/>
-      </div>
-      
       <div class="menu-desplegable">
         <div class="menu-trigger">
-          <i class="fa-solid fa-bars"></i> NAVEGACIÓN
+          <i class="fa-solid fa-bars"></i>
         </div>
         <nav class="menu-content">
           <a href="{{ url_for('home_route.paginaBienvenida') }}" class="menu-item"><i class="fa-solid fa-house"></i> Inicio</a>
@@ -42,7 +39,10 @@
           </div>
         </nav>
       </div>
+
+      <input class="btns-perfil" id="Perfil" type="button" value="{{ usuario.nombre }}" data-url="{{ url_for('perfil_route.perfil') }}"/>
     {% endif %}
+    </div>
     {% if usuario %}
     <div class="music-container-wrapper"> 
         <div class="music-toggle" id="music-icon">
