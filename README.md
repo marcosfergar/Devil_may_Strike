@@ -79,6 +79,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
 # Si tienes problemas de permisos, ejecuta PowerShell como administrador
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 ```
 
 **En macOS/Linux:**
