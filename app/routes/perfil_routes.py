@@ -5,7 +5,7 @@ from app.services import usuario_service
 
 perfil_pb = Blueprint('perfil_route', __name__, template_folder='templates')
 
-@perfil_pb.route('/perfil', methods=['GET', 'POST'])
+@perfil_pb.route('/', methods=['GET', 'POST'])
 def perfil():
     if "username" not in session:
         return redirect(url_for('homeLogin_route.paginaLogin'))

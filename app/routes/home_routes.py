@@ -36,6 +36,31 @@ def biblioteca_dmc():
     juegos_saga = listar_saga_dmc()
     return render_template('biblioteca-dmc.html',usuario=user, juegos=juegos_saga)
 
+@home_pb.route('/api/juegos-raw')
+def api_juegos_raw():
+    juegos_objetos = listar_saga_dmc() 
+    juegos_serializados = []
+    
+    for juego in juegos_objetos:
+        nombres_plataformas = []
+        if juego.platforms:
+            for p in juego.platforms:
+                if isinstance(p, dict) and 'platform' in p:
+                    nombres_plataformas.append(p['platform']['name'])
+                else:
+                    nombres_plataformas.append(str(p))
+
+        juegos_serializados.append({
+            "id": juego.id,
+            "titulo": juego.name,
+            "lanzamiento": juego.released,
+            "imagen": juego.background_image,
+            "puntuacion": juego.rating,
+            "plataformas": nombres_plataformas
+        })
+    
+    return jsonify(juegos_serializados)
+
 @home_pb.route('/recompensa-tiempo', methods=['POST'])
 def recompensa_tiempo():
     if "user_id" in session:
