@@ -28,7 +28,6 @@ app.context_processor(inject_vergil_status)
 app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
 app.config["SESSION_PERMANENT"] = False     # Sesiones temporales
 app.config["SESSION_FILE_DIR"] = "./.flask_session"  # Carpeta donde se guardan
-app.config['WTF_CSRF_ENABLED'] = False  # SOLO PARA EL VIDEO
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 BD_PATH = os.path.join(BASE_DIR, "jugadores.db")

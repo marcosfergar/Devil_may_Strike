@@ -49,6 +49,11 @@ def postear_comentario(producto_id):
     if "username" not in session:
         return jsonify({"success": False, "message": "Sesión no iniciada"}), 401
     
+    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
+
+    if user and user.is_guest:
+        return jsonify({"success": False, "message": "Los invitados no pueden postear."})
+    
     data = request.get_json()
     texto = data.get("contenido", "").strip()
     
@@ -93,6 +98,11 @@ def comprar(id):
 @tienda_bp.route('/truco-orbes', methods=['POST'])
 def truco_orbes():
     user_id = session.get("user_id")
+    user = usuario_service.obtener_usuario_por_id(user_id)
+
+    if user and user.is_guest:
+        return jsonify({"success": False, "message": "Los invitados no pueden postear."})
+    
     if not user_id:
         return jsonify({"success": False, "message": "Sesión no iniciada"}), 401
 
