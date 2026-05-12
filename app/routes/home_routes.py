@@ -61,6 +61,14 @@ def api_juegos_raw():
     
     return jsonify(juegos_serializados)
 
+@home_pb.route('/jugar')
+def jugar():
+    if "user_id" not in session:
+            return redirect(url_for('homeLogin_route.paginaLogin'))
+    
+    user = usuario_service.obtener_usuario_por_id(session.get("user_id"))
+    return render_template('juego.html', usuario=user)
+
 @home_pb.route('/recompensa-tiempo', methods=['POST'])
 def recompensa_tiempo():
     if "user_id" in session:
