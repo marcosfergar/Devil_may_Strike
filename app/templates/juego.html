@@ -1,0 +1,52 @@
+{% extends "plantilla_base.html" %} 
+{% block title %}DevilMayStrike{% endblock %} 
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/juego.css') }}" />
+{% endblock %}
+{% block content %}
+<div id="unity-container">
+    <game id="unity-game" tabindex="-1"></game>
+    
+    <div id="unity-loading-bar">
+        <div style="font-weight: bold; letter-spacing: 2px;">CARGANDO JUEGO...</div>
+        <div class="progress-bar-empty">
+            <div id="unity-progress-bar-full" class="progress-bar-full"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const contGame = document.querySelector("#unity-game");
+    const loadingBar = document.querySelector("#unity-loading-bar");
+    const progressBarFull = document.querySelector("#unity-progress-bar-full");
+
+    // Rutas dinámicas de Flask
+    const buildUrl = "{{ url_for('static', filename='juego') }}";
+    const loaderUrl = buildUrl + "/juego.loader.js"; 
+
+    const config = {
+        dataUrl: buildUrl + "/juego.data",
+        frameworkUrl: buildUrl + "/juego.framework.js",
+        codeUrl: buildUrl + "/juego.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DevilMayStrike",
+        productName: "DMC_Arena",
+        productVersion: "0.1",
+    };
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+        createUnityInstance(contGame, config, (progress) => {
+            progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+            loadingBar.style.display = "none";
+            window.unityInstance = unityInstance;
+        }).catch((message) => {
+            console.error("Error Unity:", message);
+        });
+    };
+    document.body.appendChild(script);
+</script>
+{% endblock %}

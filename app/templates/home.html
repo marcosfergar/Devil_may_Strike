@@ -16,7 +16,7 @@
   <div class="menu-botones-home">
     <h1>MISSION SELECT</h1>
     <hr>
-    <input class="btns-menu" id="Start" type="button" value="Start" />
+    <input class="btns-menu" id="Jugar" type="button" value="Jugar" data-url="{{ url_for('home_route.jugar') }}"/>
     <input class="btns-menu" id="Ranking" type="button" value="Ranking" />
     <input class="btns-menu" id="biblioteca-dmc" type="button" value="Saga" data-url="{{ url_for('home_route.biblioteca_dmc') }}"/>
     {% if not usuario.is_guest %}

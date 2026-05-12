@@ -1,0 +1,49 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#unity-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#unity-game {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-pure-black);
+}
+
+/* Pantalla de carga */
+#unity-loading-bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--dmc-red);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 10;
+}
+
+.progress-bar-empty {
+    width: 250px;
+    height: 4px;
+    background: var(--bg-dark-gray);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+.progress-bar-full {
+    width: 0%;
+    height: 100%;
+    background: var(--dmc-red);
+    transition: width 0.2s;
+}

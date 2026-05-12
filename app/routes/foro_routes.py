@@ -34,7 +34,7 @@ def ver_tema(id):
 
     if form.validate_on_submit():
         if not user:
-            flash("Debes ser un cazador registrado para responder.", "error")
+            flash("Debes estar registrado para responder.", "error")
             return redirect(url_for('homeLogin_route.paginaLogin'))
         
         resultado, mensaje = foro_service.agregar_respuesta(

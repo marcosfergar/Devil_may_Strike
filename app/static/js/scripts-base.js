@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnPerfil.getAttribute("data-url");
         });
     }
+
     const btnRegistro = document.getElementById("btnRegistro");
 
     if (btnRegistro) {
@@ -81,6 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = btnBibliotecaDmc.getAttribute("data-url");
         });
     }
+
+
+    const btnJugar = document.getElementById("Jugar");
+
+    if (btnJugar) {
+        btnJugar.addEventListener("click", () => {
+            window.location.href = btnJugar.getAttribute("data-url");
+        });
+    }
+
 
     const btnTienda = document.getElementById("Tienda");
 
