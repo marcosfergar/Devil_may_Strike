@@ -138,7 +138,7 @@ setInterval(() => {
             intentarCobrarRecompensa();
         } 
 
-    }, 15000);    
+    }, 180000);    
     document.addEventListener('submit', (e) => {
     if (e.target.classList.contains('form-respuesta')) {
         e.preventDefault();

@@ -1,36 +1,43 @@
-{% extends "plantilla_base.html" %} 
-{% block title %}DevilMayStrike{% endblock %} 
+{% extends "plantilla_base.html" %}
+{% block title %}Devil May Strike{% endblock %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/juego.css') }}" />
 {% endblock %}
+
 {% block content %}
-<div id="unity-container">
-    <game id="unity-game" tabindex="-1"></game>
-    
-    <div id="unity-loading-bar">
-        <div style="font-weight: bold; letter-spacing: 2px;">CARGANDO JUEGO...</div>
-        <div class="progress-bar-empty">
-            <div id="unity-progress-bar-full" class="progress-bar-full"></div>
+<div class="game-wrapper">
+    <div id="unity-container">
+        <canvas id="unity-canvas" tabindex="-1"></canvas>
+        
+        <button id="fullscreen-button" title="Pantalla Completa">
+            <div class="icon-fs"></div>
+        </button>
+
+        <div id="unity-loading-bar">
+            <div class="loading-text">CARGANDO JUEGO...</div>
+            <div class="progress-bar-empty">
+                <div id="unity-progress-bar-full" class="progress-bar-full"></div>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    const contGame = document.querySelector("#unity-game");
+    const canvas = document.querySelector("#unity-canvas");
     const loadingBar = document.querySelector("#unity-loading-bar");
     const progressBarFull = document.querySelector("#unity-progress-bar-full");
+    const fullscreenButton = document.querySelector("#fullscreen-button");
 
-    // Rutas dinámicas de Flask
-    const buildUrl = "{{ url_for('static', filename='juego') }}";
-    const loaderUrl = buildUrl + "/juego.loader.js"; 
+    const buildUrl = "{{ url_for('static', filename='juego/Build') }}";
+    const loaderUrl = buildUrl + "/juego.loader.js";
 
     const config = {
-        dataUrl: buildUrl + "/juego.data",
-        frameworkUrl: buildUrl + "/juego.framework.js",
-        codeUrl: buildUrl + "/juego.wasm",
+        dataUrl: buildUrl + "/juego.data.unityweb",
+        frameworkUrl: buildUrl + "/juego.framework.js.unityweb",
+        codeUrl: buildUrl + "/juego.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DevilMayStrike",
+        companyName: "DefaultCompany",
         productName: "DMC_Arena",
         productVersion: "0.1",
     };
@@ -38,11 +45,15 @@
     const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
-        createUnityInstance(contGame, config, (progress) => {
+        createUnityInstance(canvas, config, (progress) => {
             progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
             loadingBar.style.display = "none";
-            window.unityInstance = unityInstance;
+            
+            fullscreenButton.onclick = () => {
+                unityInstance.SetFullscreen(1);
+            };
+
         }).catch((message) => {
             console.error("Error Unity:", message);
         });
