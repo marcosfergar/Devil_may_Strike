@@ -1,49 +1,94 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
+.game-wrapper {
+    max-width: 960px;
+    margin: 40px auto;
+    position: relative;
+    background: var(--bg-pure-black);
+    border-radius: 10px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: var(--shadow-red);
+    border: var(--border-thin);
 }
 
 #unity-container {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
 }
 
-#unity-game {
+#unity-canvas {
     width: 100%;
     height: 100%;
-    background: var(--bg-pure-black);
+    display: block;
+}
+
+/* boton fullscreen */
+#fullscreen-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    background: var(--bg-dark-semitransparent);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0.6;
+}
+
+#fullscreen-button:hover {
+    opacity: 1;
+    background: var(--dmc-red);
+    transform: scale(1.1);
+}
+
+/* Icono expandir*/
+.icon-fs {
+    width: 20px;
+    height: 20px;
+    border: var(--bg-pure-black);
+    border-radius: 2px;
+    position: relative;
 }
 
 /* Pantalla de carga */
 #unity-loading-bar {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: var(--dmc-red);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    z-index: 10;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-pure-black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
 }
 
 .progress-bar-empty {
     width: 250px;
-    height: 4px;
+    height: 10px;
     background: var(--bg-dark-gray);
-    margin-top: 10px;
-    border-radius: 2px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 auto;
+    border: var(--border-thin);
 }
 
 .progress-bar-full {
     width: 0%;
     height: 100%;
-    background: var(--dmc-red);
-    transition: width 0.2s;
+    background: var(--dmc-red-dark);
+    box-shadow: 0 0 10px var(--dmc-red);
+    transition: width 0.2s ease-out;
+}
+
+.loading-text {
+    color:  var(--dmc-red);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: var(--shadow-red);
 }
