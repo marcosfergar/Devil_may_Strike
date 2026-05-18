@@ -1,65 +1,50 @@
-import os,json
+import os, json
 from flask import Flask
 from flask_migrate import Migrate
 from flask_session import Session
 from dotenv import load_dotenv
-# importe database
+
+# Importar database
 from app.database.db import db
 
-# importe de rutas
+# Importar de rutas
 from app.routes.home_routes import home_pb
 from app.routes.homeLogin_routes import homeLogin_pb
 from app.routes.perfil_routes import perfil_pb
 from app.routes.tienda_routes import tienda_bp
 from app.routes.foro_routes import foro_bp
 
-
-# importae modelos
+# Importar modelos
 from app.models.schema import Categoria, Producto
 from app.services.procesos_service import inject_vergil_status
 
+# Forzar la carga del .env en desarrollo local
 load_dotenv()
 
 app = Flask(__name__, template_folder='templates')
-app.secret_key = os.getenv("SECRET_KEY")
+
+# Obtener la llave secreta de forma segura
+app.secret_key = os.getenv("SECRET_KEY", "DMC_Key_Fallback")
 app.context_processor(inject_vergil_status)
 
-load_dotenv()
+# Obtención de la URI de Base de Datos
+DATABASE_URI = os.getenv("DB_URI")
 
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = os.getenv("DB_PORT", "3306")
-DB_NAME = os.getenv("DB_NAME", "")
-DB_USER = os.getenv("DB_USER", "")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+# --- ASIGNACIÓN CRUCIAL EXIGIDA POR FLASK-SQLALCHEMY ---
+app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# Configuracion session
+# Configuración session
 app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
 app.config["SESSION_PERMANENT"] = False     # Sesiones temporales
 app.config["SESSION_FILE_DIR"] = "./.flask_session"  # Carpeta donde se guardan
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-BD_PATH = os.path.join(BASE_DIR, "jugadores.db")
-
-# # Configuracion alchemy
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    "connect_args": {
-        "ssl": {
-            "ca": os.path.join(os.path.dirname(__file__), 'ca.pem')
-        }
-    }
-}
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URI")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+# Inicializar componentes de Base de Datos y Migraciones
 migrate = Migrate(app, db)
-
-
-
-# Inicializar la extensión
 Session(app)
 db.init_app(app)
 
-# Rutas
+# Registro de Blueprints (Rutas)
 app.register_blueprint(homeLogin_pb, url_prefix='/')
 app.register_blueprint(home_pb, url_prefix='/home')
 app.register_blueprint(perfil_pb, url_prefix='/perfil')
@@ -67,11 +52,9 @@ app.register_blueprint(tienda_bp, url_prefix='/tienda')
 app.register_blueprint(foro_bp, url_prefix='/foro')
 
 
-
-# # Comando CLI
+# --- Comando CLI para forjar la base de datos ---
 def seed_categorias():
     """Función auxiliar para insertar categorías iniciales"""
-    # Lista de categorías para iterar fácilmente
     categorias_data = [
         {"nombre": "Estrategias de Combate", "descripcion": "Guías para rango SSS."},
         {"nombre": "Taberna General", "descripcion": "Charla general de cazadores."},
@@ -79,7 +62,6 @@ def seed_categorias():
     ]
     
     for cat in categorias_data:
-        # Esto evita que el script falle si la categoría ya existe
         existe = Categoria.query.filter_by(nombre=cat['nombre']).first()
         if not existe:
             nueva_cat = Categoria(nombre=cat['nombre'], descripcion=cat['descripcion'])
@@ -95,7 +77,7 @@ def crear_tablas():
     db.create_all()
     print("Tablas creadas con éxito.")
     
-    # 1. Cargar Productos desde JSON
+    # Cargar Productos desde JSON
     json_path = os.path.join(app.root_path, 'data', 'productos.json')
     if os.path.exists(json_path):
         try:
@@ -119,7 +101,7 @@ def crear_tablas():
             db.session.rollback()
             print(f"Error crítico al cargar JSON: {e}")
     
-    # 2. Cargar Categorías del Foro
+    # Cargar Categorías del Foro
     try:
         seed_categorias()
     except Exception as e:
@@ -128,5 +110,5 @@ def crear_tablas():
     print("--- PROCESO FINALIZADO: RANGO SSS ---")
 
 if __name__ == '__main__':
-    # app.run(debug=True, host='0.0.0.0', port=8080)
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    # Configuración limpia para Docker / local
+    app.run(host='0.0.0.0', port=8000, debug=True)
