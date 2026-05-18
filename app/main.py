@@ -24,6 +24,14 @@ app = Flask(__name__, template_folder='templates')
 app.secret_key = os.getenv("SECRET_KEY")
 app.context_processor(inject_vergil_status)
 
+load_dotenv()
+
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "3306")
+DB_NAME = os.getenv("DB_NAME", "")
+DB_USER = os.getenv("DB_USER", "")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+
 # Configuracion session
 app.config["SESSION_TYPE"] = "filesystem"   # Guardar en ficheros
 app.config["SESSION_PERMANENT"] = False     # Sesiones temporales
