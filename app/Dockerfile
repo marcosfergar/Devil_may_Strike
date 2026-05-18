@@ -1,23 +1,26 @@
-FROM python:3.14.3
-# directorio trabajo
+# 1. Bajamos a una versión real y ultra-estable de Python (Slim ocupa muy poco espacio)
+FROM python:3.12-slim
+
+# Directorio de trabajo interno del contenedor
 WORKDIR /app
 
-# dependencias
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
+# Copiamos los requerimientos instalando Flask y Gunicorn para producción
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt && pip install gunicorn
 
-# librerias
-RUN pip install --no-cache-dir -r requirements.txt
-
+# Copiamos todo el proyecto (incluyendo la carpeta app/ y los archivos de Unity)
 COPY . .
-EXPOSE 5000
 
-# Variables de entorno para Flask
-ENV FLASK_APP=run.py
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_ENV=production
+RUN mkdir -p data flask_session
 
-CMD ["flask", "run"]
+# Exponemos el puerto
+EXPOSE 8000
+
+# Variables de entorno corregidas apuntando a la carpeta 'app'
+ENV FLASK_APP=app/main.py
+ENV FLASK_DEBUG=0
+
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+
+CMD ["./entrypoint.sh"]
