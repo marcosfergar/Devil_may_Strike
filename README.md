@@ -1,5 +1,5 @@
 # Enlace a la web
-[text](https://devilmaystrike.onrender.com/)
+[DevilMayStrike](https://devilmaystrike.onrender.com/)
 # Devil May Strike 🎮
 
 Una aplicación web interactiva que integra un videojuego desarrollado en **Unity (WebGL)** con un backend robusto en **Python/Flask**. Se trata de un *demake* inspirado en la franquicia Devil May Cry, combinando gameplay envolvente con gestión de usuarios, tienda interactiva y comunidad.
